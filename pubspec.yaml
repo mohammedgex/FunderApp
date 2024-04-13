@@ -1,0 +1,42 @@
+name: funder_app
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies: 
+  cupertino_icons: ^1.0.6
+  get: 4.6.6
+  flutter: 
+    sdk: flutter
+  image_picker: ^1.0.7
+  flutter_svg: ^2.0.10+1
+  get_storage: ^2.1.1	
+  smooth_page_indicator: ^1.1.0
+  timeline_tile: ^2.0.0
+  http: ^1.2.1
+  searchfield: ^1.0.1
+
+
+dev_dependencies: 
+  flutter_lints: ^3.0.0
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/icons/
+    - assets/TextField_Icons/
+    - assets/socail_media/
+    - assets/wallet_assets/
+  fonts:
+    - family: Lato
+      fonts:
+        - asset: assets/lato.ttf
+    - family: Roboto
+      fonts:
+        - asset: assets/Roboto.ttf
+
