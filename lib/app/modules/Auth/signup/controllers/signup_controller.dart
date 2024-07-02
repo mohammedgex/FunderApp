@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:funder_app/app/data/apis_url.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 
 class SignupController extends GetxController {
   RxBool isLoading = false.obs;
-
+  final box = GetStorage();
   // TextField Controllers init
   late TextEditingController Email_Controller;
   late TextEditingController Password_Controller;
@@ -20,6 +21,23 @@ class SignupController extends GetxController {
 
   // Profie Image Varable
   Rx<File>? profileImage = Rx<File>(File(""));
+
+  // password variable
+  RxBool showPassword = false.obs;
+
+   // confirm password variable
+  RxBool conf_showPassword = false.obs;
+
+  // trogle password
+  void troglePassword() {
+    showPassword.value = !showPassword.value;
+  }
+
+   // trogle password
+  void trogleConfPassword() {
+    conf_showPassword.value = !conf_showPassword.value;
+  }
+
 
   @override
   void onInit() {
@@ -80,6 +98,7 @@ class SignupController extends GetxController {
         if (response.statusCode == 200) {
           // Successful response
           await SendOtp(Email!);
+          box.write("registeredEmail", Email);
           Get.toNamed(Routes.CREATOTP, arguments: ["$Email"]);
           isLoading.value = false;
           print(await response.stream.bytesToString());
@@ -87,7 +106,7 @@ class SignupController extends GetxController {
           // Unsuccessful response
           print(await response.stream.bytesToString());
           isLoading.value = false;
-          Get.snackbar("Failed", "Email or Password has been found",
+          Get.snackbar("Failed", "${response.stream.bytesToString()}",
               snackPosition: SnackPosition.BOTTOM);
         }
       } catch (error) {
@@ -127,7 +146,7 @@ class SignupController extends GetxController {
         Get.defaultDialog(
             title: "Error",
             content: CustomText(
-              text: "Failed to send OTP",
+              text: "${response.body}",
             ));
       }
     } catch (error) {

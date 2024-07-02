@@ -3,7 +3,7 @@ version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
 environment: 
-  sdk: '>=3.3.0 <4.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies: 
   cupertino_icons: ^1.0.6
@@ -17,6 +17,11 @@ dependencies:
   timeline_tile: ^2.0.0
   http: ^1.2.1
   searchfield: ^1.0.1
+  lottie: ^3.1.0
+  flutter_map: ^6.1.0
+  latlong2: ^0.9.1
+  intl: ^0.17.0
+
 
 
 dev_dependencies: 

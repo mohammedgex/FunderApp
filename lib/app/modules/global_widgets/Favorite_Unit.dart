@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:funder_app/app/data/apis_url.dart';
+import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 
 class FavoriteUnit extends StatelessWidget {
@@ -8,12 +11,14 @@ class FavoriteUnit extends StatelessWidget {
       this.image_url,
       this.propert_Location,
       this.propert_Price,
+      this.status,
       this.propert_Title});
 
   final String? propert_Title;
   final String? propert_Location;
   final String? propert_Price;
   final String? image_url;
+  final String? status;
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +45,7 @@ class FavoriteUnit extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(
-                        "https://5e22-156-196-105-117.ngrok-free.app/uploads/$image_url"))),
+                    image: NetworkImage("${ApiUrls.URl}/uploads/$image_url"))),
             height: double.infinity,
           ),
           Padding(
@@ -50,10 +54,17 @@ class FavoriteUnit extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomText(
-                  text: "$propert_Title",
-                  weight: FontWeight.w500,
-                  size: 14,
+                Container(
+                  width: (MediaQuery.of(context).size.width - 10) * 0.4,
+                  child: Text(
+                    softWrap: true,
+                    propert_Title!,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                        fontFamily: "Lato",
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500),
+                  ),
                 ),
                 CustomText(
                   text: "$propert_Price EGP",
@@ -76,6 +87,21 @@ class FavoriteUnit extends StatelessWidget {
                       ),
                     )
                   ],
+                ),
+                Container(
+                  width: 59,
+                  height: 21,
+                  decoration: BoxDecoration(
+                      color: const Color.fromRGBO(4, 54, 61, 0.7),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Center(
+                    child: CustomText(
+                      text: "$status",
+                      size: 10,
+                      weight: FontWeight.w400,
+                      color: Colors.white,
+                    ),
+                  ),
                 )
               ],
             ),

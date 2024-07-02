@@ -6,13 +6,24 @@ class OnboardingController extends GetxController {
   // init getStorage box
   final box = GetStorage();
   final value = false.obs;
-
+  final isSignedIn = false.obs;
   @override
   void onInit() {
     value.value = box.read("splash_end") ?? false;
     box.write("splash_end", value.value);
+    print(value.value);
+    isSigned();
     update();
     super.onInit();
+  }
+
+  void isSigned() {
+    if (box.read("userToken") == "SignedOut" || box.read("userToken") == null) {
+      isSignedIn.value = false;
+    } else {
+      isSignedIn.value = true;
+    }
+    print(isSignedIn.value);
   }
 
   // onboarding last screen

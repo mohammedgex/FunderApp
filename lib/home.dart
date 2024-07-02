@@ -12,8 +12,11 @@ class HomePage extends StatelessWidget {
     return Obx(() => GetMaterialApp(
           title: "Funder",
           debugShowCheckedModeBanner: false,
-          initialRoute:
-              controller.value.value ? AppPages.MAIN : AppPages.INITIAL,
+          initialRoute: controller.value.value
+              ? controller.isSignedIn.value == true
+                  ? AppPages.MAIN
+                  : AppPages.LOGIN
+              : AppPages.INITIAL,
           getPages: AppPages.routes,
         ));
   }

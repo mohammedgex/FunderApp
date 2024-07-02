@@ -58,17 +58,28 @@ class LoginView extends GetView<LoginController> {
                     const SizedBox(
                       height: 18,
                     ),
-                    CustomTextField(
-                      hinttext: "Password",
-                      controller: controller.Password_Controller,
-                      suficon: const Icon(Icons.remove_red_eye),
-                      validation: (value) {
-                        if (value!.length > 8) {
-                          return null;
-                        }
-                        return "Enter Valid Password";
-                      },
-                      showen: true,
+                    Obx(
+                      () => CustomTextField(
+                        hinttext: "Password",
+                        controller: controller.Password_Controller,
+                        suficon: InkWell(
+                          onTap: () => controller.troglePassword(),
+                          child: SizedBox(
+                            child: controller.showPassword.value
+                                ? SvgPicture.asset(
+                                    "assets/TextField_Icons/showpassword.svg")
+                                : SvgPicture.asset(
+                                    "assets/TextField_Icons/hidepassword.svg"),
+                          ),
+                        ),
+                        validation: (value) {
+                          if (value!.length >= 8) {
+                            return null;
+                          }
+                          return "Enter Valid Password";
+                        },
+                        showen: controller.showPassword.value ? true : false,
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -100,8 +111,9 @@ class LoginView extends GetView<LoginController> {
                           onTap: () async {
                             if (_formKey.currentState!.validate()) {
                               await controller.ApiLogin(
-                                  controller.Email_Controller.text,
-                                  controller.Password_Controller.text);
+                                  controller.Email_Controller.text.toString(),
+                                  controller.Password_Controller.text
+                                      .toString());
                             }
                           },
                           child: controller.isLoading.value
@@ -148,7 +160,6 @@ class LoginView extends GetView<LoginController> {
                             children: [
                               SvgPicture.asset(
                                   "assets/socail_media/Google.svg"),
-                              SvgPicture.asset("assets/socail_media/Apple.svg"),
                               SvgPicture.asset(
                                   "assets/socail_media/Facebook.svg"),
                             ],

@@ -40,7 +40,7 @@ class SignupView extends GetView<SignupController> {
                               fit: BoxFit.cover,
                               image: controller.profileImage!.value.path.isEmpty
                                   ? const NetworkImage(
-                                      "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg")
+                                      "https://t3.ftcdn.net/jpg/03/64/62/36/360_F_364623623_ERzQYfO4HHHyawYkJ16tREsizLyvcaeg.jpg")
                                   : FileImage(controller.profileImage!.value)
                                       as ImageProvider<Object>),
                           border: Border.all(
@@ -103,36 +103,55 @@ class SignupView extends GetView<SignupController> {
                     const SizedBox(
                       height: 15,
                     ),
-                    CustomTextField(
-                      hinttext: "Password",
-                      validation: (value) {
-                        if (value!.length > 8) {
-                          return null;
-                        }
-                        return "Enter Valid Password";
-                      },
-                      controller: controller.Password_Controller,
-                      suficon: const Icon(Icons.password),
-                      showen: true,
-                    ),
+                    Obx(() => CustomTextField(
+                          hinttext: "Password",
+                          validation: (value) {
+                            if (value!.length >= 8) {
+                              return null;
+                            }
+                            return "Enter Valid Password";
+                          },
+                          controller: controller.Password_Controller,
+                          suficon: InkWell(
+                            onTap: () => controller.troglePassword(),
+                            child: SizedBox(
+                              child: controller.showPassword.value
+                                  ? SvgPicture.asset(
+                                      "assets/TextField_Icons/showpassword.svg")
+                                  : SvgPicture.asset(
+                                      "assets/TextField_Icons/hidepassword.svg"),
+                            ),
+                          ),
+                          showen: controller.showPassword.value ? true : false,
+                        )),
                     const SizedBox(
                       height: 15,
                     ),
-                    CustomTextField(
-                      hinttext: "Confirm password",
-                      validation: (value) {
-                        if (value!.length > 8) {
-                          return null;
-                        } else if (controller.Password_Controller ==
-                            controller.RePassword_Controller) {
-                          return "Passwords not the same";
-                        }
-                        return "Enter Valid Password";
-                      },
-                      controller: controller.RePassword_Controller,
-                      suficon: const Icon(Icons.password),
-                      showen: true,
-                    ),
+                    Obx(() => CustomTextField(
+                          hinttext: "Confirm password",
+                          validation: (value) {
+                            if (value!.length >= 8) {
+                              return null;
+                            } else if (controller.Password_Controller ==
+                                controller.RePassword_Controller) {
+                              return "Passwords not the same";
+                            }
+                            return "Enter Valid Password";
+                          },
+                          controller: controller.RePassword_Controller,
+                          suficon: InkWell(
+                            onTap: () => controller.trogleConfPassword(),
+                            child: SizedBox(
+                              child: controller.conf_showPassword.value
+                                  ? SvgPicture.asset(
+                                      "assets/TextField_Icons/showpassword.svg")
+                                  : SvgPicture.asset(
+                                      "assets/TextField_Icons/hidepassword.svg"),
+                            ),
+                          ),
+                          showen:
+                              controller.conf_showPassword.value ? true : false,
+                        )),
                     Padding(
                       padding: const EdgeInsets.only(left: 10.0),
                       child: Row(

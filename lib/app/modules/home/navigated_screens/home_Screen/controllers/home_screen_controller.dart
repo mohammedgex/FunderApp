@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:funder_app/app/data/apis_url.dart';
 import 'package:funder_app/app/data/home/propertmodel.dart';
 import 'package:get/get.dart';
@@ -6,8 +7,12 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class HomeScreenController extends GetxController {
+  // init local storage
   final box = GetStorage();
+  // api url for properties
   static const String URL = ApiUrls.Properties_api;
+
+  // api url for adding to favorite
   static const String FAVO_URl = ApiUrls.Favorites_api;
 
   // property api
@@ -25,16 +30,25 @@ class HomeScreenController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        print("Conected");
         final List<dynamic> data = jsonDecode(response.body)["properties"];
-        print("data $data");
+
         properties = data.map((e) => Property_Model.fromJson(e)).toList();
-        print("propeties $properties");
       }
     } catch (error) {
       print("error : $error");
     }
     return properties;
+  }
+
+  // property detials calculator
+  void calculateTotalValueGrowth(
+    int initial_investment,
+    int annual_appreciation,
+    int years,
+  ) {
+    int eq1 = 1 + annual_appreciation;
+    int eq2 = initial_investment * eq1 * years;
+    int eq3 = eq2 - initial_investment;
   }
 
   // add property to favorite
@@ -50,9 +64,9 @@ class HomeScreenController extends GetxController {
       );
       print(response.body);
       if (response.statusCode == 200) {
-        Get.defaultDialog(title: "Added");
-      } else {
-        Get.defaultDialog(title: "Error");
+        Get.defaultDialog(title: "Added", content: const SizedBox());
+      } else if (response.statusCode == 403) {
+        Get.defaultDialog(title: "add before", content: const SizedBox());
       }
     } catch (e) {
       print("Error $e");

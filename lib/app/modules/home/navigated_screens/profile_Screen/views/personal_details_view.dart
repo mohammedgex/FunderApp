@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:funder_app/app/data/apis_url.dart';
 import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/modules/global_widgets/textField.dart';
 import 'package:funder_app/app/modules/home/navigated_screens/profile_Screen/controllers/profile_screen_controller.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class PersonalDetails extends GetView<ProfileScreenController> {
   const PersonalDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final box = GetStorage();
     // final double screenHeight = MediaQuery.of(context).size.height;
     // final double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
     return Scaffold(
@@ -32,8 +35,8 @@ class PersonalDetails extends GetView<ProfileScreenController> {
                         image: DecorationImage(
                             fit: BoxFit.cover,
                             image: controller.profileImage!.value.path.isEmpty
-                                ? const NetworkImage(
-                                    "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg")
+                                ? NetworkImage(
+                                    "${ApiUrls.URl}/uploads/${box.read("userImage")}")
                                 : FileImage(controller.profileImage!.value)
                                     as ImageProvider<Object>),
                         borderRadius: BorderRadius.circular(100)),
@@ -48,6 +51,7 @@ class PersonalDetails extends GetView<ProfileScreenController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomTextField(
+                      controller: controller.UserName_Controller,
                       icon: Padding(
                         padding: const EdgeInsets.all(10),
                         child: SizedBox(
@@ -62,6 +66,7 @@ class PersonalDetails extends GetView<ProfileScreenController> {
                       height: 16,
                     ),
                     CustomTextField(
+                      controller: controller.PhoneNumber_Controller,
                       icon: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: SizedBox(
@@ -78,18 +83,15 @@ class PersonalDetails extends GetView<ProfileScreenController> {
                     Obx(
                       () => CustomTextField(
                         showen: controller.showPassword.value ? true : false,
-                        suficon: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: InkWell(
-                            onTap: () => controller.troglePassword(),
-                            child: SizedBox(
-                              height: 30,
-                              child: controller.showPassword.value
-                                  ? SvgPicture.asset(
-                                      "assets/TextField_Icons/showpassword.svg")
-                                  : SvgPicture.asset(
-                                      "assets/TextField_Icons/hidepassword.svg"),
-                            ),
+                        suficon: InkWell(
+                          onTap: () => controller.troglePassword(),
+                          child: SizedBox(
+                            height: 30,
+                            child: controller.showPassword.value
+                                ? SvgPicture.asset(
+                                    "assets/TextField_Icons/showpassword.svg")
+                                : SvgPicture.asset(
+                                    "assets/TextField_Icons/hidepassword.svg"),
                           ),
                         ),
                         icon: Padding(
@@ -117,11 +119,25 @@ class PersonalDetails extends GetView<ProfileScreenController> {
                   ],
                 ),
               ),
-              const Button(
-                width: double.infinity,
-                text: "Next",
-                buttonColor: Color.fromRGBO(236, 138, 35, 1),
-              )
+              Obx(() => GestureDetector(
+                    onTap: () {
+                      print(controller.UserName_Controller.text);
+                      print(controller.PhoneNumber_Controller.text);
+                      controller.ApiEdit(
+                          UserName: controller.UserName_Controller.text,
+                          phone: controller.PhoneNumber_Controller.text);
+                    },
+                    child: controller.isLoading.value
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                            color: Color.fromRGBO(236, 138, 35, 1),
+                          ))
+                        : const Button(
+                            width: double.infinity,
+                            text: "Next",
+                            buttonColor: Color.fromRGBO(236, 138, 35, 1),
+                          ),
+                  ))
             ],
           ),
         ),

@@ -5,6 +5,7 @@ import 'package:funder_app/app/data/apis_url.dart';
 import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/routes/app_pages.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ import 'package:image_picker/image_picker.dart';
 
 class VerifyIdController extends GetxController {
   RxBool isLoading = false.obs;
+  final box = GetStorage();
 
   static const URL = ApiUrls.Identification_api;
   // OTP controllers
@@ -55,7 +57,7 @@ class VerifyIdController extends GetxController {
         // Create a multipart request
         var request = http.MultipartRequest('POST', Uri.parse(URL));
 
-        request.fields['email'] = "mohammedelabud332@gmail.com";
+        request.fields['email'] = "${box.read("registeredEmail")}";
         request.fields['type'] = "Passport";
 
         // Add image file

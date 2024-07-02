@@ -13,6 +13,21 @@ class PropertiyUnit extends StatelessWidget {
       this.image_url,
       this.propert_Price,
       this.id,
+      this.approved,
+      this.currentRent,
+      this.description,
+      this.fundedDate,
+      this.funderCount,
+      this.locationString,
+      this.percent,
+      this.propertyPrice,
+      this.propertyPriceTotal,
+      this.purchasePrice,
+      this.rentalIncome,
+      this.serviceCharge,
+      this.images,
+      this.status,
+      this.transactionCosts,
       this.controller,
       this.propert_Title});
   final String? propert_Title;
@@ -21,13 +36,51 @@ class PropertiyUnit extends StatelessWidget {
   final String? image_url;
   final HomeScreenController? controller;
   final int? id;
+  final String? description;
+  final String? fundedDate;
+  final int? purchasePrice;
+  final int? funderCount;
+  final int? rentalIncome;
+  final int? currentRent;
+  final int? percent;
+  final String? locationString;
+  final int? propertyPriceTotal;
+  final String? propertyPrice;
+  final int? transactionCosts;
+  final int? serviceCharge;
+  final dynamic status;
+  final dynamic approved;
+  final List<dynamic>? images;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(Routes.PROPERTY_DETAILS),
+      onTap: () => Get.toNamed(
+        Routes.PROPERTY_DETAILS,
+        arguments: [
+          propert_Title,
+          propert_Location,
+          propert_Price,
+          id,
+          description,
+          fundedDate,
+          purchasePrice,
+          funderCount,
+          rentalIncome,
+          currentRent,
+          percent,
+          locationString,
+          propertyPriceTotal,
+          propertyPrice,
+          transactionCosts,
+          serviceCharge,
+          status,
+          approved,
+          images,
+        ],
+      ),
       child: Container(
-        width: 300,
+        width: 350,
         height: 264,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
@@ -59,11 +112,24 @@ class PropertiyUnit extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CustomText(
-                    text: "$propert_Title",
-                    weight: FontWeight.w500,
-                    size: 14,
-                  ),
+                  Container(
+                      width: (MediaQuery.of(context).size.width - 10) * 0.6,
+                      child: Text(
+                        softWrap: true,
+                        propert_Title!,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                            fontFamily: "Lato",
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500),
+                      )
+                      //  CustomText(
+                      //   text: "$propert_Title",
+                      //   ellipsis: true,
+                      //   weight: FontWeight.w500,
+                      //   size: 14,
+                      // ),
+                      ),
                   InkWell(
                       onTap: () async {
                         await controller!.addtofavorite(id!);

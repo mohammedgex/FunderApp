@@ -19,6 +19,16 @@ class LoginController extends GetxController {
   late TextEditingController Email_Controller;
   late TextEditingController Password_Controller;
 
+  // password variable
+  RxBool showPassword = false.obs;
+
+  // confirm password variable
+
+  // trogle password
+  void troglePassword() {
+    showPassword.value = !showPassword.value;
+  }
+
   // when page navigated
   @override
   void onInit() {
@@ -50,12 +60,17 @@ class LoginController extends GetxController {
       if (response.statusCode == 200) {
         print("Conected");
         final data = jsonDecode(response.body);
-        print("MAP DATA : $data");
+
         userData = LoginModel.fromJson(data);
-        print("USERTOKEN : $userData!.token");
+
         box.write("userToken", userData!.token);
-        print(box.read("userToken"));
+
         isLoading.value = false;
+        box.write("userName", userData!.user!.name);
+        box.write("userEmail", userData!.user!.email);
+        box.write("userImage", userData!.user!.image);
+        box.write("userPhone", userData!.user!.phone);
+        print(box.read("userData"));
         Get.offAllNamed(Routes.MAIN_PAGE);
       } else {
         Get.defaultDialog(
@@ -66,8 +81,7 @@ class LoginController extends GetxController {
             textCancel: "DISMISS",
             content: CustomText(
               cenetr: true,
-              text:
-                  "Invalid login credentials. please check your email and password and try again.",
+              text: "${response.body}",
             ));
         isLoading.value = false;
       }

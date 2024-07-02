@@ -1,4 +1,4 @@
-import 'package:funder_app/app/modules/home/navigated_screens/Search_Filter/views/search_filter_view.dart';
+import 'package:funder_app/app/modules/home/navigated_screens/Search_Filter/views/search_screen_view%20copy.dart';
 import 'package:funder_app/app/modules/home/navigated_screens/favorite_Screen/views/favorite_screen_view.dart';
 import 'package:funder_app/app/modules/home/navigated_screens/home_Screen/views/home_screen_view.dart';
 import 'package:funder_app/app/modules/home/navigated_screens/profile_Screen/views/profile_screen_view.dart';
@@ -10,7 +10,7 @@ class MainPageController extends GetxController {
   final RxList _pages = [
     HomeScreenView(),
     WalletScreenView(),
-    SearchFilterView(),
+    const SearchScreenView(),
     FavoriteScreenView(),
     ProfileScreenView()
   ].obs;
@@ -20,5 +20,9 @@ class MainPageController extends GetxController {
 
   void changeIndex(int value) {
     currentPage.value = value;
+  }
+
+  void goToSearch() {
+    currentPage.value = 2;
   }
 }

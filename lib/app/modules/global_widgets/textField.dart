@@ -40,55 +40,50 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: decoration,
-      height: textFieldheight,
-      width: width,
-      child: TextFormField(
-        validator: validation,
-        readOnly: readonly!,
+    return TextFormField(
+      validator: validation,
+      readOnly: readonly!,
 
-        // onChanged: onchange!,
-        maxLength: max,
-        maxLines: Lines,
-        controller: controller,
-        obscureText: showen!,
-        keyboardType: keyboard,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        obscuringCharacter: "*",
-        decoration: InputDecoration(
-            hintStyle: const TextStyle(
-                fontFamily: "Lato",
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: Color.fromRGBO(4, 54, 61, 1)),
-            hintText: hinttext,
-            disabledBorder: null,
-            prefixIcon: icon,
-            border: InputBorder.none,
-            suffix: suficon,
-            errorBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                gapPadding: 40.00,
-                borderSide: BorderSide.none),
-            focusedErrorBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                gapPadding: 40.00,
-                borderSide: BorderSide.none),
-            errorStyle: const TextStyle(fontSize: 10, color: Colors.red),
-            focusedBorder: showborder
-                ? OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(
-                      width: border_width!,
-                    ))
-                : null,
-            enabledBorder: showborder
-                ? OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(width: border_width!))
-                : null),
-      ),
+      // onChanged: onchange!,
+      maxLength: max,
+      maxLines: Lines,
+      controller: controller,
+      obscureText: showen!,
+      keyboardType: keyboard,
+      autovalidateMode: AutovalidateMode.disabled,
+      obscuringCharacter: "*",
+      decoration: InputDecoration(
+          hintStyle: const TextStyle(
+              fontFamily: "Lato",
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              color: Color.fromRGBO(4, 54, 61, 1)),
+          hintText: hinttext,
+          disabledBorder: null,
+          prefixIcon: icon,
+          border: InputBorder.none,
+          suffix: suficon,
+          errorBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(width: border_width!, color: Colors.red),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(width: border_width!, color: Colors.red),
+          ),
+          errorStyle: const TextStyle(fontSize: 10, color: Colors.red),
+          focusedBorder: showborder
+              ? OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  borderSide: BorderSide(
+                    width: border_width!,
+                  ))
+              : null,
+          enabledBorder: showborder
+              ? OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  borderSide: BorderSide(width: border_width!))
+              : null),
     );
   }
 }

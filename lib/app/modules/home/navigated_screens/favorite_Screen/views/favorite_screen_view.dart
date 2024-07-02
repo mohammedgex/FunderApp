@@ -3,6 +3,7 @@ import 'package:funder_app/app/modules/global_widgets/Favorite_Unit.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/modules/home/navigated_screens/favorite_Screen/controllers/favorite_screen_controller.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class FavoriteScreenView extends GetView<FavoriteScreenController> {
   final FavoriteScreenController favoriteController =
@@ -46,9 +47,8 @@ class FavoriteScreenView extends GetView<FavoriteScreenController> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(
-                  child: CustomText(
-                    text: "Loading",
-                  ),
+                  child: Lottie.asset('assets/loading.json',
+                      width: 100, height: 100),
                 );
               } else if (snapshot.data!.isEmpty) {
                 return Center(
@@ -67,6 +67,9 @@ class FavoriteScreenView extends GetView<FavoriteScreenController> {
                         snapshot.data![index].property.purchasePrice.toString(),
                     propert_Title: snapshot.data![index].property.name,
                     image_url: snapshot.data![index].property.images[0],
+                    status: snapshot.data![index].property.status != null
+                        ? snapshot.data![index].property.status
+                        : "avaiable",
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) {

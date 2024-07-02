@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:funder_app/app/data/apis_url.dart';
+import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:funder_app/app/modules/global_widgets/profilerow.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/modules/home/navigated_screens/profile_Screen/controllers/profile_screen_controller.dart';
 import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ProfileScreenView extends GetView<ProfileScreenController> {
   @override
   Widget build(BuildContext context) {
+    final box = GetStorage();
+    final Profile_controller = Get.put(ProfileScreenController());
+
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -26,23 +33,23 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
                       height: 132,
                       alignment: const Alignment(1.0, 1.15),
                       decoration: BoxDecoration(
-                          image: const DecorationImage(
+                          image: DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                  "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg")),
+                                  "${ApiUrls.URl}/uploads/${box.read("userImage")}")),
                           borderRadius: BorderRadius.circular(100)),
                     ),
                     const SizedBox(
                       height: 14,
                     ),
                     CustomText(
-                      text: "Maryam Moayyad",
+                      text: "${box.read("userName")}",
                       color: const Color.fromRGBO(4, 54, 61, 1),
                       weight: FontWeight.w500,
                       size: 16,
                     ),
                     CustomText(
-                      text: "+19283845542",
+                      text: "${box.read("userPhone")}",
                       color: const Color.fromRGBO(4, 54, 61, 1),
                       size: 12,
                       weight: FontWeight.w500,
@@ -82,7 +89,66 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
                           height: 35,
                         ),
                         GestureDetector(
-                          onTap: () => print("Test"),
+                          onTap: () => Get.defaultDialog(
+                              backgroundColor: Colors.white,
+                              barrierDismissible: false,
+                              onWillPop: () async =>
+                                  await Get.offAllNamed(Routes.MAIN_PAGE),
+                              title: "",
+                              content: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset("assets/logo.svg"),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Center(
+                                    child: CustomText(
+                                      text: "Sign out",
+                                      color: const Color.fromRGBO(4, 54, 61, 1),
+                                      size: 15,
+                                      weight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  CustomText(
+                                    text: "Are you sure want to sign out?",
+                                    size: 14,
+                                    cenetr: true,
+                                    weight: FontWeight.w400,
+                                    color:
+                                        const Color.fromRGBO(148, 148, 148, 1),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Profile_controller.clearToken();
+                                      Get.offAllNamed(Routes.LOGIN);
+                                    },
+                                    child: const Button(
+                                      width: 252,
+                                      text: "Sign out",
+                                      buttonColor:
+                                          Color.fromRGBO(236, 138, 35, 1),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () => Navigator.of(context).pop(),
+                                    child: const Button(
+                                      width: 252,
+                                      text: "Cancel",
+                                      isBorder: true,
+                                      buttonColor:
+                                          Color.fromRGBO(255, 255, 255, 1),
+                                    ),
+                                  )
+                                ],
+                              )),
                           child: ProfileTile(
                             text: "Sign out",
                             path: "assets/signout.svg",

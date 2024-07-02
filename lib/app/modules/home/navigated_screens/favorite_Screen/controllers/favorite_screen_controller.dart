@@ -11,7 +11,9 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class FavoriteScreenController extends GetxController {
+  // init local storage
   final box = GetStorage();
+  // api url
   static const String URL = ApiUrls.Favorites_api;
 
   // Api get favorites
@@ -43,11 +45,9 @@ class FavoriteScreenController extends GetxController {
 
   // Api clear all favorites
   void clear_Favorites() async {
-    const String CLEARFAV_URL =
-        "https://5e22-156-196-105-117.ngrok-free.app/api/favorites";
     try {
       final response = await http.delete(
-        Uri.parse(CLEARFAV_URL),
+        Uri.parse(URL),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
