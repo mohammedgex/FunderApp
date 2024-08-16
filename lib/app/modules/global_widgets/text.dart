@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 // ignore: must_be_immutable
 class CustomText extends StatelessWidget {
@@ -21,6 +23,8 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String fontFamily =
+        Get.locale?.languageCode == 'ar' ? 'Tajawal-Regular' : 'Lato';
     return Text(
       softWrap: true,
       text!,
@@ -30,7 +34,7 @@ class CustomText extends StatelessWidget {
           decoration:
               Underline! ? TextDecoration.underline : TextDecoration.none,
           color: color,
-          fontFamily: "Lato",
+          fontFamily: fontFamily,
           fontSize: size,
           fontWeight: weight),
     );

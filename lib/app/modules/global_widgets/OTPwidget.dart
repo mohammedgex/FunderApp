@@ -1,4 +1,3 @@
-// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -29,6 +28,8 @@ class OTPbutton extends StatelessWidget {
               } else {
                 FocusScope.of(context).nextFocus();
               }
+            } else if (value.isEmpty) {
+              FocusScope.of(context).previousFocus();
             }
           },
           keyboardType: TextInputType.number,

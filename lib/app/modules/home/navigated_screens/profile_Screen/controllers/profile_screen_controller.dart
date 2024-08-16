@@ -29,6 +29,8 @@ class ProfileScreenController extends GetxController {
   void onInit() {
     UserName_Controller = TextEditingController();
     PhoneNumber_Controller = TextEditingController();
+    UserName_Controller.text = box.read("userName");
+    PhoneNumber_Controller.text = box.read("userPhone");
     super.onInit();
   }
 

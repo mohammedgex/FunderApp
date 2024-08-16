@@ -34,6 +34,9 @@ abstract class Routes {
   static const MY_PROPERTY_DETAILS = _Paths.MY_PROPERTY_DETAILS;
   static const SEARCH_RESULTS = _Paths.SEARCH_RESULTS;
   static const TERMS = _Paths.TERMS;
+  static const RESET_PASSWORD = _Paths.RESET_PASSWORD;
+  static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
+  static const RESETPASSWORD = _Paths.RESETPASSWORD;
 }
 
 abstract class _Paths {
@@ -68,4 +71,7 @@ abstract class _Paths {
   static const MY_PROPERTY_DETAILS = '/my-property-details';
   static const SEARCH_RESULTS = '/search-results';
   static const TERMS = '/terms';
+  static const RESET_PASSWORD = '/resetpassword';
+  static const NOTIFICATIONS = '/notifications';
+  static const RESETPASSWORD = '/resetpassword';
 }

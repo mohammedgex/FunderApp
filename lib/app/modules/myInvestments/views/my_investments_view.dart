@@ -21,7 +21,7 @@ class MyInvestmentsView extends GetView<MyInvestmentsController> {
         elevation: 0,
         scrolledUnderElevation: 0,
         title: CustomText(
-          text: "My investments",
+          text: "My properties".tr,
         ),
         backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       ),
@@ -57,7 +57,7 @@ class MyInvestmentsView extends GetView<MyInvestmentsController> {
                                   height: 40,
                                   child: Center(
                                     child: CustomText(
-                                      text: "${controller.list[index]}",
+                                      text: controller.list[index].tr,
                                       size: 16,
                                       color: controller
                                                   .Is_Selected_type.value ==
@@ -86,7 +86,26 @@ class MyInvestmentsView extends GetView<MyInvestmentsController> {
                               width: 100, height: 100),
                         );
                       }
-                      return my_Property();
+                      return snapshot.data!.isEmpty
+                          ? Center(
+                              child: CustomText(
+                              text: "No Properties Found",
+                            ))
+                          : SizedBox(
+                              height: MediaQuery.of(context).size.height - 400,
+                              child: ListView.builder(
+                                  itemCount: snapshot.data!.length,
+                                  itemBuilder: (context, index) {
+                                    return my_Property(
+                                      title: snapshot.data![index].name,
+                                      price: snapshot.data![index].propertyPrice
+                                          .toString(),
+                                      imageUrl: snapshot.data![index].images[0],
+                                      rent: snapshot.data![index].rentalIncome
+                                          .toString(),
+                                    );
+                                  }),
+                            );
                     })))
           ],
         ),

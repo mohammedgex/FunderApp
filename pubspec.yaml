@@ -21,6 +21,7 @@ dependencies:
   flutter_map: ^6.1.0
   latlong2: ^0.9.1
   intl: ^0.17.0
+  iconly: ^1.0.1
 
 
 
@@ -44,4 +45,16 @@ flutter:
     - family: Roboto
       fonts:
         - asset: assets/Roboto.ttf
+    - family: Poppins
+      fonts:
+        - asset: assets/Poppins.ttf
+    - family: Poppins-Light
+      fonts:
+        - asset: assets/Poppins-Light.ttf
+    - family: Tajawal-Regular
+      fonts:
+        - asset: assets/Tajawal-Regular.ttf
+        
+
+        
 

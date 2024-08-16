@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:funder_app/app/data/apis_url.dart';
+import 'package:funder_app/app/data/home/category.dart';
 import 'package:funder_app/app/data/home/propertmodel.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -27,6 +28,7 @@ class SearchFilterController extends GetxController {
   // api url
   static const String SEARCH_URl = ApiUrls.Search_api;
   static const String LOCATIONS_URl = ApiUrls.locations_api;
+  static const String GATEGORY_URL = ApiUrls.categories_api;
 
   // when page init
   @override
@@ -125,5 +127,32 @@ class SearchFilterController extends GetxController {
     } else {
       print('Failed to fetch locations: ${response.statusCode}');
     }
+  }
+
+  // get categories
+  Future<List> get_categories() async {
+    List<category> categories = [];
+    try {
+      print(box.read("userToken"));
+      final response = await http.get(
+        Uri.parse(GATEGORY_URL),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${box.read("userToken")}',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        print("Conected");
+        final List<dynamic> data = jsonDecode(response.body)["categories"];
+        print(data);
+        categories = data.map((e) => category.fromJson(e)).toList();
+        print("receipts $categories");
+      }
+    } catch (error) {
+      print("error : $error");
+    }
+    return categories;
   }
 }

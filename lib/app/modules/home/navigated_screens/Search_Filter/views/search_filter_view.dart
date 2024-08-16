@@ -139,8 +139,7 @@ class SearchFilterView extends GetView<SearchFilterController> {
                           child: SearchField(
                               searchStyle: const TextStyle(
                                   fontSize: 16, fontFamily: "Lato"),
-                              controller:
-                                  location_controller.locationController,
+                              controller: controller.locationController,
                               hint: "share selected areas in properties",
                               suggestionsDecoration: SuggestionDecoration(
                                   elevation: 0.2,

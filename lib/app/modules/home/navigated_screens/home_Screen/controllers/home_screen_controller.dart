@@ -7,6 +7,41 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class HomeScreenController extends GetxController {
+  // buttons
+  final RxList<String> buttons = ["Available", "Funded"].obs;
+  final is_Selected = 0.obs;
+  void selectButton(int index) {
+    is_Selected.value = index;
+    print("select : ${is_Selected.value}");
+  }
+
+  // funded
+  static const String fundedUrl = ApiUrls.sold_out_properties;
+
+  Future<List> Get_SoldOutProperties() async {
+    List<Property_Model> properties = [];
+    try {
+      print(box.read("userToken"));
+      final response = await http.get(
+        Uri.parse(fundedUrl),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${box.read("userToken")}',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final List<dynamic> data = jsonDecode(response.body)["properties"];
+
+        properties = data.map((e) => Property_Model.fromJson(e)).toList();
+      }
+    } catch (error) {
+      print("error : $error");
+    }
+    return properties;
+  }
+
   // init local storage
   final box = GetStorage();
   // api url for properties

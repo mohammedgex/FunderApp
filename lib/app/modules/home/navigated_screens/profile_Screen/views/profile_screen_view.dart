@@ -79,12 +79,55 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
                           height: 35,
                         ),
                         GestureDetector(
-                          onTap: () => print("Test"),
-                          child: ProfileTile(
-                            text: "Setting",
-                            path: "assets/settings.svg",
-                          ),
-                        ),
+                            onTap: () => print("Test"),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    SvgPicture.asset("assets/settings.svg"),
+                                    const SizedBox(
+                                      width: 2,
+                                    ),
+                                    CustomText(
+                                      text: "change language".tr,
+                                      size: 16,
+                                      weight: FontWeight.w600,
+                                      color: const Color.fromRGBO(4, 54, 61, 1),
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(),
+                                DropdownButton<Locale>(
+                                  dropdownColor: Colors.white,
+                                  elevation: 4,
+                                  value: Get.locale,
+                                  items: [
+                                    DropdownMenuItem(
+                                      value: const Locale('en', 'US'),
+                                      child: CustomText(text: 'English'),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: const Locale('ar', 'AE'),
+                                      child: CustomText(text: 'العربية'),
+                                    ),
+                                  ],
+                                  onChanged: (Locale? locale) {
+                                    if (locale != null) {
+                                      // Save the selected language in GetStorage
+                                      final storage = GetStorage();
+                                      storage.write(
+                                          'languageCode', locale.languageCode);
+                                      storage.write(
+                                          'countryCode', locale.countryCode);
+
+                                      // Update the locale
+                                      Get.updateLocale(locale);
+                                    }
+                                  },
+                                ),
+                              ],
+                            )),
                         const SizedBox(
                           height: 35,
                         ),
@@ -105,14 +148,14 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
                                   ),
                                   Center(
                                     child: CustomText(
-                                      text: "Sign out",
+                                      text: "log out".tr,
                                       color: const Color.fromRGBO(4, 54, 61, 1),
                                       size: 15,
                                       weight: FontWeight.w500,
                                     ),
                                   ),
                                   CustomText(
-                                    text: "Are you sure want to sign out?",
+                                    text: "Are you sure want to login out?".tr,
                                     size: 14,
                                     cenetr: true,
                                     weight: FontWeight.w400,
@@ -127,11 +170,11 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
                                       Profile_controller.clearToken();
                                       Get.offAllNamed(Routes.LOGIN);
                                     },
-                                    child: const Button(
+                                    child: Button(
                                       width: 252,
-                                      text: "Sign out",
+                                      text: "log out".tr,
                                       buttonColor:
-                                          Color.fromRGBO(236, 138, 35, 1),
+                                          const Color.fromRGBO(236, 138, 35, 1),
                                     ),
                                   ),
                                   const SizedBox(
@@ -139,18 +182,18 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
                                   ),
                                   GestureDetector(
                                     onTap: () => Navigator.of(context).pop(),
-                                    child: const Button(
+                                    child: Button(
                                       width: 252,
-                                      text: "Cancel",
+                                      text: "Cancel".tr,
                                       isBorder: true,
-                                      buttonColor:
-                                          Color.fromRGBO(255, 255, 255, 1),
+                                      buttonColor: const Color.fromRGBO(
+                                          255, 255, 255, 1),
                                     ),
                                   )
                                 ],
                               )),
                           child: ProfileTile(
-                            text: "Sign out",
+                            text: "log out".tr,
                             path: "assets/signout.svg",
                           ),
                         ),

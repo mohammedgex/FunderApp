@@ -1,20 +1,29 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class ForgetPasswordController extends GetxController {
-  //TODO: Implement ForgetPasswordController
+  late TextEditingController Password_Controller;
+  late TextEditingController RePassword_Controller;
 
-  final count = 0.obs;
   @override
   void onInit() {
+    Password_Controller = TextEditingController();
+    RePassword_Controller = TextEditingController();
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  RxBool showPassword = true.obs;
+
+  // confirm password variable
+  RxBool conf_showPassword = true.obs;
+
+  // trogle password
+  void troglePassword() {
+    showPassword.value = !showPassword.value;
   }
 
-  @override
-  void onClose() {}
-  void increment() => count.value++;
+  // trogle password
+  void trogleConfPassword() {
+    conf_showPassword.value = !conf_showPassword.value;
+  }
 }

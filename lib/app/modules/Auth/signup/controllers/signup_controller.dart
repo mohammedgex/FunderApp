@@ -23,21 +23,20 @@ class SignupController extends GetxController {
   Rx<File>? profileImage = Rx<File>(File(""));
 
   // password variable
-  RxBool showPassword = false.obs;
+  RxBool showPassword = true.obs;
 
-   // confirm password variable
-  RxBool conf_showPassword = false.obs;
+  // confirm password variable
+  RxBool conf_showPassword = true.obs;
 
   // trogle password
   void troglePassword() {
     showPassword.value = !showPassword.value;
   }
 
-   // trogle password
+  // trogle password
   void trogleConfPassword() {
     conf_showPassword.value = !conf_showPassword.value;
   }
-
 
   @override
   void onInit() {
@@ -81,10 +80,10 @@ class SignupController extends GetxController {
         var request = http.MultipartRequest('POST', Uri.parse(URL));
 
         // Add form fields
-        request.fields['name'] = Name ?? '';
-        request.fields['phone'] = phone ?? '';
-        request.fields['email'] = Email ?? '';
-        request.fields['password'] = Password ?? '';
+        request.fields['name'] = Name_Controller.text.toString();
+        request.fields['phone'] = Phone_Controller.text.toString();
+        request.fields['email'] = Email_Controller.text.toString();
+        request.fields['password'] = Password_Controller.text.toString();
 
         // Add image file
 
@@ -93,29 +92,38 @@ class SignupController extends GetxController {
 
         // Send request
         var response = await request.send();
+        final streamResponse = await response.stream.bytesToString();
 
         // Handle response
         if (response.statusCode == 200) {
-          // Successful response
-          await SendOtp(Email!);
-          box.write("registeredEmail", Email);
-          Get.toNamed(Routes.CREATOTP, arguments: ["$Email"]);
-          isLoading.value = false;
-          print(await response.stream.bytesToString());
+          final respond = jsonDecode(streamResponse);
+          if (respond["success"]) {
+            isLoading.value = false;
+            // Successful response
+            await SendOtp(Email!);
+            box.write("registeredEmail", Email);
+            Get.toNamed(Routes.CREATOTP, arguments: ["$Email"]);
+          }
         } else {
           // Unsuccessful response
-          print(await response.stream.bytesToString());
+          final respond = jsonDecode(streamResponse);
           isLoading.value = false;
-          Get.snackbar("Failed", "${response.stream.bytesToString()}",
+          isLoading.value = false;
+          Get.snackbar("Failed", "${respond["error"]}",
+              backgroundColor: Colors.white,
+              icon: const Icon(Icons.error_outline_outlined),
               snackPosition: SnackPosition.BOTTOM);
         }
       } catch (error) {
         // Error occurred
         isLoading.value = false;
-        print("error : $error");
+        print("error sign up : $error");
       }
     } else {
-      print("image not picked up or you didn't check");
+      Get.snackbar("choose Image", "Please pick an image",
+          icon: const Icon(Icons.error),
+          backgroundColor: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
     }
   }
 

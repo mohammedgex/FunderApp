@@ -20,7 +20,7 @@ class FavoriteScreenView extends GetView<FavoriteScreenController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomText(
-                text: "Favorites",
+                text: "Favorites".tr,
                 weight: FontWeight.w600,
                 size: 20,
               ),
@@ -29,7 +29,7 @@ class FavoriteScreenView extends GetView<FavoriteScreenController> {
                   controller.clear_Favorites();
                 },
                 child: CustomText(
-                  text: "clear all",
+                  text: "clear all".tr,
                   weight: FontWeight.w400,
                   size: 12,
                 ),
@@ -59,10 +59,12 @@ class FavoriteScreenView extends GetView<FavoriteScreenController> {
               }
               return ListView.separated(
                 itemCount: snapshot.data!.length,
+                physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   return FavoriteUnit(
                     propert_Location:
                         snapshot.data![index].property.locationString,
+                    id: snapshot.data![index].property.id,
                     propert_Price:
                         snapshot.data![index].property.purchasePrice.toString(),
                     propert_Title: snapshot.data![index].property.name,

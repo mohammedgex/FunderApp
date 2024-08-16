@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class CustomTextField extends StatelessWidget {
@@ -40,6 +40,8 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String fontFamily =
+        Get.locale?.languageCode == 'ar' ? 'Tajawal-Regular' : 'Lato';
     return TextFormField(
       validator: validation,
       readOnly: readonly!,
@@ -53,16 +55,17 @@ class CustomTextField extends StatelessWidget {
       autovalidateMode: AutovalidateMode.disabled,
       obscuringCharacter: "*",
       decoration: InputDecoration(
-          hintStyle: const TextStyle(
-              fontFamily: "Lato",
+        
+          hintStyle: TextStyle(
+              fontFamily: fontFamily,
               fontSize: 16,
               fontWeight: FontWeight.w400,
-              color: Color.fromRGBO(4, 54, 61, 1)),
+              color: const Color.fromRGBO(4, 54, 61, 1)),
           hintText: hinttext,
           disabledBorder: null,
           prefixIcon: icon,
           border: InputBorder.none,
-          suffix: suficon,
+          suffixIcon: suficon,
           errorBorder: OutlineInputBorder(
             borderRadius: const BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide(width: border_width!, color: Colors.red),
@@ -73,11 +76,10 @@ class CustomTextField extends StatelessWidget {
           ),
           errorStyle: const TextStyle(fontSize: 10, color: Colors.red),
           focusedBorder: showborder
-              ? OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+              ? const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                   borderSide: BorderSide(
-                    width: border_width!,
-                  ))
+                      width: 1.5, color: Color.fromRGBO(236, 138, 35, 1)))
               : null,
           enabledBorder: showborder
               ? OutlineInputBorder(

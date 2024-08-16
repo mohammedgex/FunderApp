@@ -15,6 +15,8 @@ class VerifyIdController extends GetxController {
   RxBool isLoading = false.obs;
   final box = GetStorage();
 
+  var selectedType = ''.obs;
+
   static const URL = ApiUrls.Identification_api;
   // OTP controllers
   TextEditingController? first_num;

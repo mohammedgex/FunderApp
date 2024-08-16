@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/routes/app_pages.dart';
@@ -13,7 +12,7 @@ class CheckoutView extends GetView<CheckoutController> {
     return Scaffold(
         appBar: AppBar(
           title: CustomText(
-            text: "Check out",
+            text: "Check out".tr,
             size: 20,
             weight: FontWeight.w600,
           ),
@@ -26,7 +25,7 @@ class CheckoutView extends GetView<CheckoutController> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
+                  SizedBox(
                     child: Column(
                       children: [
                         Obx(() => Row(
@@ -42,9 +41,9 @@ class CheckoutView extends GetView<CheckoutController> {
                                               136, 136, 136, 1)),
                                       borderRadius: BorderRadius.circular(4)),
                                   child: GestureDetector(
-                                    onTap: () => controller.increment(args[3]),
+                                    onTap: () => controller.decrement(args[3]),
                                     child: const Icon(
-                                      Icons.add,
+                                      Icons.minimize,
                                       size: 30,
                                     ),
                                   ),
@@ -81,9 +80,9 @@ class CheckoutView extends GetView<CheckoutController> {
                                               136, 136, 136, 1)),
                                       borderRadius: BorderRadius.circular(4)),
                                   child: GestureDetector(
-                                    onTap: () => controller.decrement(),
+                                    onTap: () => controller.increment(args[3]),
                                     child: const Icon(
-                                      Icons.minimize,
+                                      Icons.add,
                                       size: 30,
                                     ),
                                   ),
@@ -96,13 +95,17 @@ class CheckoutView extends GetView<CheckoutController> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Center(
-                    child: CustomText(
-                      text: "shares number (max 40% of shares)",
-                      size: 14,
-                      weight: FontWeight.w400,
-                      color: Colors.red,
-                    ),
+                  Obx(
+                    () => controller.isOvered.value
+                        ? const SizedBox()
+                        : Center(
+                            child: CustomText(
+                              text: "shares number (max 40% of shares)".tr,
+                              size: 14,
+                              weight: FontWeight.w400,
+                              color: Colors.red,
+                            ),
+                          ),
                   ),
                   const SizedBox(
                     height: 25,
@@ -112,7 +115,7 @@ class CheckoutView extends GetView<CheckoutController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
-                        text: "Price Details",
+                        text: "Price Details".tr,
                         size: 20,
                         weight: FontWeight.w600,
                       ),
@@ -139,7 +142,7 @@ class CheckoutView extends GetView<CheckoutController> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   CustomText(
-                                    text: "Property Price",
+                                    text: "Property Price".tr,
                                     size: 14,
                                     weight: FontWeight.w400,
                                   ),
@@ -155,7 +158,7 @@ class CheckoutView extends GetView<CheckoutController> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   CustomText(
-                                    text: "price per share",
+                                    text: "price per share".tr,
                                     size: 14,
                                     weight: FontWeight.w400,
                                   ),
@@ -171,7 +174,7 @@ class CheckoutView extends GetView<CheckoutController> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   CustomText(
-                                    text: "total shares cost",
+                                    text: "total shares cost".tr,
                                     size: 14,
                                     weight: FontWeight.w400,
                                   ),
@@ -193,13 +196,13 @@ class CheckoutView extends GetView<CheckoutController> {
                     height: 25,
                   ),
                   Center(
-                    child: Container(
+                    child: SizedBox(
                       width: 324,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomText(
-                            text: "deposit",
+                            text: "deposit".tr,
                             size: 14,
                             weight: FontWeight.w700,
                           ),
@@ -217,12 +220,12 @@ class CheckoutView extends GetView<CheckoutController> {
               ),
               GestureDetector(
                 onTap: () => Get.toNamed(Routes.PAYMENT_METHODS,
-                    arguments: [controller.count.value, args[0]]),
-                child: const Button(
+                    arguments: [controller.count.value, /* id */ args[0]]),
+                child: Button(
                   width: 216,
                   height: 50,
-                  text: "Continue",
-                  buttonColor: Color.fromRGBO(236, 138, 35, 1),
+                  text: "Continue".tr,
+                  buttonColor: const Color.fromRGBO(236, 138, 35, 1),
                 ),
               )
             ],

@@ -1,5 +1,4 @@
 // ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,21 +9,33 @@ import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/modules/home/navigated_screens/home_Screen/controllers/home_screen_controller.dart';
 import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../controllers/property_details_controller.dart';
 
 class PropertyDetailsView extends GetView<PropertyDetailsController> {
+  // controller
   PageController control = PageController();
+
+  // passed data
   dynamic Property_Details = Get.arguments;
+
+  final isArabic = Get.locale?.languageCode == 'ar';
 
   PropertyDetailsView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // property images
     List<dynamic> images = Property_Details[18];
+
+    // slider years
     int years = 0;
+
+    // Parse the date string
+
     return Scaffold(
         body: FutureBuilder(
             future: controller.DetailsApi(Property_Details[3]),
@@ -38,15 +49,17 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
 
               return SafeArea(
                 child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Stack(children: [
-                        Container(
+                        SizedBox(
                           width: double.infinity,
                           height: 257,
                           child: PageView.builder(
+                              physics: const BouncingScrollPhysics(),
                               controller: control,
                               itemCount: images.length < 6 ? images.length : 4,
                               itemBuilder: (context, index) {
@@ -112,7 +125,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Container(
+                                SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * 0.6,
                                   child: CustomText(
@@ -141,21 +154,43 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                             const SizedBox(
                               height: 12,
                             ),
-                            Container(
+                            SizedBox(
                               width: 304,
                               child: LinearProgressIndicator(
-                                value: snapshot.data!.funders!.isEmpty
-                                    ? 0
-                                    : 1 -
-                                        ((12 -
-                                                (snapshot
-                                                        .data!.funders!.length -
-                                                    2)) /
-                                            10),
+                                value: snapshot.data!.funders!.length ==
+                                        snapshot.data!.funderCount
+                                    ? 1.0 - 0.2
+                                    : 1.0 -
+                                        (1 -
+                                            snapshot.data!.funders!.length /
+                                                10),
                                 backgroundColor:
-                                    const Color.fromRGBO(189, 32, 44, 1),
+                                    const Color.fromRGBO(21, 174, 73, 1),
                                 valueColor: const AlwaysStoppedAnimation<Color>(
-                                    Color.fromRGBO(21, 174, 73, 1)),
+                                    Color.fromRGBO(189, 32, 44, 1)),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(children: [
+                                    CustomText(
+                                      text:
+                                          "${snapshot.data!.funders!.length}/${snapshot.data!.funderCount}",
+                                    ),
+                                    CustomText(
+                                      text: "Funded".tr,
+                                    ),
+                                  ]),
+                                  CustomText(
+                                    text: snapshot.data!.status == "sold out"
+                                        ? "Sold in ${DateFormat('MMMM').format(DateTime.parse(snapshot.data!.fundedDate.toString()))} ${DateTime.parse(snapshot.data!.fundedDate.toString()).year}"
+                                        : "",
+                                  ),
+                                ],
                               ),
                             ),
                             const SizedBox(
@@ -179,12 +214,14 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         CustomText(
-                                          text: snapshot.data!.status! == "null"
-                                              ? "estimated Annualised return"
-                                              : "Funded date",
+                                          text: snapshot.data!.status! ==
+                                                  "sold out".tr
+                                              ? "estimated Annual return".tr
+                                              : "Funded date".tr,
                                         ),
                                         CustomText(
-                                          text: snapshot.data!.status! == "null"
+                                          text: snapshot.data!.status! ==
+                                                  "sold out"
                                               ? "${snapshot.data!.estimatedAnnualisedReturn}%"
                                               : "${Property_Details[5]}",
                                         )
@@ -195,12 +232,15 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         CustomText(
-                                          text: snapshot.data!.status! == "null"
+                                          text: snapshot.data!.status! ==
+                                                  "sold out"
                                               ? "estimated Annual appreciation"
-                                              : "Purchase price",
+                                                  .tr
+                                              : "Purchase price".tr,
                                         ),
                                         CustomText(
-                                          text: snapshot.data!.status! == "null"
+                                          text: snapshot.data!.status! ==
+                                                  "sold out"
                                               ? "${snapshot.data!.estimatedAnnualAppreciation}%"
                                               : "${Property_Details[6]} EGP",
                                         )
@@ -211,12 +251,15 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         CustomText(
-                                          text: snapshot.data!.status! == "null"
+                                          text: snapshot.data!.status! ==
+                                                  "sold out"
                                               ? "estimated projected gross yield"
-                                              : "Rental income paid",
+                                                  .tr
+                                              : "Rental income paid".tr,
                                         ),
                                         CustomText(
-                                          text: snapshot.data!.status! == "null"
+                                          text: snapshot.data!.status! ==
+                                                  "sold out"
                                               ? "${snapshot.data!.estimatedProjectedGrossYield}%"
                                               : "${Property_Details[9]} EGP",
                                         )
@@ -248,38 +291,42 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SvgPicture.asset("assets/icons/Home.svg"),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CustomText(
-                                            size: 15,
-                                            weight: FontWeight.w500,
-                                            text: "Rented",
-                                          ),
-                                          Container(
-                                            width: 300 - 50,
-                                            child: CustomText(
-                                              size: 11,
-                                              weight: FontWeight.w400,
-                                              text:
-                                                  "currently occupied and professionally managed by our team",
-                                              ellipsis: true,
+                                  snapshot.data!.status! == "sold out"
+                                      ? Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SvgPicture.asset(
+                                                "assets/icons/Home.svg"),
+                                            const SizedBox(
+                                              width: 10,
                                             ),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                CustomText(
+                                                  size: 15,
+                                                  weight: FontWeight.w500,
+                                                  text: "Rented",
+                                                ),
+                                                SizedBox(
+                                                  width: 300 - 50,
+                                                  child: CustomText(
+                                                    size: 11,
+                                                    weight: FontWeight.w400,
+                                                    text:
+                                                        "currently occupied and professionally managed by our team",
+                                                    ellipsis: true,
+                                                  ),
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        )
+                                      : const SizedBox(),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
@@ -301,7 +348,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                             text:
                                                 "Current rent id ${Property_Details[9]} EGP per month",
                                           ),
-                                          Container(
+                                          SizedBox(
                                             width: 310 - 50,
                                             child: CustomText(
                                               size: 11,
@@ -335,7 +382,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                             text:
                                                 "${Property_Details[10]}% annual gross yield",
                                           ),
-                                          Container(
+                                          SizedBox(
                                             width: 310 - 50,
                                             child: CustomText(
                                               size: 11,
@@ -359,23 +406,44 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 20.0),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  CustomText(
-                                    text: "See on Map",
-                                    size: 14,
-                                    color: const Color.fromRGBO(4, 54, 61, 1),
-                                    weight: FontWeight.w400,
-                                    Underline: true,
-                                  ),
-                                  CustomText(
-                                    text: "Location",
-                                    size: 20,
-                                    color: const Color.fromRGBO(4, 54, 61, 1),
-                                    weight: FontWeight.w600,
-                                  ),
-                                ],
+                                mainAxisAlignment: isArabic
+                                    ? MainAxisAlignment.spaceBetween
+                                    : MainAxisAlignment.spaceBetween,
+                                children: isArabic
+                                    ? [
+                                        CustomText(
+                                          text: "Location".tr,
+                                          size: 20,
+                                          color: const Color.fromRGBO(
+                                              4, 54, 61, 1),
+                                          weight: FontWeight.w600,
+                                        ),
+                                        CustomText(
+                                          text: "See on Map".tr,
+                                          size: 14,
+                                          color: const Color.fromRGBO(
+                                              4, 54, 61, 1),
+                                          weight: FontWeight.w400,
+                                          Underline: true,
+                                        ),
+                                      ]
+                                    : [
+                                        CustomText(
+                                          text: "See on Map".tr,
+                                          size: 14,
+                                          color: const Color.fromRGBO(
+                                              4, 54, 61, 1),
+                                          weight: FontWeight.w400,
+                                          Underline: true,
+                                        ),
+                                        CustomText(
+                                          text: "Location".tr,
+                                          size: 20,
+                                          color: const Color.fromRGBO(
+                                              4, 54, 61, 1),
+                                          weight: FontWeight.w600,
+                                        ),
+                                      ],
                               ),
                             ),
                             const SizedBox(
@@ -426,7 +494,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomText(
-                            text: "Financials",
+                            text: "Financials".tr,
                             size: 20,
                             weight: FontWeight.w600,
                           ),
@@ -458,7 +526,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                       CustomText(
                                         size: 14,
                                         weight: FontWeight.w400,
-                                        text: "Property Price",
+                                        text: "Property Price".tr,
                                       ),
                                       CustomText(
                                         size: 15,
@@ -475,7 +543,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                             CustomText(
                                               size: 14,
                                               weight: FontWeight.w400,
-                                              text: "Transaction Costs",
+                                              text: "Transaction Costs".tr,
                                             ),
                                             CustomText(
                                               text:
@@ -491,7 +559,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                             ),
                           ),
                           CustomText(
-                            text: "Investment calculator",
+                            text: "Investment calculator".tr,
                             size: 20,
                             weight: FontWeight.w600,
                           ),
@@ -510,7 +578,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 CustomText(
-                                  text: "Initial Investment",
+                                  text: "Initial Investment".tr,
                                   size: 14,
                                   weight: FontWeight.w600,
                                   color: const Color.fromRGBO(148, 148, 148, 1),
@@ -559,7 +627,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 CustomText(
-                                  text: " property value growth years ",
+                                  text: "property value growth years".tr,
                                   size: 14,
                                   weight: FontWeight.w600,
                                   color: const Color.fromRGBO(148, 148, 148, 1),
@@ -598,7 +666,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                         height: 15,
                       ),
                       CustomText(
-                        text: "Projected investment return of ",
+                        text: "Projected investment return of".tr,
                         size: 20,
                         weight: FontWeight.w400,
                         color: const Color.fromRGBO(148, 148, 148, 1),
@@ -636,7 +704,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                             size: 15,
                                           ),
                                           CustomText(
-                                            text: "Investment",
+                                            text: "Investment".tr,
                                             size: 12,
                                             color: const Color.fromRGBO(
                                                 148, 148, 148, 1),
@@ -667,7 +735,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                                 Color.fromRGBO(189, 32, 44, 1),
                                           ),
                                           CustomText(
-                                            text: "Value growth",
+                                            text: "Value growth".tr,
                                             size: 12,
                                             color: const Color.fromRGBO(
                                                 148, 148, 148, 1),
@@ -686,6 +754,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                           ],
                         ),
                       ),
+                      // Funding timeline
                       Container(
                         padding: const EdgeInsets.all(25),
                         child: Column(
@@ -693,11 +762,12 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomText(
-                              text: "Funding timeline",
+                              text: "Funding timeline".tr,
                               size: 20,
                               weight: FontWeight.w600,
                             ),
-                            snapshot.data!.timelines!.isEmpty
+                            snapshot.data!.timelines!.isEmpty &&
+                                    snapshot.data!.timelines!.length < 3
                                 ? CustomText(
                                     text: "There is no funding timelines",
                                     size: 18,
@@ -710,8 +780,11 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                         PropertyTimeLineTile(
                                           isFirst: true,
                                           isLast: false,
-                                          DateText:
-                                              "${snapshot.data!.timelines![0].date}",
+                                          DateText: DateFormat('d MMMM yyyy')
+                                              .format(DateFormat('yyyy-MM-dd')
+                                                  .parse(snapshot
+                                                      .data!.timelines![0].date
+                                                      .toString())),
                                           DateDetails:
                                               "${snapshot.data!.timelines![0].description}",
                                           DateTitle:
@@ -720,8 +793,11 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                         PropertyTimeLineTile(
                                           isFirst: false,
                                           isLast: false,
-                                          DateText:
-                                              "${snapshot.data!.timelines![1].date}",
+                                          DateText: DateFormat('d MMMM yyyy')
+                                              .format(DateFormat('yyyy-MM-dd')
+                                                  .parse(snapshot
+                                                      .data!.timelines![1].date
+                                                      .toString())),
                                           DateDetails:
                                               "${snapshot.data!.timelines![1].description}",
                                           DateTitle:
@@ -730,8 +806,11 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                         PropertyTimeLineTile(
                                           isFirst: false,
                                           isLast: true,
-                                          DateText:
-                                              "${snapshot.data!.timelines![2].date}",
+                                          DateText: DateFormat('d MMMM yyyy')
+                                              .format(DateFormat('yyyy-MM-dd')
+                                                  .parse(snapshot
+                                                      .data!.timelines![2].date
+                                                      .toString())),
                                           DateDetails:
                                               "${snapshot.data!.timelines![2].description}",
                                           DateTitle:
@@ -754,16 +833,23 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                               snapshot.data!.funderCount
                             ]);
                           },
-                          child: snapshot.data!.ifUserShared!
-                              ? const Button(
-                                  width: 212,
-                                  text: "sell your share",
-                                  buttonColor: Color.fromRGBO(236, 138, 35, 1),
+                          child: controller.isYear(snapshot.data!.fundedDate!)
+                              ? GestureDetector(
+                                  onTap: () {
+                                    controller.submitSale(snapshot.data!.id!);
+                                  },
+                                  child: Button(
+                                    width: 212,
+                                    text: "sell your share".tr,
+                                    buttonColor:
+                                        const Color.fromRGBO(236, 138, 35, 1),
+                                  ),
                                 )
-                              : const Button(
+                              : Button(
                                   width: 212,
-                                  text: "share value",
-                                  buttonColor: Color.fromRGBO(236, 138, 35, 1),
+                                  text: "Book a share".tr,
+                                  buttonColor:
+                                      const Color.fromRGBO(236, 138, 35, 1),
                                 ),
                         ),
                       )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 
@@ -45,7 +46,14 @@ class copy_Box extends StatelessWidget {
               ),
             ],
           ),
-          SvgPicture.asset("assets/copy.svg")
+          InkWell(
+              onTap: () {
+                Clipboard.setData(ClipboardData(text: content!));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Copied to clipboard: $content')),
+                );
+              },
+              child: SvgPicture.asset("assets/copy.svg"))
         ],
       ),
     );

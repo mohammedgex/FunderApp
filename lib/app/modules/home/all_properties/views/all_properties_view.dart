@@ -17,7 +17,7 @@ class AllPropertiesView extends GetView<AllPropertiesController> {
           elevation: 0,
           backgroundColor: Colors.white,
           title: CustomText(
-            text: "Our properties",
+            text: "Our properties".tr,
             size: 20,
             weight: FontWeight.w600,
           ),
@@ -37,33 +37,45 @@ class AllPropertiesView extends GetView<AllPropertiesController> {
                 return ListView.separated(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
-                    return PropertiyUnit(
-                      images: snapshot.data![index].images,
-                      propert_Location: snapshot.data![index].locationString,
-                      id: snapshot.data![index].id,
-                      controller: Home_Controller,
-                      description: snapshot.data![index].description,
-                      fundedDate: snapshot.data![index].fundedDate,
-                      purchasePrice: snapshot.data![index].purchasePrice,
-                      funderCount: snapshot.data![index].funderCount,
-                      rentalIncome: snapshot.data![index].rentalIncome,
-                      currentRent: snapshot.data![index].currentRent,
-                      percent: snapshot.data![index].percent,
-                      locationString: snapshot.data![index].locationString,
-                      propertyPriceTotal:
-                          snapshot.data![index].propertyPriceTotal,
-                      propertyPrice: snapshot.data![index].propertyPrice,
-                      transactionCosts: snapshot.data![index].transactionCosts,
-                      serviceCharge: snapshot.data![index].serviceCharge,
-                      status: snapshot.data![index].status != null
-                          ? snapshot.data![index].status
-                          : "null",
-                      approved: snapshot.data![index].approved,
-                      propert_Price:
-                          snapshot.data![index].purchasePrice.toString(),
-                      propert_Title: snapshot.data![index].name,
-                      image_url: snapshot.data![index].images[0],
-                    );
+                    return Stack(alignment: Alignment.topLeft, children: [
+                      Container(
+                        width: 50,
+                        height: 50,
+                        color: Colors.black,
+                        child: CustomText(
+                          text: "tte",
+                          color: Colors.black,
+                        ),
+                      ),
+                      PropertiyUnit(
+                        images: snapshot.data![index].images,
+                        propert_Location: snapshot.data![index].locationString,
+                        id: snapshot.data![index].id,
+                        controller: Home_Controller,
+                        description: snapshot.data![index].description,
+                        fundedDate: snapshot.data![index].fundedDate,
+                        purchasePrice: snapshot.data![index].purchasePrice,
+                        funderCount: snapshot.data![index].funderCount,
+                        rentalIncome: snapshot.data![index].rentalIncome,
+                        currentRent: snapshot.data![index].currentRent,
+                        percent: snapshot.data![index].percent,
+                        locationString: snapshot.data![index].locationString,
+                        propertyPriceTotal:
+                            snapshot.data![index].propertyPriceTotal,
+                        propertyPrice: snapshot.data![index].propertyPrice,
+                        transactionCosts:
+                            snapshot.data![index].transactionCosts,
+                        serviceCharge: snapshot.data![index].serviceCharge,
+                        status: snapshot.data![index].status != null
+                            ? snapshot.data![index].status
+                            : "null",
+                        approved: snapshot.data![index].approved,
+                        propert_Price:
+                            snapshot.data![index].purchasePrice.toString(),
+                        propert_Title: snapshot.data![index].name,
+                        image_url: snapshot.data![index].images[0],
+                      ),
+                    ]);
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return const SizedBox(

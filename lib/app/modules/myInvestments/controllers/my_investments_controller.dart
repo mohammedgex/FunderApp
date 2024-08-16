@@ -9,20 +9,18 @@ class MyInvestmentsController extends GetxController {
   // init local storage
   final box = GetStorage();
 
-    final list = ["Property", "Pending"];
-      final Is_Selected_type = 0.obs;
-
-
+  final list = ["Property", "Pending"];
+  final Is_Selected_type = 0.obs;
 
   // api url for my properties
   static const String URL = ApiUrls.MyProperties_api;
-
 
   // trogle buttons
   void select_Type(int index) {
     Is_Selected_type.value = index;
     print("select : ${Is_Selected_type.value}");
   }
+
   // connect api getting my properties
   Future<List> get_MyProperties() async {
     List<Property_Model> myproperties = [];
@@ -61,7 +59,8 @@ class MyInvestmentsController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        final List<dynamic> data = jsonDecode(response.body)["properties"];
+        final List<dynamic> data =
+            jsonDecode(response.body)["properties_panding"];
 
         myPendingProperties =
             data.map((e) => Property_Model.fromJson(e)).toList();

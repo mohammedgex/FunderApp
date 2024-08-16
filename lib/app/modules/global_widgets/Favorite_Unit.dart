@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funder_app/app/data/apis_url.dart';
-import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
+import 'package:funder_app/app/modules/home/navigated_screens/favorite_Screen/controllers/favorite_screen_controller.dart';
+import 'package:get/get.dart';
 
 class FavoriteUnit extends StatelessWidget {
   const FavoriteUnit(
       {super.key,
       this.image_url,
+      this.id,
       this.propert_Location,
       this.propert_Price,
       this.status,
@@ -19,9 +20,11 @@ class FavoriteUnit extends StatelessWidget {
   final String? propert_Price;
   final String? image_url;
   final String? status;
+  final int? id;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(FavoriteScreenController());
     return Container(
       width: double.infinity,
       height: 113,
@@ -106,9 +109,12 @@ class FavoriteUnit extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: SvgPicture.asset("assets/icons/favor.svg"),
+          GestureDetector(
+            onTap: () => controller.removetofavorite(id!),
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset("assets/icons/favor.svg"),
+            ),
           )
         ],
       ),

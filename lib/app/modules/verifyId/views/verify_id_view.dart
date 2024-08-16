@@ -17,7 +17,7 @@ class VerifyIdView extends GetView<VerifyIdController> {
         backgroundColor: Colors.white,
         elevation: 0,
         title: CustomText(
-          text: "Verify ID",
+          text: "Verify ID".tr,
           size: 20,
           weight: FontWeight.w600,
         ),
@@ -34,47 +34,41 @@ class VerifyIdView extends GetView<VerifyIdController> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Image.asset(
                 "assets/id.png",
                 fit: BoxFit.cover,
               ),
             ),
-            Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CustomText(
-                    text: "We need to verify your ID",
-                    cenetr: true,
-                    size: 20,
-                    weight: FontWeight.w700,
-                  ),
-                  CustomText(
-                    text:
-                        "In order to create an account we need to be 100% sure you are you ",
-                    size: 16,
-                    weight: FontWeight.w400,
-                    cenetr: true,
-                  ),
-                ],
-              ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomText(
+                  text: "We need to verify your ID".tr,
+                  cenetr: true,
+                  size: 20,
+                  weight: FontWeight.w700,
+                ),
+                CustomText(
+                  text:
+                      "In order to create an account we need to be 100% sure you are you"
+                          .tr,
+                  size: 16,
+                  weight: FontWeight.w400,
+                  cenetr: true,
+                ),
+              ],
             ),
             GestureDetector(
               onTap: () {
                 Get.toNamed(Routes.SELECT_TYPE);
               },
-              child: GestureDetector(
-                onTap: () {
-                  Get.toNamed(Routes.UPLOAD_ID);
-                },
-                child: const Button(
-                  width: 278,
-                  text: "Verify",
-                  buttonColor: Color.fromRGBO(236, 138, 35, 1),
-                ),
+              child: Button(
+                width: 278,
+                text: "Verify".tr,
+                buttonColor: const Color.fromRGBO(236, 138, 35, 1),
               ),
             )
           ],

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class Button extends StatelessWidget {
   const Button(
@@ -16,6 +18,8 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String fontFamily =
+        Get.locale?.languageCode == 'ar' ? 'Tajawal-Regular' : 'Lato';
     return Container(
       width: width,
       height: height,
@@ -34,7 +38,7 @@ class Button extends StatelessWidget {
             fontSize: 20,
             color:
                 isBorder ? const Color.fromRGBO(236, 138, 35, 1) : Colors.white,
-            fontFamily: "Lato"),
+            fontFamily: fontFamily),
       )),
     );
   }

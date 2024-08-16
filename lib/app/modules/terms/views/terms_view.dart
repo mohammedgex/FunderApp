@@ -10,13 +10,45 @@ class TermsView extends GetView<TermsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('TermsView'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: CustomText(
-          text: "mklfdnmnfmdf",
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              CustomText(
+                text: "Terms and conditions",
+                size: 32,
+                weight: FontWeight.w700,
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      text: "1.termes",
+                      size: 20,
+                      weight: FontWeight.w700,
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    CustomText(
+                      text:
+                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ",
+                      size: 14,
+                      weight: FontWeight.w400,
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

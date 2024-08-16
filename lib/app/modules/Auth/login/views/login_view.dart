@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funder_app/app/routes/app_pages.dart';
@@ -5,6 +7,7 @@ import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/modules/global_widgets/textField.dart';
 import 'package:get/get.dart';
+import 'package:iconly/iconly.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -26,12 +29,12 @@ class LoginView extends GetView<LoginController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: "Hello again",
+                      text: "Hello again".tr,
                       size: 24,
                       weight: FontWeight.w600,
                     ),
                     CustomText(
-                      text: "Please sign in to access your account",
+                      text: "Please sign in to access your account".tr,
                       size: 16,
                       weight: FontWeight.w400,
                       color: const Color.fromRGBO(148, 148, 148, 1),
@@ -42,7 +45,7 @@ class LoginView extends GetView<LoginController> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CustomTextField(
-                        hinttext: "Email address",
+                        hinttext: "Email address".tr,
                         keyboard: TextInputType.emailAddress,
                         controller: controller.Email_Controller,
                         validation: (value) {
@@ -60,17 +63,13 @@ class LoginView extends GetView<LoginController> {
                     ),
                     Obx(
                       () => CustomTextField(
-                        hinttext: "Password",
+                        hinttext: "Password".tr,
                         controller: controller.Password_Controller,
-                        suficon: InkWell(
+                        suficon: GestureDetector(
                           onTap: () => controller.troglePassword(),
-                          child: SizedBox(
-                            child: controller.showPassword.value
-                                ? SvgPicture.asset(
-                                    "assets/TextField_Icons/showpassword.svg")
-                                : SvgPicture.asset(
-                                    "assets/TextField_Icons/hidepassword.svg"),
-                          ),
+                          child: controller.showPassword.value
+                              ? const Icon(IconlyLight.show)
+                              : const Icon(IconlyLight.hide),
                         ),
                         validation: (value) {
                           if (value!.length >= 8) {
@@ -98,7 +97,8 @@ class LoginView extends GetView<LoginController> {
                               Get.toNamed(Routes.FOGETPASSWORD);
                             },
                             child: CustomText(
-                              text: "Forget password",
+                              text: "Forget password".tr,
+                              Underline: true,
                             ),
                           )
                         ],
@@ -121,10 +121,11 @@ class LoginView extends GetView<LoginController> {
                                   child: CircularProgressIndicator(
                                   color: Color.fromRGBO(236, 138, 35, 1),
                                 ))
-                              : const Button(
+                              : Button(
                                   width: double.infinity,
-                                  text: "Login",
-                                  buttonColor: Color.fromRGBO(236, 138, 35, 1),
+                                  text: "Sign in".tr,
+                                  buttonColor:
+                                      const Color.fromRGBO(236, 138, 35, 1),
                                 ),
                         )),
                     Column(
@@ -140,7 +141,7 @@ class LoginView extends GetView<LoginController> {
                               color: Color.fromRGBO(156, 154, 165, 0.3),
                             )),
                             CustomText(
-                              text: " OR ",
+                              text: "OR".tr,
                               color: const Color.fromRGBO(156, 154, 165, 0.3),
                             ),
                             const Expanded(
@@ -174,7 +175,7 @@ class LoginView extends GetView<LoginController> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CustomText(
-                      text: "Don’t Have an Account ?",
+                      text: "Don't Have an Account ? ".tr,
                       color: const Color.fromRGBO(148, 148, 148, 1),
                       weight: FontWeight.w400,
                       size: 14,
@@ -184,7 +185,7 @@ class LoginView extends GetView<LoginController> {
                         Get.offAllNamed(Routes.SIGNUP);
                       },
                       child: CustomText(
-                        text: " Sing Up",
+                        text: "Sign up".tr,
                         weight: FontWeight.w700,
                       ),
                     )

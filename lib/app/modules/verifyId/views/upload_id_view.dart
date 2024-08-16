@@ -28,7 +28,7 @@ class UploadIdView extends GetView<VerifyIdController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomText(
-                text: "Upload your Passport",
+                text: "Upload your Passport".tr,
                 size: 24,
                 weight: FontWeight.w700,
               ),
@@ -39,7 +39,7 @@ class UploadIdView extends GetView<VerifyIdController> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CustomText(
-                      text: "Front Side",
+                      text: "Front Side".tr,
                       size: 20,
                       weight: FontWeight.w500,
                     ),
@@ -56,8 +56,7 @@ class UploadIdView extends GetView<VerifyIdController> {
                                   fit: BoxFit.cover,
                                   image: controller
                                           .frontSide!.value.path.isEmpty
-                                      ? const NetworkImage(
-                                          "https://s3-alpha-sig.figma.com/img/fdd5/0f28/a41849b95e4496b49e7766fe01096641?Expires=1711929600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XFnDwDXclKJp-Ht~on2ErnYj1BG1p7dpjgUPN9U6NKrJCpuM2dUFVW84gXeX3yEiEwe1bKPEP0KFHMJYY1upPgxbIMxBw-sNO07enGlZD7wL10rUI544KEjrxEr5IalBWXKGTRiztnfaJt3CPVQ0ayRxY761Qy4aYh1MoKVSaoc~YkWFi1~aaITseS3YCZ5-l1rQUW4CRjyLbNl~~Pf~3s9Akv3vvfbLskDM8dul1eRyEAyhFwqY34hXawMwIbmyVxrQmX9I6ffmnfd57QngwK~kGWkjD78tnX5~c1DdwiXp48DaIsgz62sZni9nGRAJG1Gih5QTBKJDjwAnLPhtUA__")
+                                      ? const AssetImage("assets/upload.jpg")
                                       : FileImage(controller.frontSide!.value)
                                           as ImageProvider)),
                         )))
@@ -70,7 +69,7 @@ class UploadIdView extends GetView<VerifyIdController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: "Back Side",
+                      text: "Back Side".tr,
                       size: 20,
                       weight: FontWeight.w500,
                     ),
@@ -87,8 +86,7 @@ class UploadIdView extends GetView<VerifyIdController> {
                                     fit: BoxFit.cover,
                                     image: controller
                                             .backSide!.value.path.isEmpty
-                                        ? const NetworkImage(
-                                            "https://s3-alpha-sig.figma.com/img/fdd5/0f28/a41849b95e4496b49e7766fe01096641?Expires=1711929600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XFnDwDXclKJp-Ht~on2ErnYj1BG1p7dpjgUPN9U6NKrJCpuM2dUFVW84gXeX3yEiEwe1bKPEP0KFHMJYY1upPgxbIMxBw-sNO07enGlZD7wL10rUI544KEjrxEr5IalBWXKGTRiztnfaJt3CPVQ0ayRxY761Qy4aYh1MoKVSaoc~YkWFi1~aaITseS3YCZ5-l1rQUW4CRjyLbNl~~Pf~3s9Akv3vvfbLskDM8dul1eRyEAyhFwqY34hXawMwIbmyVxrQmX9I6ffmnfd57QngwK~kGWkjD78tnX5~c1DdwiXp48DaIsgz62sZni9nGRAJG1Gih5QTBKJDjwAnLPhtUA__")
+                                        ? const AssetImage("assets/upload.jpg")
                                         : FileImage(controller.backSide!.value)
                                             as ImageProvider)),
                           ),
@@ -107,11 +105,12 @@ class UploadIdView extends GetView<VerifyIdController> {
                               color: Color.fromRGBO(236, 138, 35, 1),
                             ),
                           )
-                        : const Center(
+                        : Center(
                             child: Button(
                               width: double.infinity,
-                              text: "Next",
-                              buttonColor: Color.fromRGBO(236, 138, 35, 1),
+                              text: "Next".tr,
+                              buttonColor:
+                                  const Color.fromRGBO(236, 138, 35, 1),
                             ),
                           ),
                   ))

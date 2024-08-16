@@ -1,20 +1,31 @@
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 
 class CheckoutController extends GetxController {
-  //TODO: Implement CheckoutController
-
   RxInt count = 1.obs;
+  RxBool isOvered = true.obs;
 
   void increment(int fundersNumber) {
+    print(isOvered.value);
     if (count.value < fundersNumber * 0.4) {
       count += 1;
+    } else {
+      isOvered.value = false;
     }
   }
 
-  void decrement() {
+  // void chngVal(int fundersNumber) {
+  //   if (count.value > fundersNumber * 0.4) {
+  //     isOvered.value = false;
+  //   }
+  //   isOvered.value = true;
+  // }
+
+  void decrement(int fundersNumber) {
+    print(isOvered.value);
+
     if (count.value > 1) {
       count -= 1;
+      isOvered.value = true;
     }
   }
 }

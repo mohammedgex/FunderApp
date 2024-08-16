@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:funder_app/app/modules/Auth/signup/controllers/signup_controller.dart';
 import 'package:funder_app/app/modules/global_widgets/OTPwidget.dart';
@@ -15,20 +13,19 @@ class OtpWidgetView extends GetView<LoginController> {
   TextEditingController? th_controller = TextEditingController();
   TextEditingController? fo_controller = TextEditingController();
 
-  final PassedData = Get.arguments;
+  // final PassedData = Get.arguments;
 
   OtpWidgetView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    print("PassedData ${PassedData[0]}");
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         title: CustomText(
-          text: "Verification code",
+          text: "Verification code".tr,
           size: 20,
           weight: FontWeight.w600,
         ),
@@ -45,21 +42,19 @@ class OtpWidgetView extends GetView<LoginController> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              child: Column(
-                children: [
-                  CustomText(
-                    text: "Verification code",
-                    size: 20,
-                    weight: FontWeight.w600,
-                  ),
-                  CustomText(
-                    text: "Enter the verification code we sent to",
-                    size: 16,
-                    weight: FontWeight.w400,
-                  ),
-                ],
-              ),
+            Column(
+              children: [
+                CustomText(
+                  text: "Verification code".tr,
+                  size: 20,
+                  weight: FontWeight.w600,
+                ),
+                CustomText(
+                  text: "Enter the verification code we sent to".tr,
+                  size: 16,
+                  weight: FontWeight.w400,
+                ),
+              ],
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -91,7 +86,7 @@ class OtpWidgetView extends GetView<LoginController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CustomText(
-                        text: "Didn’t  receive the code ?",
+                        text: "Didn’t  receive the code ?".tr,
                       ),
                       InkWell(
                         onTap: () {
@@ -100,7 +95,7 @@ class OtpWidgetView extends GetView<LoginController> {
                           print("Sent Again");
                         },
                         child: CustomText(
-                          text: " Resend",
+                          text: " Resend".tr,
                           size: 16,
                           weight: FontWeight.w700,
                           Underline: true,
@@ -120,16 +115,19 @@ class OtpWidgetView extends GetView<LoginController> {
                   Get.toNamed(Routes.VERIFY_ID);
                 },
                 child: GestureDetector(
-                  onTap: () => controller.VERIFYOTP(
-                      f_controller!.text,
-                      s_controller!.text,
-                      th_controller!.text,
-                      fo_controller!.text,
-                      PassedData[0]),
-                  child: const Button(
-                    text: "Verify",
+                  onTap: () => Get.toNamed(Routes.CREATPASSWORD)
+
+                  // controller.VERIFYOTP(
+                  //     f_controller!.text,
+                  //     s_controller!.text,
+                  //     th_controller!.text,
+                  //     fo_controller!.text,
+                  //     "eslam@gmail.com")
+                  ,
+                  child: Button(
+                    text: "Verify".tr,
                     width: 282,
-                    buttonColor: Color.fromRGBO(236, 138, 35, 1),
+                    buttonColor: const Color.fromRGBO(236, 138, 35, 1),
                   ),
                 ),
               ),

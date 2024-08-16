@@ -13,7 +13,7 @@ class PaymentMethodsView extends GetView<PaymentMethodsController> {
     return Scaffold(
         appBar: AppBar(
             title: CustomText(
-          text: "Payment methods",
+          text: "Payment methods".tr,
           size: 20,
           weight: FontWeight.w600,
         )),
@@ -29,19 +29,20 @@ class PaymentMethodsView extends GetView<PaymentMethodsController> {
 
               return Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     height: 500,
                     child: ListView.separated(
                       itemCount: snapshot.data!.length,
+                      physics: const BouncingScrollPhysics(),
                       itemBuilder: ((context, index) {
                         return GestureDetector(
                           onTap: () => Get.toNamed(Routes.INSTAPAY, arguments: [
                             "${snapshot.data![index].title}",
                             "There are no third party fees currently",
                             "${snapshot.data![index].description}",
-                            args[0],
-                            args[1],
+                            args[0], // shares count
+                            args[1], // id
                             "${snapshot.data![index].bank}",
                             "${snapshot.data![index].accountNumber}",
                           ]),

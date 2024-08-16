@@ -59,39 +59,37 @@ class InstaPayView extends GetView {
                 ],
               ),
             ),
-            Container(
-              child: Column(
-                children: [
-                  copy_Box(
-                    title: "The name of the bank",
-                    content: "${args[5]}",
-                  ),
-                  copy_Box(
-                    title: "The account number",
-                    content: "${args[6]}",
-                  ),
-                  const copy_Box(
-                    title: "The username",
-                    content: "Funder",
-                  ),
-                ],
-              ),
+            Column(
+              children: [
+                copy_Box(
+                  title: "The name of the bank".tr,
+                  content: "${args[5]}",
+                ),
+                copy_Box(
+                  title: "The account number".tr,
+                  content: "${args[6]}",
+                ),
+                copy_Box(
+                  title: "The username".tr,
+                  content: "Funder",
+                ),
+              ],
             ),
             CustomText(
-              text: " save a copy of payment reciept",
+              text: "save a copy of payment reciept".tr,
               color: Colors.red,
             ),
             GestureDetector(
               onTap: () => Get.toNamed(Routes.UPLOAD_RECEIPT, arguments: [
-                args[3],
-                args[4],
-                args[0],
+                args[3], // shares count
+                args[4], // id
+                args[0], // payment method
               ]),
-              child: const Button(
+              child: Button(
                 width: 216,
                 height: 50,
-                text: "Confirm the deposit",
-                buttonColor: Color.fromRGBO(236, 138, 35, 1),
+                text: "Confirm the deposit".tr,
+                buttonColor: const Color.fromRGBO(236, 138, 35, 1),
               ),
             )
           ],

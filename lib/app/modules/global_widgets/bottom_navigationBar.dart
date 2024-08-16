@@ -46,17 +46,6 @@ class bottom_NavigationBar extends StatelessWidget {
         ),
         NavigationDestination(
           icon: SvgPicture.asset(
-            "assets/icons/search_Icon.svg",
-            color: const Color.fromRGBO(115, 115, 115, 1),
-          ),
-          label: "",
-          selectedIcon: SvgPicture.asset(
-            "assets/icons/search_Icon 2.svg",
-            color: const Color.fromRGBO(236, 138, 35, 1),
-          ),
-        ),
-        NavigationDestination(
-          icon: SvgPicture.asset(
             "assets/icons/favorite_Icon.svg",
             color: const Color.fromRGBO(115, 115, 115, 1),
           ),

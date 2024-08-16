@@ -5,8 +5,10 @@ import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/modules/global_widgets/textField.dart';
 import 'package:funder_app/app/modules/home/navigated_screens/profile_Screen/controllers/profile_screen_controller.dart';
+import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:iconly/iconly.dart';
 
 class PersonalDetails extends GetView<ProfileScreenController> {
   const PersonalDetails({super.key});
@@ -45,84 +47,41 @@ class PersonalDetails extends GetView<ProfileScreenController> {
                       onTap: () => controller.PickprofileImage(),
                     ),
                   )),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomTextField(
-                      controller: controller.UserName_Controller,
-                      icon: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: SizedBox(
-                          height: 20,
-                          child: SvgPicture.asset(
-                              "assets/TextField_Icons/username.svg"),
-                        ),
-                      ),
-                      hinttext: "Username",
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomTextField(
+                    controller: controller.UserName_Controller,
+                    icon: const Icon(IconlyLight.profile),
+                    hinttext: "Username".tr,
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  CustomTextField(
+                    controller: controller.PhoneNumber_Controller,
+                    icon: const Icon(IconlyLight.call),
+                    hinttext: "Phone".tr,
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  GestureDetector(
+                    onTap: () => Get.toNamed(Routes.RESET_PASSWORD),
+                    child: CustomText(
+                      text: "Reset Password".tr,
+                      Underline: true,
+                      color: const Color.fromRGBO(4, 54, 61, 1),
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CustomTextField(
-                      controller: controller.PhoneNumber_Controller,
-                      icon: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: SizedBox(
-                          height: 20,
-                          child: SvgPicture.asset(
-                              "assets/TextField_Icons/phonenumber.svg"),
-                        ),
-                      ),
-                      hinttext: "Phone",
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Obx(
-                      () => CustomTextField(
-                        showen: controller.showPassword.value ? true : false,
-                        suficon: InkWell(
-                          onTap: () => controller.troglePassword(),
-                          child: SizedBox(
-                            height: 30,
-                            child: controller.showPassword.value
-                                ? SvgPicture.asset(
-                                    "assets/TextField_Icons/showpassword.svg")
-                                : SvgPicture.asset(
-                                    "assets/TextField_Icons/hidepassword.svg"),
-                          ),
-                        ),
-                        icon: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: SizedBox(
-                            height: 30,
-                            child: SvgPicture.asset(
-                                "assets/TextField_Icons/password.svg"),
-                          ),
-                        ),
-                        hinttext: "Password",
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    GestureDetector(
-                      onTap: () => print("Ok"),
-                      child: CustomText(
-                        text: "Rest Password",
-                        Underline: true,
-                        color: const Color.fromRGBO(4, 54, 61, 1),
-                      ),
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
               Obx(() => GestureDetector(
                     onTap: () {
-                      print(controller.UserName_Controller.text);
-                      print(controller.PhoneNumber_Controller.text);
                       controller.ApiEdit(
                           UserName: controller.UserName_Controller.text,
                           phone: controller.PhoneNumber_Controller.text);
@@ -132,10 +91,10 @@ class PersonalDetails extends GetView<ProfileScreenController> {
                             child: CircularProgressIndicator(
                             color: Color.fromRGBO(236, 138, 35, 1),
                           ))
-                        : const Button(
+                        : Button(
                             width: double.infinity,
-                            text: "Next",
-                            buttonColor: Color.fromRGBO(236, 138, 35, 1),
+                            text: "Next".tr,
+                            buttonColor: const Color.fromRGBO(236, 138, 35, 1),
                           ),
                   ))
             ],

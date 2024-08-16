@@ -10,11 +10,7 @@ class ReceiptsController extends GetxController {
   //TODO: Implement ReceiptsController
 
   final box = GetStorage();
-  static const String URL = ApiUrls.Favorites_api;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  static const String URL = ApiUrls.Receipt_api;
 
   // api connect
   Future<List> get_receipts() async {

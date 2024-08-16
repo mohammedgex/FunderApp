@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:funder_app/app/data/apis_url.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class my_Property extends StatelessWidget {
-  const my_Property({super.key});
+  my_Property({super.key, this.imageUrl, this.price, this.rent, this.title});
+  String? title;
+  String? imageUrl;
+  String? price;
+  String? rent;
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +32,9 @@ class my_Property extends StatelessWidget {
               width: 82,
               height: 97,
               decoration: BoxDecoration(
-                image: const DecorationImage(
+                image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(
-                        "https://www.ubm-development.com/magazin/wp-content/uploads/2020/03/kl-main-building-d-Kopie.jpg")),
+                    image: NetworkImage("${ApiUrls.URl}/uploads/$imageUrl")),
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
@@ -38,18 +42,31 @@ class my_Property extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Container(
+                    width: (MediaQuery.of(context).size.width - 10) * 0.3,
+                    child: Text(
+                      softWrap: true,
+                      title!,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontFamily: "Lato",
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500),
+                    )
+                    //  CustomText(
+                    //   text: "$propert_Title",
+                    //   ellipsis: true,
+                    //   weight: FontWeight.w500,
+                    //   size: 14,
+                    // ),
+                    ),
                 CustomText(
-                  text: "2 Bed in park Heughts",
-                  size: 14,
-                  weight: FontWeight.w500,
-                ),
-                CustomText(
-                  text: "AED 9.458",
+                  text: "$price EGP",
                   size: 10,
                   weight: FontWeight.w600,
                 ),
                 CustomText(
-                  text: "Rent earned : AED 19.9",
+                  text: "Rent earned : $rent EGP",
                   size: 12,
                   weight: FontWeight.w400,
                 ),

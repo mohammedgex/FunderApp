@@ -20,7 +20,7 @@ class LoginController extends GetxController {
   late TextEditingController Password_Controller;
 
   // password variable
-  RxBool showPassword = false.obs;
+  RxBool showPassword = true.obs;
 
   // confirm password variable
 
@@ -58,21 +58,32 @@ class LoginController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        print("Conected");
         final data = jsonDecode(response.body);
-
-        userData = LoginModel.fromJson(data);
-
-        box.write("userToken", userData!.token);
-
-        isLoading.value = false;
-        box.write("userName", userData!.user!.name);
-        box.write("userEmail", userData!.user!.email);
-        box.write("userImage", userData!.user!.image);
-        box.write("userPhone", userData!.user!.phone);
-        print(box.read("userData"));
-        Get.offAllNamed(Routes.MAIN_PAGE);
+        if (data["token"] != null) {
+          userData = LoginModel.fromJson(data);
+          box.write("userToken", userData!.token);
+          isLoading.value = false;
+          box.write("userName", userData!.user!.name);
+          box.write("userEmail", userData!.user!.email);
+          box.write("userImage", userData!.user!.image);
+          box.write("userPhone", userData!.user!.phone);
+          print(box.read("userData"));
+          Get.offAllNamed(Routes.MAIN_PAGE);
+        } else if (data["error"] != null) {
+          isLoading.value = false;
+          Get.defaultDialog(
+              title: "Error",
+              titleStyle: const TextStyle(
+                  fontFamily: "Lato", fontWeight: FontWeight.w700),
+              backgroundColor: Colors.white,
+              textCancel: "DISMISS",
+              content: CustomText(
+                cenetr: true,
+                text: "${data["error"]}",
+              ));
+        }
       } else {
+        final data = jsonDecode(response.body);
         Get.defaultDialog(
             title: "Error",
             titleStyle: const TextStyle(
@@ -81,7 +92,7 @@ class LoginController extends GetxController {
             textCancel: "DISMISS",
             content: CustomText(
               cenetr: true,
-              text: "${response.body}",
+              text: "${data["error"]}",
             ));
         isLoading.value = false;
       }

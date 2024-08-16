@@ -14,6 +14,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
+          scrolledUnderElevation: 0,
           leading: GestureDetector(
               onTap: () {
                 Get.back();
@@ -21,6 +22,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
               child: const Icon(Icons.arrow_back)),
         ),
         body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: SafeArea(
               child: Padding(
             padding:
@@ -29,53 +31,50 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomText(
-                        text: "Forget your password",
-                        size: 24,
-                        weight: FontWeight.w600,
-                      ),
-                      CustomText(
-                        text:
-                            "Please enter your phone number to reset your password",
-                        size: 16,
-                        weight: FontWeight.w400,
-                        color: const Color.fromRGBO(148, 148, 148, 1),
-                      )
-                    ],
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      text: "Forget password".tr,
+                      size: 24,
+                      weight: FontWeight.w600,
+                    ),
+                    CustomText(
+                      text:
+                          "Please enter your phone number to reset your password"
+                              .tr,
+                      size: 16,
+                      weight: FontWeight.w400,
+                      color: const Color.fromRGBO(148, 148, 148, 1),
+                    )
+                  ],
                 ),
                 const SizedBox(
                   height: 80,
                 ),
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomTextField(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CustomTextField(
+                      width: double.infinity,
+                      icon: const Icon(Icons.call),
+                      keyboard: TextInputType.phone,
+                      hinttext: "Phone".tr,
+                    ),
+                    const SizedBox(
+                      height: 18,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(Routes.CREATOTP);
+                      },
+                      child: Button(
                         width: double.infinity,
-                        icon: const Icon(Icons.call),
-                        keyboard: TextInputType.phone,
-                        hinttext: "Phone Number",
+                        text: "Send Code".tr,
+                        buttonColor: const Color.fromRGBO(236, 138, 35, 1),
                       ),
-                      const SizedBox(
-                        height: 18,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.toNamed(Routes.CREATOTP);
-                        },
-                        child: const Button(
-                          width: double.infinity,
-                          text: "Send Code",
-                          buttonColor: Color.fromRGBO(236, 138, 35, 1),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),

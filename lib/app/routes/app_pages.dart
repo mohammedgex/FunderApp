@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import '../modules/Auth/forget_password/bindings/forget_password_binding.dart';
 import '../modules/Auth/forget_password/views/creat_password_view.dart';
 import '../modules/Auth/forget_password/views/forget_password_view.dart';
@@ -19,10 +20,12 @@ import '../modules/home/navigated_screens/Search_Filter/views/search_results_vie
 import '../modules/home/navigated_screens/profile_Screen/bindings/profile_screen_binding.dart';
 import '../modules/home/navigated_screens/profile_Screen/views/personal_details_view.dart';
 import '../modules/home/navigated_screens/profile_Screen/views/profile_screen_view.dart';
+import '../modules/home/notifications/bindings/notifications_binding.dart';
+import '../modules/home/notifications/views/notifications_view.dart';
+import '../modules/home/reset_password/bindings/resetPassword_binding.dart';
+import '../modules/home/reset_password/views/resetPassword_view.dart';
 import '../modules/myInvestments/bindings/my_investments_binding.dart';
 import '../modules/myInvestments/views/my_investments_view.dart';
-// import '../modules/myPropertyDetails/bindings/my_property_details_binding.dart';
-// import '../modules/myPropertyDetails/views/my_property_details_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding.dart';
 import '../modules/payment/checkout/bindings/checkout_binding.dart';
@@ -34,12 +37,16 @@ import '../modules/receipt/receipts/bindings/receipts_binding.dart';
 import '../modules/receipt/receipts/views/receipts_view.dart';
 import '../modules/receipt/upload_receipt/bindings/upload_receipt_binding.dart';
 import '../modules/receipt/upload_receipt/views/upload_receipt_view.dart';
+
 import '../modules/terms/bindings/terms_binding.dart';
 import '../modules/terms/views/terms_view.dart';
 import '../modules/verifyId/bindings/verify_id_binding.dart';
 import '../modules/verifyId/views/select_type_view.dart';
 import '../modules/verifyId/views/upload_id_view.dart';
 import '../modules/verifyId/views/verify_id_view.dart';
+
+// import '../modules/myPropertyDetails/bindings/my_property_details_binding.dart';
+// import '../modules/myPropertyDetails/views/my_property_details_view.dart';
 
 part 'app_routes.dart';
 
@@ -102,10 +109,10 @@ class AppPages {
       binding: VerifyIdBinding(),
     ),
     GetPage(
-      name: _Paths.MAIN_PAGE,
-      page: () => MainPageView(),
-      binding: MainPageBinding(),
-    ),
+        name: _Paths.MAIN_PAGE,
+        page: () => MainPageView(),
+        binding: MainPageBinding(),
+        transition: Transition.cupertinoDialog),
     GetPage(
       name: _Paths.PROFILE_PAGE,
       page: () => ProfileScreenView(),
@@ -171,5 +178,15 @@ class AppPages {
       page: () => const TermsView(),
       binding: TermsBinding(),
     ),
+    GetPage(
+      name: _Paths.RESET_PASSWORD,
+      page: () => resetPasswordView(),
+      binding: resetPasswordBinding(),
+    ),
+    GetPage(
+        name: _Paths.NOTIFICATIONS,
+        page: () => const NotificationsView(),
+        binding: NotificationsBinding(),
+        transition: Transition.downToUp),
   ];
 }

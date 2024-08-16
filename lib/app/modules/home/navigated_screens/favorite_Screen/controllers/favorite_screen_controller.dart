@@ -102,4 +102,27 @@ class FavoriteScreenController extends GetxController {
       print(e);
     }
   }
+
+  // remove from favorites
+  Future<void> removetofavorite(int id) async {
+    try {
+      final response = await http.delete(
+        Uri.parse("$URL/$id"),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${box.read("userToken")}',
+        },
+      );
+      print(response.body);
+      if (response.statusCode == 200) {
+        Get.defaultDialog(title: "REMOVED", content: const SizedBox());
+        Get.offAllNamed(Routes.HOME_SCREEN);
+      } else if (response.statusCode == 403) {
+        Get.defaultDialog(title: "add before", content: const SizedBox());
+      }
+    } catch (e) {
+      print("Error $e");
+    }
+  }
 }

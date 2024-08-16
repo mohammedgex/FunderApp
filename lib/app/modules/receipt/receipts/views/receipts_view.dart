@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:funder_app/app/data/apis_url.dart';
 import 'package:funder_app/app/modules/global_widgets/receiptUnit.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
+import 'package:funder_app/app/routes/app_pages.dart';
 
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 import '../controllers/receipts_controller.dart';
 
@@ -14,7 +17,7 @@ class ReceiptsView extends GetView<ReceiptsController> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           title: CustomText(
-            text: "Receipts",
+            text: "Receipts".tr,
             size: 20,
             weight: FontWeight.w600,
           ),
@@ -25,14 +28,20 @@ class ReceiptsView extends GetView<ReceiptsController> {
             child: FutureBuilder(
               future: controller.get_receipts(),
               builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: Lottie.asset('assets/loading.json',
+                        width: 100, height: 100),
+                  );
+                }
                 return ListView.separated(
-                  itemCount: 15,
+                  itemCount: snapshot.data!.length,
                   itemBuilder: ((context, index) {
                     return receiptUnit(
-                      imageUrl: "dfdf",
-                      amount: "100",
-                      date: "11-8-2004",
-                      status: "acceted",
+                      imageUrl: "${snapshot.data![index].image}",
+                      amount: "${snapshot.data![index].depositedAmount}",
+                      date: "${snapshot.data![index].depositDate}",
+                      status: "${snapshot.data![index].status}",
                     );
                   }),
                   separatorBuilder: (BuildContext context, int index) {

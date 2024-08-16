@@ -24,9 +24,6 @@ class WalletScreenView extends GetView<WalletScreenController> {
     // Get the current year
     int currentYear = now.year;
 
-    print('Current month: $currentMonth');
-    print('Current year: $currentYear');
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -34,16 +31,16 @@ class WalletScreenView extends GetView<WalletScreenController> {
         scrolledUnderElevation: 0,
         backgroundColor: Colors.white,
         title: CustomText(
-          text: "MY Wallet",
+          text: "MY Wallet".tr,
           size: 20,
           weight: FontWeight.w600,
         ),
       ),
       body: SingleChildScrollView(
-        child: Container(
+        physics: const BouncingScrollPhysics(),
+        child: SizedBox(
           width: double.infinity,
           height: MediaQuery.of(context).size.height,
-          padding: const EdgeInsets.all(12),
           child: FutureBuilder(
               future: walletController.walletApi(),
               builder: (context, snapshot) {
@@ -54,9 +51,9 @@ class WalletScreenView extends GetView<WalletScreenController> {
                   );
                 }
                 return Padding(
-                  padding: const EdgeInsets.only(top: 25, left: 25),
+                  padding: const EdgeInsets.only(top: 20, left: 25, right: 25),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // investments value
@@ -66,12 +63,14 @@ class WalletScreenView extends GetView<WalletScreenController> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             CustomText(
-                              text: "Investments",
+                              text: "Investments".tr,
                               size: 16,
                               weight: FontWeight.w400,
                             ),
+                            //  snapshot.data!.myInvestments.toString().isNotEmpty?
                             CustomText(
-                              text: "${snapshot.data!.myInvestments} EGP",
+                              text:
+                                  "${snapshot.data!.myInvestments.toString()} EGP",
                               size: 16,
                               color: const Color.fromRGBO(236, 138, 35, 1),
                               weight: FontWeight.w600,
@@ -86,7 +85,7 @@ class WalletScreenView extends GetView<WalletScreenController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomText(
-                            text: "Key financials",
+                            text: "Key financials".tr,
                             size: 20,
                             weight: FontWeight.w700,
                           ),
@@ -94,6 +93,8 @@ class WalletScreenView extends GetView<WalletScreenController> {
                             height: 5,
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Container(
                                 padding: const EdgeInsets.all(10),
@@ -123,7 +124,7 @@ class WalletScreenView extends GetView<WalletScreenController> {
                                             ellipsis: true,
                                             size: 14,
                                             weight: FontWeight.w500,
-                                            text: "Monthly income",
+                                            text: "Monthly income".tr,
                                             color: const Color.fromRGBO(
                                                 4, 54, 61, 1),
                                           ),
@@ -178,7 +179,7 @@ class WalletScreenView extends GetView<WalletScreenController> {
                                             ellipsis: true,
                                             size: 14,
                                             weight: FontWeight.w500,
-                                            text: "Properties count",
+                                            text: "Properties count".tr,
                                             color: const Color.fromRGBO(
                                                 4, 54, 61, 1),
                                           ),
@@ -211,7 +212,7 @@ class WalletScreenView extends GetView<WalletScreenController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomText(
-                            text: "Quick Insights",
+                            text: "Quick Insights".tr,
                             size: 20,
                             weight: FontWeight.w700,
                           ),
@@ -219,6 +220,8 @@ class WalletScreenView extends GetView<WalletScreenController> {
                             height: 5,
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Container(
                                 padding: const EdgeInsets.all(10),
@@ -248,7 +251,7 @@ class WalletScreenView extends GetView<WalletScreenController> {
                                             ellipsis: true,
                                             size: 14,
                                             weight: FontWeight.w500,
-                                            text: "deposit",
+                                            text: "deposit".tr,
                                             color: const Color.fromRGBO(
                                                 4, 54, 61, 1),
                                           ),
@@ -297,15 +300,13 @@ class WalletScreenView extends GetView<WalletScreenController> {
                                         const SizedBox(
                                           width: 5,
                                         ),
-                                        Container(
-                                          child: CustomText(
-                                            ellipsis: true,
-                                            size: 14,
-                                            weight: FontWeight.w500,
-                                            text: "annual gross",
-                                            color: const Color.fromRGBO(
-                                                4, 54, 61, 1),
-                                          ),
+                                        CustomText(
+                                          ellipsis: true,
+                                          size: 14,
+                                          weight: FontWeight.w500,
+                                          text: "annual gross".tr,
+                                          color: const Color.fromRGBO(
+                                              4, 54, 61, 1),
                                         )
                                       ],
                                     ),
@@ -335,79 +336,80 @@ class WalletScreenView extends GetView<WalletScreenController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomText(
-                            text: "Receipts",
+                            text: "Receipts".tr,
                             size: 20,
                             weight: FontWeight.w700,
                           ),
                           const SizedBox(
                             height: 5,
                           ),
-                          Container(
-                            height: 100,
-                            child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 1,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  padding: const EdgeInsets.all(10),
-                                  width: 150,
-                                  height: 87,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: const Border(
-                                        bottom: BorderSide(
-                                            width: 0.5, color: Colors.black),
-                                      )),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                              "assets/wallet_assets/receipts.svg"),
-                                          const SizedBox(
-                                            width: 5,
-                                          ),
-                                          Container(
-                                            child: CustomText(
+                          GestureDetector(
+                            onTap: () => Get.toNamed(Routes.RECEIPTS),
+                            child: SizedBox(
+                              height: 100,
+                              child: ListView.separated(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: 1,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    padding: const EdgeInsets.all(10),
+                                    width: 150,
+                                    height: 87,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: const Border(
+                                          bottom: BorderSide(
+                                              width: 0.5, color: Colors.black),
+                                        )),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                                "assets/wallet_assets/receipts.svg"),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            CustomText(
                                               ellipsis: true,
                                               size: 14,
                                               weight: FontWeight.w700,
-                                              text: "Receipts",
+                                              text: "Receipts".tr,
                                               color: const Color.fromRGBO(
                                                   4, 54, 61, 1),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      CustomText(
-                                        text: "${snapshot.data!.receipts}",
-                                        size: 14,
-                                        weight: FontWeight.w700,
-                                        color:
-                                            const Color.fromRGBO(4, 54, 61, 1),
-                                      ),
-                                      CustomText(
-                                        text: "$currentMonth $currentYear",
-                                        color:
-                                            const Color.fromRGBO(4, 54, 61, 1),
-                                        size: 10,
-                                        weight: FontWeight.w400,
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                              separatorBuilder:
-                                  (BuildContext context, int index) {
-                                return const SizedBox(
-                                  width: 10,
-                                );
-                              },
+                                            )
+                                          ],
+                                        ),
+                                        CustomText(
+                                          text: "${snapshot.data!.receipts}",
+                                          size: 14,
+                                          weight: FontWeight.w700,
+                                          color: const Color.fromRGBO(
+                                              4, 54, 61, 1),
+                                        ),
+                                        CustomText(
+                                          text: "$currentMonth $currentYear",
+                                          color: const Color.fromRGBO(
+                                              4, 54, 61, 1),
+                                          size: 10,
+                                          weight: FontWeight.w400,
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return const SizedBox(
+                                    width: 10,
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         ],
@@ -418,19 +420,23 @@ class WalletScreenView extends GetView<WalletScreenController> {
                           children: [
                             GestureDetector(
                               onTap: () => Get.toNamed(Routes.MY_INVESTMENTS),
-                              child: const Button(
+                              child: Button(
                                 width: 244,
-                                text: "My properties",
-                                buttonColor: Color.fromRGBO(236, 138, 35, 1),
+                                text: "My properties".tr,
+                                buttonColor:
+                                    const Color.fromRGBO(236, 138, 35, 1),
                               ),
                             ),
                             const SizedBox(
                               height: 5,
                             ),
-                            const Button(
-                              width: 244,
-                              isBorder: true,
-                              text: "Buy Properties",
+                            GestureDetector(
+                              onTap: () => Get.offAllNamed(Routes.MAIN_PAGE),
+                              child: Button(
+                                width: 244,
+                                isBorder: true,
+                                text: "Buy Properties".tr,
+                              ),
                             ),
                           ],
                         ),
