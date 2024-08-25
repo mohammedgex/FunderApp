@@ -323,6 +323,9 @@ class Translation extends Translations {
 
           "Property": "Property",
           "Pending": "Pending",
+
+          "Agree with ": "Agree with ",
+          "Terms & conditions": "Terms & conditions",
         },
       };
 }
