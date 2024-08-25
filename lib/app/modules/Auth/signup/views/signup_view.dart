@@ -11,6 +11,8 @@ import 'package:iconly/iconly.dart';
 class SignupView extends GetView<SignupController> {
   final _formKey = GlobalKey<FormState>();
 
+  SignupView({super.key});
+
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
@@ -36,6 +38,26 @@ class SignupView extends GetView<SignupController> {
                 const SizedBox(height: 15),
                 _buildSubmitButton(),
                 const SizedBox(height: 10),
+                SizedBox(
+                  width: 176,
+                  child: Row(children: <Widget>[
+                    const Expanded(
+                        child: Divider(
+                      color: Color.fromRGBO(156, 154, 165, 0.3),
+                    )),
+                    CustomText(
+                      text: "OR".tr,
+                      color: const Color.fromRGBO(156, 154, 165, 0.3),
+                    ),
+                    const Expanded(
+                        child: Divider(
+                      color: Color.fromRGBO(156, 154, 165, 0.3),
+                    )),
+                  ]),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 _buildSocialMediaRow(width),
                 const SizedBox(height: 10),
                 _buildSignInRow(),
@@ -101,8 +123,19 @@ class SignupView extends GetView<SignupController> {
           hinttext: "Phone".tr,
           controller: controller.Phone_Controller,
           keyboard: TextInputType.phone,
+          icon: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomText(
+                text: "+20",
+                size: 16,
+                weight: FontWeight.w600,
+              ),
+            ],
+          ),
           validation: (value) {
-            if (value!.length == 11 && value.startsWith("01")) {
+            if (value!.length == 10 && value.startsWith("01")) {
               return null;
             }
             return "Enter Valid Phone number".tr;

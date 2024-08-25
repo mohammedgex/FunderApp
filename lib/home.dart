@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:funder_app/app/modules/onboarding/controllers/onboarding_controller.dart';
 import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:funder_app/translations.dart';
@@ -23,6 +24,7 @@ class HomePage extends StatelessWidget {
           title: "Funder",
           translations: Translation(),
           debugShowCheckedModeBanner: false,
+          theme: ThemeData(fontFamily: "Lato"),
           initialRoute: controller.value.value
               ? controller.isSignedIn.value == true
                   ? AppPages.MAIN

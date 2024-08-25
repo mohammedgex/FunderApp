@@ -94,7 +94,8 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                               ),
                               GestureDetector(
                                   onTap: () => HomeScreenController()
-                                      .addtofavorite(Property_Details[3]),
+                                      .addtofavorite(
+                                          Property_Details[3], context),
                                   child: SvgPicture.asset(
                                       "assets/icons/favoGround.svg")),
                             ],

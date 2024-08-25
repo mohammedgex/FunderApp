@@ -9,13 +9,13 @@ class Translation extends Translations {
           'Available': 'المتاح',
           'Funded': 'المباع',
           'Our Properties': 'العقارات',
-
+          "Our properties": "عقاراتنا",
           "Funded Properties": "العقارات المباعة",
 
           // wallet page
           "MY Wallet": "محفظتي",
-          "Investments": "الاستثمارات",
-          "Key financials": "الاموال",
+          "Investments": "الإستثمارات",
+          "Key financials": "الأموال",
           "Quick Insights": "ملاحظات",
           "Receipts": "الفواتير",
           "Monthly income": "الدخل الشهري",
@@ -24,16 +24,14 @@ class Translation extends Translations {
           "annual gross": "الزيادة السنوية",
           "Buy Properties": "شراء عقارات",
           "My properties": "عقاراتي",
-          "Property": "العقار",
-          "Pending": "المعلق",
 
           // profile poage
           "Personal details": "تفاصيل شخصية",
-          "settings": "الاعدادت",
+          "settings": "الإعدادت",
           "log out": "تسجيل خروج",
           "change language": "تغيير اللغة",
           "login out": "تسجيل خروج",
-          "Are you sure want to login out?": "هل انت متأكد من تسجيل الخروج ؟",
+          "Are you sure want to login out?": "هل انت متأكد من تسجيل الخروج؟",
 
           // favorite page
           "Favorites": "المفضلة",
@@ -46,41 +44,41 @@ class Translation extends Translations {
 
           //Inputs
           "Reset Password": "تعيين كلمة السر",
-          "Username": "اسم المستخدم",
+          "Username": "أسم المستخدم",
           "Password": "كلمة المرور",
           "Phone": "رقم الهاتف",
-          "Email address": "البريد الالكتروني",
+          "Email address": "البريد الإلكتروني",
 
           // login
-          "Hello again": "مرحبا مجددا",
+          "Hello again": "ًمرحبا مجدداً",
           "Please sign in to access your account":
               "من قضلك قم بتسجيل الدخول للوصول لحسابك",
           "Sign in": "تسجيل دخول",
           "Sign up": "تسجيل حساب",
           "Forget password": "هل نسيت كلمة المرور",
-          "Don't Have an Account ? ": "ليس لديك حساب بعد ؟",
-          "You Have an Account ? ": "لديك حساب بالفعل ؟",
+          "Don't Have an Account ? ": "ليس لديك حساب بعد؟",
+          "You Have an Account ? ": "لديك حساب بالفعل؟",
           "OR": "أو",
 
           // check out
-          "Check out": "التحقق",
+          "Check out": "الدفع",
           "Price Details": "تفاصيل السعر",
           "Property Price": "سعر العقار",
-          "price per share": "السعر لكل جزء",
-          "total shares cost": "سعر كل الاجزاء",
+          "price per share": "السعر لكل سهم",
+          "total shares cost": "سعر كل الأسهم",
           "shares number (max 40% of shares)":
-              "اقصي عدد للشراء (40% من الاجزاء)",
+              "اقصي عدد للشراء (40% من الأسهم)",
 
           // property detials page
 
           // if property is funded
           "Funded date": "تاريخ البيع",
           "Purchase price": "سعر الشراء",
-          "Rental income paid": "مبلغ الايجار ",
+          "Rental income paid": "مبلغ الإيجار ",
           // if property is not funded
-          "estimated Annual return": "الربح العائد السنوي",
+          "estimated Annual return": "العائد السنوي المقدر",
           "estimated Annual appreciation": "العائد المتوقع",
-          "estimated projected gross yield": "نسبة النمو العائدة",
+          "estimated projected gross yield": "العائد الإجمالي المتوقع المتوقع",
 
           "See on Map": "عرض علي الخريطة",
           "Location": "الموقع",
@@ -88,56 +86,55 @@ class Translation extends Translations {
           // section 2
           "Financials": "الماليات",
           "Transaction Costs": "رسوم التحويل",
-          "Investment calculator": "حاسبة الاستثمار",
-          "Initial Investment": "الاستثمار الابتدائي",
+          "Investment calculator": "حاسبة الإستثمار",
+          "Initial Investment": "الإستثمار المبدئي",
           "property value growth years": "نمو العقار السنوي",
-          "Projected investment return of": "العائد من الاستثمار",
-          "Investment": "الاستثمار",
+          "Projected investment return of": "العائد الاستثماري المتوقع",
+          "Investment": "الإستثمار",
           "Value growth": "قيمة النمو",
-          "Funding timeline": "جدول البيع",
+          "Funding timeline": "جدول البيع الزمني",
           // button
-          "Book a share": "حجز شير",
-          "sell your share": "بيع الشير",
+          "Book a share": "حجز سهم",
+          "sell your share": "بيع السهم",
 
           //sign up page
-          "Full name": "الاسم بالكامل",
-          "Agree with ": "الموافقة علي ",
-          "Terms & conditions": "الشروط والاحكام",
-          "Confirm password": "تأكيد كلمة المرور الجديدة",
+          "Full name": "الإسم بالكامل",
+          "Agree with Terms & conditions": "الموافقة علي الشروط والأحكام.",
+          "Confirm password": "تأكيد كلمة المرور",
 
           // forget password
           "Please enter your phone number to reset your password":
-              "الرجاء ادخال رقم الهاتف لاستعادة كلمة مرورك",
-          "Send Code": "ارسال كود",
+              "الرجاء إدخال رقم الهاتف لإستعادة كلمة مرورك",
+          "Send Code": "ارسال الرمز",
 
           // payment methods page
           "Payment methods": "طرق الدفع",
 
           // paymetn detials
-          "The name of the bank": "اسم البنك",
+          "The name of the bank": "أسم البنك",
           "The account number": "رقم الحساب",
-          "The username": "اسم المستخدم",
-          "save a copy of payment reciept": "احفظ نسخة من فاتورة الدفع.",
+          "The username": "أسم المستخدم",
+          "save a copy of payment reciept": "أحفظ نسخة من فاتورة الدفع.",
 
           // upload receipt
-          "Confirm the deposit": "تأكيد المبلغ المودع",
-          "Upload receipt": "رفع فاتورة الدفع",
+          "Confirm the deposit": "تأكيد مبلغ الإيداع",
+          "Upload receipt": "إرفاق فاتورة الإيداع",
           "Photo Gallery": "معرض الصور",
           "Camera": "الكاميرا",
-          "reference number": "رقم الايداع",
-          "Deposit date": "تاريخ الايداع",
-          "Deposited amount": "مبلغ الدفع",
-          "Deposit": "المودع",
+          "reference number": "رقم الإيداع",
+          "Deposit date": "تاريخ الإيداع",
+          "Deposited amount": "مبلغ الإيداع",
+          "Deposit": "إيداع",
 
           // code verify
-          "Send details": "ارسال ", "Verification code": "كود التحقق",
+          "Send details": "ارسال ", "Verification code": "رمز التحقق",
           "Enter the verification code we sent to":
-              "ادخل كود التفعيل المرسل اليك",
-          "Didn’t  receive the code ?": "ألم تستلم كود تفعيل ؟",
-          " Resend": " اعادة ارسال",
+              "ادخل رمز التفعيل المرسل إليك",
+          "Didn’t  receive the code ?": "لم تستلم رمز تفعيل؟",
+          " Resend": " إعادة إرسال",
 
           // reset password
-          "Create a new password": "انشاء كلمة مرور جديدة",
+          "Create a new password": "إنشاء كلمة مرور جديدة",
           "New Password": "كلمة المرور الجديدة",
           "Save": "حفظ",
           // verify
@@ -163,6 +160,13 @@ class Translation extends Translations {
           "Create Password": "أنشاء كلمة مرور",
           "Please enter a secure password for your account":
               "رجاء ادخال كلمة مرور قوية لحسابك.",
+
+          "Property": "العقار",
+          "Pending": "المعلق",
+
+          //sign up page
+          "Agree with ": "الموافقة علي ",
+          "Terms & conditions": "الشروط والاحكام",
         },
         'en_US': {
           // home page
@@ -173,14 +177,14 @@ class Translation extends Translations {
 
           // profile page
           "Personal details": "Personal details",
-          "login out": "login out",
-          "log out": "log out",
+          "login out": "Log out",
+          "log out": "Log out",
           "change language": "Change language",
-          "Are you sure want to login out?": "Are you sure want to login out?",
+          "Are you sure want to login out?": "Are you sure want to log out?",
 
           // favorite page
           "Favorites": "Favorites",
-          "clear all": "clear all",
+          "clear all": "Clear all",
 
           // wallet page
           "MY Wallet": "MY Wallet",
@@ -190,13 +194,11 @@ class Translation extends Translations {
           "Receipts": "Receipts",
           "Monthly income": "Monthly income",
           "Properties count": "Properties count",
-          "deposit": "deposit",
-          "annual gross": "annual gross",
+          "deposit": "Deposit",
+          "annual gross": "Annual gross",
           "Buy Properties": "Buy Properties",
           "My properties": "My properties",
           "Our properties": "Our properties",
-          "Property": "Property",
-          "Pending": "Pending",
 
           // buttons
           "Next": "Next",
@@ -210,25 +212,25 @@ class Translation extends Translations {
           "Phone": "Phone",
 
           //login
-          "Sign in": " Sign in",
+          "Sign in": " Log in",
           "Sign up": "Sign up",
           "Forget password": "Forget password",
-          "Don't Have an Account ? ": "Don't Have an Account ? ",
-          "You Have an Account ? ": "You Have an Account ? ",
+          "Don't Have an Account ? ": "Don't Have an Account? ",
+          "You Have an Account ? ": "You Have an Account? ",
           "OR": "OR",
           "Hello again": "Hello again",
           "Please sign in to access your account":
-              "Please sign in to access your account",
+              "Please log in to access your account",
           "Email address": "Email address",
 
           // check out page
           "Check out": "Check out",
           "Price Details": "Price Details",
           "Property Price": "Property Price",
-          "price per share": "price per share",
-          "total shares cost": "total shares cost",
+          "price per share": "Price per share",
+          "total shares cost": "Total shares cost",
           "shares number (max 40% of shares)":
-              "shares number (max 40% of shares)",
+              "Shares number (max 40% of shares)",
 
           // property details
           // if property is funded
@@ -236,9 +238,9 @@ class Translation extends Translations {
           "Purchase price": "Purchase price",
           "Rental income paid": "Rental income paid",
           // if property is not funded
-          "estimated Annual return": "estimated Annual return",
-          "estimated Annual appreciation": "estimated Annual appreciation",
-          "estimated projected gross yield": "estimated projected gross yield",
+          "estimated Annual return": "Estimated Annual return",
+          "estimated Annual appreciation": "Estimated Annual appreciation",
+          "estimated projected gross yield": "Estimated projected gross yield",
           // section
           "See on Map": "See on Map",
           "Location": "Location",
@@ -246,7 +248,7 @@ class Translation extends Translations {
           "Transaction Costs": "Transaction Costs",
           "Investment calculator": "Investment calculator",
           "Initial Investment": "Initial Investment",
-          "property value growth years": "property value growth years",
+          "property value growth years": "Property value growth years",
           "Projected investment return of": "Projected investment return of",
           "Investment": "Investment",
           "Value growth": "Value growth",
@@ -256,9 +258,8 @@ class Translation extends Translations {
 
           //sign up
           "Full name": "Full name",
-          "Agree with ": "Agree with ",
-          "Terms & conditions": "Terms & conditions",
-          "Confirm password": "Confirm New password",
+          "Agree with Terms & conditions": "Agree with Terms & conditions",
+          "Confirm password": "Confirm password",
 
           // forget password
           "Please enter your phone number to reset your password":
@@ -270,14 +271,14 @@ class Translation extends Translations {
           "The name of the bank": "The name of the bank",
           "The account number": "The account number",
           "The username": "The username",
-          "save a copy of payment reciept": "save a copy of payment reciept",
+          "save a copy of payment reciept": "Save a copy of payment reciept",
           "Confirm the deposit": "Confirm the deposit",
 
           // upload receipt
           "Upload receipt": "Upload receipt",
           "Photo Gallery": "Photo Gallery",
           "Camera": "Camera",
-          "reference number": "reference number",
+          "reference number": "Reference number",
           "Deposit date": "Deposit date",
           "Deposited amount": "Deposited amount",
           "Deposit": "Deposit",
@@ -287,7 +288,7 @@ class Translation extends Translations {
           "Verification code": "Verification code",
           "Enter the verification code we sent to":
               "Enter the verification code we sent to",
-          "Didn’t  receive the code ?": "Didn’t  receive the code ?",
+          "Didn’t  receive the code ?": "Didn’t receive the code?",
           " Resend": " Resend",
 
           // reset password
@@ -319,6 +320,9 @@ class Translation extends Translations {
           "Create Password": "Create Password",
           "Please enter a secure password for your account":
               "Please enter a secure password for your account",
+
+          "Property": "Property",
+          "Pending": "Pending",
         },
       };
 }

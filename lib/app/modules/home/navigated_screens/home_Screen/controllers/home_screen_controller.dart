@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:funder_app/app/data/apis_url.dart';
 import 'package:funder_app/app/data/home/propertmodel.dart';
@@ -87,10 +88,10 @@ class HomeScreenController extends GetxController {
   }
 
   // add property to favorite
-  Future<void> addtofavorite(int id) async {
+  Future<void> addtofavorite(int id, BuildContext context) async {
     try {
       final response = await http.post(
-        Uri.parse("${FAVO_URl}/$id"),
+        Uri.parse("$FAVO_URl/$id"),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -99,7 +100,14 @@ class HomeScreenController extends GetxController {
       );
       print(response.body);
       if (response.statusCode == 200) {
-        Get.defaultDialog(title: "Added", content: const SizedBox());
+        AnimatedSnackBar.material(
+          'The item has been added successfully',
+          duration: const Duration(seconds: 3),
+          mobileSnackBarPosition: MobileSnackBarPosition.bottom,
+          type: AnimatedSnackBarType.success,
+        ).show(
+          context,
+        );
       } else if (response.statusCode == 403) {
         Get.defaultDialog(title: "add before", content: const SizedBox());
       }

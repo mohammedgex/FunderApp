@@ -1,3 +1,5 @@
+import 'package:funder_app/app/modules/myPropertyDetails/bindings/my_property_details_binding.dart';
+import 'package:funder_app/app/modules/myPropertyDetails/views/my_property_details_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/Auth/forget_password/bindings/forget_password_binding.dart';
@@ -158,11 +160,11 @@ class AppPages {
       page: () => MyInvestmentsView(),
       binding: MyInvestmentsBinding(),
     ),
-    // GetPage(
-    //   name: _Paths.MY_PROPERTY_DETAILS,
-    //   page: () => const MyPropertyDetailsView(),
-    //   binding: MyPropertyDetailsBinding(),
-    // ),
+    GetPage(
+      name: _Paths.MY_PROPERTY_DETAILS,
+      page: () => const MyPropertyDetailsView(),
+      binding: MyPropertyDetailsBinding(),
+    ),
     GetPage(
         name: _Paths.SEARCH_RESULTS,
         page: () => const SearchResultsView(),

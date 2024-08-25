@@ -1,9 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:funder_app/app/data/apis_url.dart';
-import 'package:funder_app/app/data/home/propertmodel.dart';
-import 'package:funder_app/app/data/home/resetpassword.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;

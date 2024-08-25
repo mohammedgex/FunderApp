@@ -69,8 +69,9 @@ class WalletScreenView extends GetView<WalletScreenController> {
                             ),
                             //  snapshot.data!.myInvestments.toString().isNotEmpty?
                             CustomText(
-                              text:
-                                  "${snapshot.data!.myInvestments.toString()} EGP",
+                              text: snapshot.data!.myInvestments == null
+                                  ? "${snapshot.data!.myInvestments.toString()} EGP"
+                                  : "0",
                               size: 16,
                               color: const Color.fromRGBO(236, 138, 35, 1),
                               weight: FontWeight.w600,

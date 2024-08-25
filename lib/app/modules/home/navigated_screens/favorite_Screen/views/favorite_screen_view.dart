@@ -69,9 +69,7 @@ class FavoriteScreenView extends GetView<FavoriteScreenController> {
                         snapshot.data![index].property.purchasePrice.toString(),
                     propert_Title: snapshot.data![index].property.name,
                     image_url: snapshot.data![index].property.images[0],
-                    status: snapshot.data![index].property.status != null
-                        ? snapshot.data![index].property.status
-                        : "avaiable",
+                    status: snapshot.data![index].property.status ?? "avaiable",
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) {

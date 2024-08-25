@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class property_detailsmodel {
   int? id;
   String? name;

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:funder_app/app/data/apis_url.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class my_Property extends StatelessWidget {
-  my_Property({super.key, this.imageUrl, this.price, this.rent, this.title});
+  my_Property({super.key, this.imageUrl, this.price, this.rent, this.title,this.id});
   String? title;
   String? imageUrl;
   String? price;
   String? rent;
+  int? id;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class my_Property extends StatelessWidget {
               ],
             ),
             GestureDetector(
-              onTap: () => Get.toNamed(Routes.MY_PROPERTY_DETAILS),
+              onTap: () => Get.toNamed(Routes.MY_PROPERTY_DETAILS,arguments: {"my_propery_id" : id}),
               child: const Icon(
                 Icons.arrow_forward_ios,
                 size: 30,

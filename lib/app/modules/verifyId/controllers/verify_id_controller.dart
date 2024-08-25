@@ -52,7 +52,7 @@ class VerifyIdController extends GetxController {
 
   // upload passport to database
   Future<void> UPLOADID() async {
-    if (!backSide!.value.path.isEmpty && !backSide!.value.path.isEmpty) {
+    if (backSide!.value.path.isNotEmpty && backSide!.value.path.isNotEmpty) {
       try {
         isLoading.value = true;
 

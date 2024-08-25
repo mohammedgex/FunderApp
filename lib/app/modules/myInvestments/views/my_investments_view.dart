@@ -8,7 +8,7 @@ import 'package:lottie/lottie.dart';
 import '../controllers/my_investments_controller.dart';
 
 class MyInvestmentsView extends GetView<MyInvestmentsController> {
-  MyInvestmentsView({Key? key}) : super(key: key);
+  MyInvestmentsView({super.key});
 
   int pageNumIndex = 0;
 
@@ -94,6 +94,7 @@ class MyInvestmentsView extends GetView<MyInvestmentsController> {
                           : SizedBox(
                               height: MediaQuery.of(context).size.height - 400,
                               child: ListView.builder(
+                                  physics: const BouncingScrollPhysics(),
                                   itemCount: snapshot.data!.length,
                                   itemBuilder: (context, index) {
                                     return my_Property(
@@ -103,6 +104,7 @@ class MyInvestmentsView extends GetView<MyInvestmentsController> {
                                       imageUrl: snapshot.data![index].images[0],
                                       rent: snapshot.data![index].rentalIncome
                                           .toString(),
+                                      id: snapshot.data![index].id,
                                     );
                                   }),
                             );

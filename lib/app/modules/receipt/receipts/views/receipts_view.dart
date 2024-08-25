@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:funder_app/app/data/apis_url.dart';
 import 'package:funder_app/app/modules/global_widgets/receiptUnit.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
-import 'package:funder_app/app/routes/app_pages.dart';
-
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-
 import '../controllers/receipts_controller.dart';
 
 class ReceiptsView extends GetView<ReceiptsController> {

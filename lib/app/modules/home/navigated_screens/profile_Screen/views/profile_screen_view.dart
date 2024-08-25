@@ -68,7 +68,7 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
                     padding: const EdgeInsets.all(30.0),
                     child: Column(
                       children: [
-                        GestureDetector(
+                        InkWell(
                           onTap: () => Get.toNamed(Routes.PERSONALDETAILS_PAGE),
                           child: ProfileTile(
                             text: "Personal details",
@@ -78,7 +78,7 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
                         const SizedBox(
                           height: 35,
                         ),
-                        GestureDetector(
+                        InkWell(
                             onTap: () => print("Test"),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,7 +131,7 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
                         const SizedBox(
                           height: 35,
                         ),
-                        GestureDetector(
+                        InkWell(
                           onTap: () => Get.defaultDialog(
                               backgroundColor: Colors.white,
                               barrierDismissible: false,

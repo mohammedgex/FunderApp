@@ -7,7 +7,7 @@ import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class PropertiyUnit extends StatelessWidget {
-  PropertiyUnit(
+  const PropertiyUnit(
       {super.key,
       this.propert_Location,
       this.image_url,
@@ -112,7 +112,7 @@ class PropertiyUnit extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                       width: (MediaQuery.of(context).size.width - 10) * 0.6,
                       child: Text(
                         softWrap: true,
@@ -132,7 +132,7 @@ class PropertiyUnit extends StatelessWidget {
                       ),
                   InkWell(
                       onTap: () async {
-                        await controller!.addtofavorite(id!);
+                        await controller!.addtofavorite(id!, context);
                       },
                       child: SvgPicture.asset("assets/icons/favorite2.svg"))
                 ],

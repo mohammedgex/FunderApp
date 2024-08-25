@@ -1,8 +1,10 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funder_app/app/data/apis_url.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/modules/home/navigated_screens/favorite_Screen/controllers/favorite_screen_controller.dart';
+import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class FavoriteUnit extends StatelessWidget {
@@ -57,7 +59,7 @@ class FavoriteUnit extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
+                SizedBox(
                   width: (MediaQuery.of(context).size.width - 10) * 0.4,
                   child: Text(
                     softWrap: true,
@@ -80,7 +82,7 @@ class FavoriteUnit extends StatelessWidget {
                     const SizedBox(
                       width: 4,
                     ),
-                    Container(
+                    SizedBox(
                       width: 150,
                       child: CustomText(
                         text: "$propert_Location",
@@ -110,7 +112,20 @@ class FavoriteUnit extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () => controller.removetofavorite(id!),
+            onTap: () {
+              controller.removetofavorite(
+                id!,
+              );
+              AnimatedSnackBar.material(
+                'The item has been removed successfully',
+                duration: const Duration(seconds: 3),
+                mobileSnackBarPosition: MobileSnackBarPosition.bottom,
+                type: AnimatedSnackBarType.success,
+              ).show(
+                context,
+              );
+              Get.offAllNamed(Routes.MAIN_PAGE);
+            },
             child: Padding(
               padding: const EdgeInsets.all(15.0),
               child: SvgPicture.asset("assets/icons/favor.svg"),

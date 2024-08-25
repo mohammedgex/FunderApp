@@ -45,7 +45,7 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       validator: validation,
       readOnly: readonly!,
-
+      
       // onChanged: onchange!,
       maxLength: max,
       maxLines: Lines,
@@ -54,6 +54,7 @@ class CustomTextField extends StatelessWidget {
       keyboardType: keyboard,
       autovalidateMode: AutovalidateMode.disabled,
       obscuringCharacter: "*",
+      
       decoration: InputDecoration(
         
           hintStyle: TextStyle(
