@@ -29,7 +29,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
   @override
   Widget build(BuildContext context) {
     // property images
-    List<dynamic> images = Property_Details[18];
+    // List<dynamic> images = Property_Details[18];
 
     // slider years
     int years = 0;
@@ -40,6 +40,14 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
         body: FutureBuilder(
             future: controller.DetailsApi(Property_Details[3]),
             builder: ((context, snapshot) {
+              double calculateProgress() {
+                if (snapshot.data!.funderCount == 0) return 0.0;
+                // Avoid division by zero
+                return snapshot.data!.funders!.length /
+                    snapshot.data!.funderCount!
+                        .toDouble(); // Calculate progress, e.g., 5 / 12
+              }
+
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(
                   child: Lottie.asset('assets/loading.json',
@@ -54,14 +62,17 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Stack(children: [
+                      Stack(
+                        children: [
                         SizedBox(
                           width: double.infinity,
                           height: 257,
                           child: PageView.builder(
                               physics: const BouncingScrollPhysics(),
                               controller: control,
-                              itemCount: images.length < 6 ? images.length : 4,
+                              itemCount: snapshot.data!.images!.length < 6
+                                  ? snapshot.data!.images!.length
+                                  : 4,
                               itemBuilder: (context, index) {
                                 return Container(
                                   width: double.infinity,
@@ -70,7 +81,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                       image: DecorationImage(
                                           fit: BoxFit.cover,
                                           image: NetworkImage(
-                                              "${ApiUrls.URl}/uploads/${images[index]}")),
+                                              "${ApiUrls.URl}/uploads/${snapshot.data!.images![index]}")),
                                       borderRadius: BorderRadius.circular(12)),
                                 );
                               }),
@@ -107,7 +118,9 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                       ),
                       SmoothPageIndicator(
                         controller: control,
-                        count: images.length < 6 ? images.length : 4,
+                        count: snapshot.data!.images!.length < 6
+                            ? snapshot.data!.images!.length
+                            : 4,
                         axisDirection: Axis.horizontal,
                         effect: const SlideEffect(
                             spacing: 8.0,
@@ -158,13 +171,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                             SizedBox(
                               width: 304,
                               child: LinearProgressIndicator(
-                                value: snapshot.data!.funders!.length ==
-                                        snapshot.data!.funderCount
-                                    ? 1.0 - 0.2
-                                    : 1.0 -
-                                        (1 -
-                                            snapshot.data!.funders!.length /
-                                                10),
+                                value: calculateProgress(),
                                 backgroundColor:
                                     const Color.fromRGBO(21, 174, 73, 1),
                                 valueColor: const AlwaysStoppedAnimation<Color>(

@@ -72,7 +72,7 @@ class SignupController extends GetxController {
     String? Name,
     String? phone,
   }) async {
-    if (Isckeck.value && !profileImage!.value.path.isEmpty) {
+    if (Isckeck.value && profileImage!.value.path.isNotEmpty) {
       try {
         isLoading.value = true;
 
@@ -102,7 +102,7 @@ class SignupController extends GetxController {
             // Successful response
             await SendOtp(Email!);
             box.write("registeredEmail", Email);
-            Get.toNamed(Routes.CREATOTP, arguments: ["$Email"]);
+            Get.toNamed(Routes.CREATOTP, arguments: {"Email": Email});
           }
         } else {
           // Unsuccessful response
@@ -154,7 +154,7 @@ class SignupController extends GetxController {
         Get.defaultDialog(
             title: "Error",
             content: CustomText(
-              text: "${response.body}",
+              text: response.body,
             ));
       }
     } catch (error) {

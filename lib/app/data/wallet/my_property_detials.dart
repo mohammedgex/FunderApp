@@ -5,8 +5,8 @@ class PropertyDetailsModal {
   final dynamic currentEvaluation;
   final int currentRent;
   final int investedAmount;
-  final double investmentValue;
-  final double myOwnership;
+  final int investmentValue;
+  final int myOwnership;
   final int totalRentReceived;
   final int theLastPayment;
   final String expectedNextPayment;

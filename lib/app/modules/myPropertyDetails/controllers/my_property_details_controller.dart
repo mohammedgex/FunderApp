@@ -19,6 +19,7 @@ class MyPropertyDetailsController extends GetxController {
     );
 
     if (response.statusCode == 200) {
+      print("CONNNN ${json.decode(response.body)}");
       return PropertyDetailsModal.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load property details');

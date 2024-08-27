@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funder_app/app/data/apis_url.dart';
 import 'package:funder_app/app/data/home/favoritemodel.dart';
-import 'package:funder_app/app/data/wallet/my_property_detials.dart';
 import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/routes/app_pages.dart';
@@ -20,8 +19,6 @@ class FavoriteScreenController extends GetxController {
 
   // Api get favorites
   Future<List> get_favortes() async {
-    final res = await fetchPropertyDetails(2);
-    print("details api is ${res!.property.images}");
     List<FavoriteModel> favortes = [];
     try {
       final response = await http.get(
@@ -36,6 +33,7 @@ class FavoriteScreenController extends GetxController {
       if (response.statusCode == 200) {
         // print("Conected");
         final List<dynamic> data = jsonDecode(response.body)["message"];
+        print(data);
         // print(data);
         favortes = data.map((e) => FavoriteModel.fromJson(e)).toList();
         // print("propeties $favortes");
@@ -48,7 +46,7 @@ class FavoriteScreenController extends GetxController {
 
   @override
   void onInit() {
-    fetchPropertyDetails(2);
+    // fetchPropertyDetails(2);
     super.onInit();
   }
 
@@ -125,30 +123,13 @@ class FavoriteScreenController extends GetxController {
           'Authorization': 'Bearer ${box.read("userToken")}',
         },
       );
-      // print(response.body);
+      print(response.body);
       if (response.statusCode == 200) {
       } else if (response.statusCode == 403) {
         Get.defaultDialog(title: "add before", content: const SizedBox());
       }
     } catch (e) {
       // print("Error $e");
-    }
-  }
-
-  Future<PropertyDetailsModal?> fetchPropertyDetails(int id) async {
-    final response = await http.get(
-      Uri.parse('https://app.atfunder.com/api/properties/propertyDetails/$id'),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ${box.read("userToken")}',
-      },
-    );
-
-    if (response.statusCode == 200) {
-      return PropertyDetailsModal.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to load property details');
     }
   }
 }

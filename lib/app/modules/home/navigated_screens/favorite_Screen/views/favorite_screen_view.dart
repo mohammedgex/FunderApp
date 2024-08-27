@@ -53,7 +53,7 @@ class FavoriteScreenView extends GetView<FavoriteScreenController> {
               } else if (snapshot.data!.isEmpty) {
                 return Center(
                   child: CustomText(
-                    text: "NO DATA",
+                    text: "NO DATA".tr,
                   ),
                 );
               }
@@ -64,7 +64,7 @@ class FavoriteScreenView extends GetView<FavoriteScreenController> {
                   return FavoriteUnit(
                     propert_Location:
                         snapshot.data![index].property.locationString,
-                    id: snapshot.data![index].property.id,
+                    id: snapshot.data![index].id,
                     propert_Price:
                         snapshot.data![index].property.purchasePrice.toString(),
                     propert_Title: snapshot.data![index].property.name,

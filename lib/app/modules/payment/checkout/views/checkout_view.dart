@@ -7,6 +7,8 @@ import '../controllers/checkout_controller.dart';
 
 class CheckoutView extends GetView<CheckoutController> {
   final args = Get.arguments;
+
+  CheckoutView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

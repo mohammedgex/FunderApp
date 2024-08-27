@@ -135,7 +135,7 @@ class SignupView extends GetView<SignupController> {
             ],
           ),
           validation: (value) {
-            if (value!.length == 10 && value.startsWith("01")) {
+            if (value!.length == 11 && value.startsWith("01")) {
               return null;
             }
             return "Enter Valid Phone number".tr;

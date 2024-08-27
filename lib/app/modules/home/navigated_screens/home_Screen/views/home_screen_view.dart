@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:funder_app/app/modules/global_widgets/propertiyUnit.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/modules/home/navigated_screens/home_Screen/controllers/home_screen_controller.dart';
-import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -27,12 +26,12 @@ class HomeScreenView extends GetView<HomeScreenController> {
                 width: 96,
                 height: 24,
               ),
-              InkWell(
-                onTap: () => Get.toNamed(Routes.NOTIFICATIONS),
-                child: SvgPicture.asset(
-                  "assets/nonotifi.svg",
-                ),
-              )
+              // InkWell(
+              //   onTap: () => Get.toNamed(Routes.NOTIFICATIONS),
+              //   child: SvgPicture.asset(
+              //     "assets/nonotifi.svg",
+              //   ),
+              // )
             ],
           ),
         ),

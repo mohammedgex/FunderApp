@@ -57,6 +57,7 @@ class LoginView extends GetView<LoginController> {
                             }
                             return 'Enter a Valid Email Address';
                           }
+                          return null;
                         }),
                     const SizedBox(
                       height: 18,

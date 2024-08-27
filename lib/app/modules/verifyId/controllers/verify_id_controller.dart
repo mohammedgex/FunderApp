@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funder_app/app/data/apis_url.dart';
@@ -51,7 +52,7 @@ class VerifyIdController extends GetxController {
   }
 
   // upload passport to database
-  Future<void> UPLOADID() async {
+  Future<void> UPLOADID(BuildContext context) async {
     if (backSide!.value.path.isNotEmpty && backSide!.value.path.isNotEmpty) {
       try {
         isLoading.value = true;
@@ -60,7 +61,7 @@ class VerifyIdController extends GetxController {
         var request = http.MultipartRequest('POST', Uri.parse(URL));
 
         request.fields['email'] = "${box.read("registeredEmail")}";
-        request.fields['type'] = "Passport";
+        request.fields['type'] = selectedType.value;
 
         // Add image file
         request.files.add(await http.MultipartFile.fromPath(
@@ -130,10 +131,16 @@ class VerifyIdController extends GetxController {
       } catch (error) {
         // Error occurred
         isLoading.value = false;
-        print("error : $error");
       }
     } else {
-      print("image not picked up or you didn't check");
+      AnimatedSnackBar.material(
+        'An occur has happened.',
+        duration: const Duration(seconds: 3),
+        mobileSnackBarPosition: MobileSnackBarPosition.bottom,
+        type: AnimatedSnackBarType.error,
+      ).show(
+        context!,
+      );
     }
   }
 }

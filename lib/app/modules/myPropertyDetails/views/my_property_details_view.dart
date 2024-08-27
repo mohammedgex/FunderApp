@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:funder_app/app/data/apis_url.dart';
 import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/routes/app_pages.dart';
@@ -14,11 +15,12 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
   Widget build(BuildContext context) {
     final args = Get.arguments;
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           elevation: 0,
           scrolledUnderElevation: 0,
           title: CustomText(
-            text: "Property details",
+            text: "Property details".tr,
             size: 20,
             weight: FontWeight.w600,
           ),
@@ -33,6 +35,26 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                       width: 100, height: 100),
                 );
               }
+              if (snapshot.connectionState == ConnectionState.none) {
+                return CustomText(
+                  text: "No details.",
+                );
+              }
+
+              // Now you can safely access the data with null-aware operators
+              final property = snapshot.data!.property;
+              final propertyPrice = snapshot.data!.propertyPrice ?? '';
+              final annualisedReturn = snapshot.data!.annualisedReturn ?? '';
+              final currentEvaluation = snapshot.data!.currentEvaluation ?? '';
+              final currentRent = snapshot.data!.currentRent ?? '';
+              final investedAmount = snapshot.data!.investedAmount ?? '';
+              final investmentValue = snapshot.data!.investmentValue ?? '';
+              final myOwnership = snapshot.data!.myOwnership ?? '';
+              final totalRentReceived = snapshot.data!.totalRentReceived ?? '';
+              final theLastPayment = snapshot.data!.theLastPayment ?? '';
+              final expectedNextPayment =
+                  snapshot.data!.expectedNextPayment ?? '';
+
               return SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Padding(
@@ -51,33 +73,36 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: NetworkImage(
-                                        snapshot.data!.property.images[0]))),
+                                        "${ApiUrls.URl}/uploads/${snapshot.data!.property.images[0]}"))),
                           ),
-                          Positioned(
-                            left: 10,
-                            top: 12,
-                            child: Container(
-                              width: 61,
-                              height: 27,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: const Color.fromRGBO(4, 54, 61, 0.7)),
-                              child: Center(
-                                child: CustomText(
-                                  text: "Rented",
-                                  color: Colors.white,
-                                  size: 12,
-                                  weight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                          )
+                          snapshot.data!.currentRent == 0
+                              ? Positioned(
+                                  left: 10,
+                                  top: 12,
+                                  child: Container(
+                                    width: 61,
+                                    height: 27,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: const Color.fromRGBO(
+                                            4, 54, 61, 0.7)),
+                                    child: Center(
+                                      child: CustomText(
+                                        text: "Rented",
+                                        color: Colors.white,
+                                        size: 12,
+                                        weight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : const SizedBox()
                         ],
                       ),
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: CustomText(
-                          text: snapshot.data!.property.description,
+                          text: property.description,
                           size: 20,
                           weight: FontWeight.w700,
                         ),
@@ -112,10 +137,10 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     CustomText(
-                                      text: "Property price",
+                                      text: "property_price".tr,
                                     ),
                                     CustomText(
-                                      text: snapshot.data!.propertyPrice,
+                                      text: "$propertyPrice EGP",
                                     ),
                                   ],
                                 ),
@@ -125,12 +150,12 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   CustomText(
-                                    text: "Annualised return",
+                                    text: "annualised_return".tr,
                                     size: 14,
                                     weight: FontWeight.w400,
                                   ),
                                   CustomText(
-                                    text: snapshot.data!.annualisedReturn,
+                                    text: "$annualisedReturn %",
                                     size: 14,
                                     weight: FontWeight.w700,
                                   ),
@@ -141,13 +166,12 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   CustomText(
-                                    text: "Current evaluation",
+                                    text: "current_evaluation".tr,
                                     size: 14,
                                     weight: FontWeight.w400,
                                   ),
                                   CustomText(
-                                    text:
-                                        "${snapshot.data!.currentEvaluation} EGP",
+                                    text: "$currentEvaluation EGP",
                                     size: 14,
                                     weight: FontWeight.w700,
                                   ),
@@ -158,13 +182,12 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   CustomText(
-                                    text: "Current gross rent",
+                                    text: "current_rent".tr,
                                     size: 14,
                                     weight: FontWeight.w400,
                                   ),
                                   CustomText(
-                                    text:
-                                        "${snapshot.data!.currentRent} EGP/month",
+                                    text: "$currentRent EGP/month",
                                     size: 14,
                                     weight: FontWeight.w700,
                                   ),
@@ -175,13 +198,13 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   CustomText(
-                                    text: "Total rental income",
+                                    text: "total_rent_received".tr,
                                     size: 14,
                                     weight: FontWeight.w400,
                                   ),
                                   CustomText(
                                     text:
-                                        "${snapshot.data!.annualisedReturn} EGP",
+                                        "${snapshot.data!.property.estimatedProjectedGrossYield} EGP",
                                     size: 14,
                                     weight: FontWeight.w700,
                                   ),
@@ -195,9 +218,32 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                         height: 10,
                       ),
                       GestureDetector(
-                        onTap: () => Get.toNamed(Routes.PROPERTY_DETAILS),
-                        child: const Button(
-                          text: "View property details",
+                        onTap: () => Get.toNamed(
+                          Routes.PROPERTY_DETAILS,
+                          arguments: [
+                            property.name,
+                            property.locationString,
+                            propertyPrice,
+                            property.id,
+                            property.description,
+                            property.fundedDate,
+                            property.purchasePrice,
+                            property.funderCount,
+                            property.rentalIncome,
+                            currentRent,
+                            property.percent,
+                            property.locationString,
+                            property.propertyPriceTotal,
+                            propertyPrice,
+                            property.serviceCharge,
+                            property.serviceCharge,
+                            property.status,
+                            property.approved,
+                            property.images,
+                          ],
+                        ),
+                        child: Button(
+                          text: "View property details".tr,
                           isBorder: true,
                           width: 324,
                           height: 40,
@@ -212,7 +258,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                             height: 20,
                           ),
                           CustomText(
-                            text: "My Investment",
+                            text: "My Investment".tr,
                             size: 20,
                             weight: FontWeight.w700,
                           ),
@@ -249,7 +295,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomText(
-                                        text: "Invested amount",
+                                        text: "invested_amount".tr,
                                         size: 16,
                                         weight: FontWeight.w400,
                                       ),
@@ -261,8 +307,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                             width: 10,
                                           ),
                                           CustomText(
-                                            text:
-                                                "${snapshot.data!.investedAmount} EGP",
+                                            text: "$investedAmount EGP",
                                             size: 16,
                                             weight: FontWeight.w700,
                                           )
@@ -288,7 +333,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomText(
-                                        text: "Investment value",
+                                        text: "investment_value".tr,
                                         size: 16,
                                         weight: FontWeight.w400,
                                       ),
@@ -300,8 +345,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                             width: 10,
                                           ),
                                           CustomText(
-                                            text:
-                                                "${snapshot.data!.investmentValue} EGP",
+                                            text: "$investmentValue EGP",
                                             size: 16,
                                             weight: FontWeight.w700,
                                           )
@@ -327,7 +371,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomText(
-                                        text: "My owner ship",
+                                        text: "my_ownership".tr,
                                         size: 16,
                                         weight: FontWeight.w400,
                                       ),
@@ -339,8 +383,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                             width: 10,
                                           ),
                                           CustomText(
-                                            text:
-                                                "${snapshot.data!.myOwnership} %",
+                                            text: "$myOwnership %",
                                             size: 16,
                                             weight: FontWeight.w700,
                                           )
@@ -366,7 +409,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomText(
-                                        text: "Projected net yield",
+                                        text: "Projected net yield".tr,
                                         size: 16,
                                         weight: FontWeight.w400,
                                       ),
@@ -379,7 +422,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                           ),
                                           CustomText(
                                             text:
-                                                "${snapshot.data!.myOwnership} %",
+                                                "${snapshot.data!.property.estimatedProjectedGrossYield} %",
                                             size: 16,
                                             weight: FontWeight.w700,
                                           )
@@ -401,7 +444,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                             height: 20,
                           ),
                           CustomText(
-                            text: "My rented payment",
+                            text: "My rented payment".tr,
                             size: 20,
                             weight: FontWeight.w700,
                           ),
@@ -438,7 +481,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomText(
-                                        text: "Total rent received",
+                                        text: "total_rent_received".tr,
                                         size: 16,
                                         weight: FontWeight.w400,
                                       ),
@@ -450,8 +493,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                             width: 10,
                                           ),
                                           CustomText(
-                                            text:
-                                                "${snapshot.data!.totalRentReceived} EGP",
+                                            text: "$totalRentReceived EGP",
                                             size: 16,
                                             weight: FontWeight.w700,
                                           )
@@ -477,7 +519,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomText(
-                                        text: "The last payment",
+                                        text: "the_last_payment".tr,
                                         size: 16,
                                         weight: FontWeight.w400,
                                       ),
@@ -489,8 +531,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                             width: 10,
                                           ),
                                           CustomText(
-                                            text:
-                                                "${snapshot.data!.theLastPayment} EGP",
+                                            text: "$theLastPayment EGP",
                                             size: 16,
                                             weight: FontWeight.w700,
                                           )
@@ -516,7 +557,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomText(
-                                        text: "Expected next payment",
+                                        text: "expected_next_payment".tr,
                                         size: 16,
                                         weight: FontWeight.w400,
                                       ),
@@ -528,8 +569,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                             width: 10,
                                           ),
                                           CustomText(
-                                            text:
-                                                "${snapshot.data!.expectedNextPayment} EGP",
+                                            text: expectedNextPayment,
                                             size: 16,
                                             weight: FontWeight.w700,
                                           )

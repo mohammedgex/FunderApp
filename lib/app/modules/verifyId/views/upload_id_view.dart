@@ -96,7 +96,7 @@ class UploadIdView extends GetView<VerifyIdController> {
               ),
               GestureDetector(
                   onTap: () async {
-                    await controller.UPLOADID();
+                    await controller.UPLOADID(context);
                   },
                   child: Obx(
                     () => controller.isLoading.value

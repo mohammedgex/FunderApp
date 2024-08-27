@@ -13,7 +13,6 @@ class HomeScreenController extends GetxController {
   final is_Selected = 0.obs;
   void selectButton(int index) {
     is_Selected.value = index;
-    print("select : ${is_Selected.value}");
   }
 
   // funded
@@ -22,7 +21,6 @@ class HomeScreenController extends GetxController {
   Future<List> Get_SoldOutProperties() async {
     List<Property_Model> properties = [];
     try {
-      print(box.read("userToken"));
       final response = await http.get(
         Uri.parse(fundedUrl),
         headers: {
@@ -55,7 +53,6 @@ class HomeScreenController extends GetxController {
   Future<List> get_properties() async {
     List<Property_Model> properties = [];
     try {
-      print(box.read("userToken"));
       final response = await http.get(
         Uri.parse(URL),
         headers: {

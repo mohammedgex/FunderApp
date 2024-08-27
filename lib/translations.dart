@@ -167,6 +167,44 @@ class Translation extends Translations {
           //sign up page
           "Agree with ": "الموافقة علي ",
           "Terms & conditions": "الشروط والاحكام",
+
+          // my property details
+          'property': 'العقار',
+          'property_price': 'سعر العقار',
+          'annualised_return': 'العائد السنوي',
+          'current_evaluation': 'التقييم الحالي',
+          'current_rent': 'الإيجار الحالي',
+          'invested_amount': 'المبلغ المستثمر',
+          'investment_value': 'قيمة الاستثمار',
+          'my_ownership': 'ملكيتي',
+          'total_rent_received': 'إجمالي الإيجارات المستلمة',
+          'the_last_payment': 'آخر دفعة',
+          'expected_next_payment': 'الدفعة التالية المتوقعة',
+          "My rented payment": "دفع الإيجار الخاص بي",
+          "My Investment": "استثماري",
+          "View property details": "عرض تفاصيل العقار",
+          'name': 'الاسم',
+          'description': 'الوصف',
+          'images': 'الصور',
+          'funded_date': 'تاريخ التمويل',
+          'purchase_price': 'سعر الشراء',
+          'funder_count': 'عدد الممولين',
+          'rental_income': 'دخل الإيجار',
+          'percent': 'النسبة المئوية',
+          'location_string': 'موقع',
+          'property_price_total': 'سعر العقار الإجمالي',
+          'discount': 'الخصم',
+          'estimated_annualised_return': 'العائد السنوي المقدر',
+          'estimated_annual_appreciation': 'التقدير السنوي للزيادة',
+          'estimated_projected_gross_yield': 'العائد الإجمالي المتوقع',
+          'service_charge': 'رسوم الخدمة',
+          'status': 'الحالة',
+          'approved': 'معتمد',
+          'Property details': 'تفاصيل العقار',
+          'Projected net yield': "العائد الصافي المتوقع",
+
+          // handle
+          "NO DATA": "لا توجد اي بيانات حتي الان"
         },
         'en_US': {
           // home page
@@ -326,6 +364,27 @@ class Translation extends Translations {
 
           "Agree with ": "Agree with ",
           "Terms & conditions": "Terms & conditions",
+
+          // my property details
+          'Property details': 'Property details',
+          'property': 'Property',
+          'property_price': 'Property price',
+          'annualised_return': 'Annualised return',
+          'current_evaluation': 'Current evaluation',
+          'current_rent': 'Current gross rent',
+          'invested_amount': 'Invested amount',
+          'investment_value': 'Investment value',
+          'my_ownership': 'My owner ship',
+          'total_rent_received': 'Total rental income',
+          'Projected net yield': 'Projected net yield',
+          'the_last_payment': 'The last payment',
+          'expected_next_payment': "Expected next payment",
+          "My rented payment": "My rented payment",
+          "My Investment": "My Investment",
+          "View property details": "View property details",
+
+          // handle
+          "NO DATA": "NO DATA"
         },
       };
 }

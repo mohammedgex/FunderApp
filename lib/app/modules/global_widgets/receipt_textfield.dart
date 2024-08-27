@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class receiptTextField extends StatelessWidget {
-  receiptTextField({super.key, this.hintText, this.controller});
+  receiptTextField(
+      {super.key, this.hintText, this.controller, this.validation});
   final String? hintText;
   TextEditingController? controller;
   String fontFamily =
       Get.locale?.languageCode == 'ar' ? 'Tajawal-Regular' : 'Lato';
+  String? Function(String?)? validation;
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +20,7 @@ class receiptTextField extends StatelessWidget {
                   width: 1, color: Color.fromRGBO(242, 243, 234, 1)))),
       child: TextFormField(
         controller: controller,
-        validator: (value) {
-          if (value == null || value.trim().isEmpty) {
-            return 'This field cannot be empty';
-          }
-          return null;
-        },
+        validator: validation,
         decoration: InputDecoration(
             border: InputBorder.none,
             errorBorder: const OutlineInputBorder(

@@ -42,7 +42,7 @@ class LoginController extends GetxController {
 
   // api urls
   final String URL = ApiUrls.Login_api;
-  final String VERIFY_URL = ApiUrls.OTP_api;
+  final String VERIFY_URL = ApiUrls.Verify_api;
 
   // LOGIN API CONNECT
   Future<void> ApiLogin(String Email, String Password) async {

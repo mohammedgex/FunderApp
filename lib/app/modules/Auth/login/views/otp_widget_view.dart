@@ -4,7 +4,6 @@ import 'package:funder_app/app/modules/global_widgets/OTPwidget.dart';
 import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/modules/Auth/login/controllers/login_controller.dart';
-import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class OtpWidgetView extends GetView<LoginController> {
@@ -13,7 +12,7 @@ class OtpWidgetView extends GetView<LoginController> {
   TextEditingController? th_controller = TextEditingController();
   TextEditingController? fo_controller = TextEditingController();
 
-  // final PassedData = Get.arguments;
+  final PassedData = Get.arguments;
 
   OtpWidgetView({super.key});
 
@@ -92,7 +91,6 @@ class OtpWidgetView extends GetView<LoginController> {
                         onTap: () {
                           SignupController().SendOtp(
                               SignupController().Email_Controller.text);
-                          print("Sent Again");
                         },
                         child: CustomText(
                           text: " Resend".tr,
@@ -108,28 +106,17 @@ class OtpWidgetView extends GetView<LoginController> {
             ),
             GestureDetector(
               onTap: () {
-                Get.toNamed(Routes.CREATPASSWORD);
+                controller.VERIFYOTP(
+                    f_controller!.text,
+                    s_controller!.text,
+                    th_controller!.text,
+                    fo_controller!.text,
+                    PassedData["Email"]);
               },
-              child: GestureDetector(
-                onTap: () {
-                  Get.toNamed(Routes.VERIFY_ID);
-                },
-                child: GestureDetector(
-                  onTap: () => Get.toNamed(Routes.CREATPASSWORD)
-
-                  // controller.VERIFYOTP(
-                  //     f_controller!.text,
-                  //     s_controller!.text,
-                  //     th_controller!.text,
-                  //     fo_controller!.text,
-                  //     "eslam@gmail.com")
-                  ,
-                  child: Button(
-                    text: "Verify".tr,
-                    width: 282,
-                    buttonColor: const Color.fromRGBO(236, 138, 35, 1),
-                  ),
-                ),
+              child: Button(
+                text: "Verify".tr,
+                width: 282,
+                buttonColor: const Color.fromRGBO(236, 138, 35, 1),
               ),
             )
           ],
