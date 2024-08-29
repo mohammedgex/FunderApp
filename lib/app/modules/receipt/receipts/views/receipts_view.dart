@@ -31,6 +31,7 @@ class ReceiptsView extends GetView<ReceiptsController> {
                   );
                 }
                 return ListView.separated(
+                  physics: const BouncingScrollPhysics(),
                   itemCount: snapshot.data!.length,
                   itemBuilder: ((context, index) {
                     return receiptUnit(

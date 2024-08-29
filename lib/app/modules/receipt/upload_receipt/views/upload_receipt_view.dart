@@ -139,7 +139,7 @@ class UploadReceiptView extends GetView<UploadReceiptController> {
                         if (value!.isNotEmpty) {
                           return null;
                         }
-                        return "This filed can't be null.";
+                        return "This filed can't be empty.";
                       },
                     ),
                     const SizedBox(
@@ -157,7 +157,7 @@ class UploadReceiptView extends GetView<UploadReceiptController> {
                         if (value!.isNotEmpty) {
                           return null;
                         }
-                        return "This filed can't be null.";
+                        return "This filed can't be empty.";
                       },
                     ),
                     const SizedBox(
@@ -175,7 +175,7 @@ class UploadReceiptView extends GetView<UploadReceiptController> {
                         if (value!.isNotEmpty) {
                           return null;
                         }
-                        return "This filed can't be null.";
+                        return "This filed can't be empty.";
                       },
                     ),
                   ],

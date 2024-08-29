@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funder_app/app/data/apis_url.dart';
+import 'package:funder_app/app/data/consts.dart';
 import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/routes/app_pages.dart';
@@ -91,64 +93,25 @@ class UploadReceiptController extends GetxController {
         // Send request
         var response = await request.send();
 
+        var responseBody = await response.stream.bytesToString();
+
         // Handle response
         if (response.statusCode == 200) {
           // Successful response
           isLoading.value = false;
-          Get.defaultDialog(
-              barrierDismissible: false,
-              onWillPop: () async => await Get.offAllNamed(Routes.MAIN_PAGE),
-              title: "",
-              content: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SvgPicture.asset("assets/icons/succ_verify.svg"),
-                  const SizedBox(
-                    height: 35,
-                  ),
-                  Center(
-                    child: CustomText(
-                      text: "Successfully !",
-                      color: const Color.fromRGBO(236, 138, 35, 1),
-                      size: 20,
-                      weight: FontWeight.w700,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 35,
-                  ),
-                  CustomText(
-                    text: "Customer support will contact you shortly.",
-                    size: 16,
-                    cenetr: true,
-                    weight: FontWeight.w400,
-                  ),
-                  const SizedBox(
-                    height: 35,
-                  ),
-                  GestureDetector(
-                    onTap: () => Get.offAllNamed(Routes.MAIN_PAGE),
-                    child: const Button(
-                      width: 252,
-                      text: "Continue",
-                      buttonColor: Color.fromRGBO(236, 138, 35, 1),
-                    ),
-                  )
-                ],
-              ));
+          Kconstans.showDialog(
+              title: "Successfully",
+              content: "customer support will contact you shortly",
+              show: false,
+              routeName: Routes.RECEIPTS);
         } else {
           // Unsuccessful response
           isLoading.value = false;
-          AnimatedSnackBar.material(
-            'An error occurs.',
-            duration: const Duration(seconds: 3),
-            mobileSnackBarPosition: MobileSnackBarPosition.bottom,
-            type: AnimatedSnackBarType.error,
-          ).show(
-            // ignore: use_build_context_synchronously
-            context!,
-          );
+          Kconstans.showDialog(
+              title: "Faild",
+              content: jsonDecode(responseBody)["error"],
+              show: false,
+              routeName: Routes.MAIN_PAGE);
         }
       } catch (error) {
         // Error occurred

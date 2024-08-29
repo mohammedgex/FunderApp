@@ -69,9 +69,8 @@ class WalletScreenView extends GetView<WalletScreenController> {
                             ),
                             //  snapshot.data!.myInvestments.toString().isNotEmpty?
                             CustomText(
-                              text: snapshot.data!.myInvestments == null
-                                  ? "${snapshot.data!.myInvestments.toString()} EGP"
-                                  : "0",
+                              text:
+                                  "${snapshot.data!.myInvestments.toString()} EGP",
                               size: 16,
                               color: const Color.fromRGBO(236, 138, 35, 1),
                               weight: FontWeight.w600,
@@ -120,15 +119,13 @@ class WalletScreenView extends GetView<WalletScreenController> {
                                         const SizedBox(
                                           width: 5,
                                         ),
-                                        Container(
-                                          child: CustomText(
-                                            ellipsis: true,
-                                            size: 14,
-                                            weight: FontWeight.w500,
-                                            text: "Monthly income".tr,
-                                            color: const Color.fromRGBO(
-                                                4, 54, 61, 1),
-                                          ),
+                                        CustomText(
+                                          ellipsis: true,
+                                          size: 14,
+                                          weight: FontWeight.w500,
+                                          text: "Monthly income".tr,
+                                          color: const Color.fromRGBO(
+                                              4, 54, 61, 1),
                                         )
                                       ],
                                     ),
@@ -175,15 +172,13 @@ class WalletScreenView extends GetView<WalletScreenController> {
                                         const SizedBox(
                                           width: 2,
                                         ),
-                                        Container(
-                                          child: CustomText(
-                                            ellipsis: true,
-                                            size: 14,
-                                            weight: FontWeight.w500,
-                                            text: "Properties count".tr,
-                                            color: const Color.fromRGBO(
-                                                4, 54, 61, 1),
-                                          ),
+                                        CustomText(
+                                          ellipsis: true,
+                                          size: 14,
+                                          weight: FontWeight.w500,
+                                          text: "Properties count".tr,
+                                          color: const Color.fromRGBO(
+                                              4, 54, 61, 1),
                                         )
                                       ],
                                     ),
@@ -247,15 +242,13 @@ class WalletScreenView extends GetView<WalletScreenController> {
                                         const SizedBox(
                                           width: 5,
                                         ),
-                                        Container(
-                                          child: CustomText(
-                                            ellipsis: true,
-                                            size: 14,
-                                            weight: FontWeight.w500,
-                                            text: "deposit".tr,
-                                            color: const Color.fromRGBO(
-                                                4, 54, 61, 1),
-                                          ),
+                                        CustomText(
+                                          ellipsis: true,
+                                          size: 14,
+                                          weight: FontWeight.w500,
+                                          text: "deposit".tr,
+                                          color: const Color.fromRGBO(
+                                              4, 54, 61, 1),
                                         )
                                       ],
                                     ),

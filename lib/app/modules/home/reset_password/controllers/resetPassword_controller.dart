@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:funder_app/app/data/apis_url.dart';
+import 'package:funder_app/app/data/consts.dart';
+import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -56,10 +58,18 @@ class resetPasswordController extends GetxController {
     );
 
     if (response.statusCode == 200) {
-      Get.snackbar('Success', 'Password reset successful');
+      Kconstans.showDialog(
+          title: "Success",
+          content: "Password reset successful",
+          show: false,
+          routeName: Routes.MAIN_PAGE);
       // Navigate to the next screen if needed
     } else {
-      Get.snackbar('Error', 'Failed to reset password');
+      Kconstans.showDialog(
+          title: "Error",
+          content: "Failed to reset password",
+          show: false,
+          routeName: Routes.MAIN_PAGE);
     }
   }
 }

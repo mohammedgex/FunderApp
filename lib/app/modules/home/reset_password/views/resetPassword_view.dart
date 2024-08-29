@@ -42,9 +42,9 @@ class resetPasswordView extends GetView<resetPasswordController> {
                           () => CustomTextField(
                             controller: controller.Password_Controller,
                             showen:
-                                controller.showPassword.value ? true : false,
+                                controller.showPassword.value ? false : true,
                             icon: const Icon(IconlyLight.lock),
-                            suficon: InkWell(
+                            suficon: GestureDetector(
                               onTap: () => controller.troglePassword(),
                               child: controller.showPassword.value
                                   ? const Icon(IconlyLight.show)
@@ -60,9 +60,9 @@ class resetPasswordView extends GetView<resetPasswordController> {
                           () => CustomTextField(
                             controller: controller.NewPassword_Controller,
                             showen:
-                                controller.showNewPassword.value ? true : false,
+                                controller.showNewPassword.value ? false : true,
                             icon: const Icon(IconlyLight.lock),
-                            suficon: InkWell(
+                            suficon: GestureDetector(
                               onTap: () => controller.trogleNewPassword(),
                               child: controller.showNewPassword.value
                                   ? const Icon(IconlyLight.show)
@@ -78,10 +78,10 @@ class resetPasswordView extends GetView<resetPasswordController> {
                           () => CustomTextField(
                             controller: controller.ReNewPassword_Controller,
                             showen: controller.showReNewPassword.value
-                                ? true
-                                : false,
+                                ? false
+                                : true,
                             icon: const Icon(IconlyLight.lock),
-                            suficon: InkWell(
+                            suficon: GestureDetector(
                               onTap: () => controller.trogleReNewPassword(),
                               child: controller.showReNewPassword.value
                                   ? const Icon(IconlyLight.show)

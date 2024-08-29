@@ -114,7 +114,8 @@ class Translation extends Translations {
           "The name of the bank": "أسم البنك",
           "The account number": "رقم الحساب",
           "The username": "أسم المستخدم",
-          "save a copy of payment reciept": "أحفظ نسخة من فاتورة الدفع.",
+          "save a copy of payment reciept":
+              "ملحوظة : أحفظ نسخة من فاتورة الدفع.",
 
           // upload receipt
           "Confirm the deposit": "تأكيد مبلغ الإيداع",
@@ -309,7 +310,8 @@ class Translation extends Translations {
           "The name of the bank": "The name of the bank",
           "The account number": "The account number",
           "The username": "The username",
-          "save a copy of payment reciept": "Save a copy of payment reciept",
+          "save a copy of payment reciept":
+              "Hint : save a copy of payment reciept",
           "Confirm the deposit": "Confirm the deposit",
 
           // upload receipt

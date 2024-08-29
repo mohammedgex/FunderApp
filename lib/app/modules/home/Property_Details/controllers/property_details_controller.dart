@@ -31,7 +31,7 @@ class PropertyDetailsController extends GetxController {
   // api connect
   Future<property_detailsmodel> DetailsApi(int id) async {
     final response = await http.get(
-      Uri.parse("${URL}/$id"),
+      Uri.parse("$URL/$id"),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -74,9 +74,12 @@ class PropertyDetailsController extends GetxController {
 
   bool isYear(String date) {
     DateTime now = DateTime.now();
+    print(now);
     DateTime convertedDate = DateTime.parse(date);
+    print(convertedDate);
     Duration difference = now.difference(convertedDate);
-    if (difference.inDays == 365 || difference.inDays == 366) {
+    print(difference.inDays);
+    if (difference.inDays >= 365) {
       return true;
     } else {
       return false;

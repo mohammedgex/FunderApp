@@ -28,18 +28,22 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
 
   @override
   Widget build(BuildContext context) {
-    // property images
-    // List<dynamic> images = Property_Details[18];
-
     // slider years
-    int years = 0;
-
-    // Parse the date string
-
+    int years = 1;
     return Scaffold(
         body: FutureBuilder(
-            future: controller.DetailsApi(Property_Details[3]),
+            future: controller.DetailsApi(Property_Details["propertyId"]),
             builder: ((context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: Lottie.asset('assets/loading.json',
+                      width: 100, height: 100),
+                );
+              }
+              if (snapshot.connectionState == ConnectionState.none) {
+                return const Text("No data");
+              }
+
               double calculateProgress() {
                 if (snapshot.data!.funderCount == 0) return 0.0;
                 // Avoid division by zero
@@ -48,12 +52,8 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                         .toDouble(); // Calculate progress, e.g., 5 / 12
               }
 
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: Lottie.asset('assets/loading.json',
-                      width: 100, height: 100),
-                );
-              }
+              print(
+                  "IS YEAR : ${controller.isYear(snapshot.data!.fundedDate!)}");
 
               return SafeArea(
                 child: SingleChildScrollView(
@@ -62,8 +62,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Stack(
-                        children: [
+                      Stack(children: [
                         SizedBox(
                           width: double.infinity,
                           height: 257,
@@ -72,7 +71,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                               controller: control,
                               itemCount: snapshot.data!.images!.length < 6
                                   ? snapshot.data!.images!.length
-                                  : 4,
+                                  : 6,
                               itemBuilder: (context, index) {
                                 return Container(
                                   width: double.infinity,
@@ -106,7 +105,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                               GestureDetector(
                                   onTap: () => HomeScreenController()
                                       .addtofavorite(
-                                          Property_Details[3], context),
+                                          snapshot.data!.id!, context),
                                   child: SvgPicture.asset(
                                       "assets/icons/favoGround.svg")),
                             ],
@@ -120,7 +119,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                         controller: control,
                         count: snapshot.data!.images!.length < 6
                             ? snapshot.data!.images!.length
-                            : 4,
+                            : 6,
                         axisDirection: Axis.horizontal,
                         effect: const SlideEffect(
                             spacing: 8.0,
@@ -143,14 +142,14 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.6,
                                   child: CustomText(
-                                    text: "${Property_Details[0]}",
+                                    text: "${snapshot.data!.name}",
                                     weight: FontWeight.w600,
                                     ellipsis: true,
                                     size: 16,
                                   ),
                                 ),
                                 CustomText(
-                                  text: "${Property_Details[2]} EGP",
+                                  text: "${snapshot.data!.propertyPrice} EGP",
                                   size: 16,
                                   weight: FontWeight.w700,
                                 ),
@@ -161,7 +160,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                             ),
                             CustomText(
                               cenetr: true,
-                              text: "${Property_Details[4]}",
+                              text: "${snapshot.data!.description}",
                               size: 14,
                               weight: FontWeight.w400,
                             ),
@@ -188,6 +187,9 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                     CustomText(
                                       text:
                                           "${snapshot.data!.funders!.length}/${snapshot.data!.funderCount}",
+                                    ),
+                                    const SizedBox(
+                                      width: 1.8,
                                     ),
                                     CustomText(
                                       text: "Funded".tr,
@@ -231,7 +233,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                           text: snapshot.data!.status! ==
                                                   "sold out"
                                               ? "${snapshot.data!.estimatedAnnualisedReturn}%"
-                                              : "${Property_Details[5]}",
+                                              : "${snapshot.data!.fundedDate}",
                                         )
                                       ],
                                     ),
@@ -250,7 +252,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                           text: snapshot.data!.status! ==
                                                   "sold out"
                                               ? "${snapshot.data!.estimatedAnnualAppreciation}%"
-                                              : "${Property_Details[6]} EGP",
+                                              : "${snapshot.data!.purchasePrice} EGP",
                                         )
                                       ],
                                     ),
@@ -269,7 +271,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                           text: snapshot.data!.status! ==
                                                   "sold out"
                                               ? "${snapshot.data!.estimatedProjectedGrossYield}%"
-                                              : "${Property_Details[9]} EGP",
+                                              : "${snapshot.data!.currentRent} EGP",
                                         )
                                       ],
                                     )
@@ -354,7 +356,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                             ellipsis: true,
                                             weight: FontWeight.w500,
                                             text:
-                                                "Current rent id ${Property_Details[9]} EGP per month",
+                                                "Current rent ${snapshot.data!.currentRent} EGP per month",
                                           ),
                                           SizedBox(
                                             width: 310 - 50,
@@ -388,7 +390,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                             size: 15,
                                             weight: FontWeight.w500,
                                             text:
-                                                "${Property_Details[10]}% annual gross yield",
+                                                "${snapshot.data!.percent}% annual gross yield",
                                           ),
                                           SizedBox(
                                             width: 310 - 50,
@@ -539,11 +541,12 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                       CustomText(
                                         size: 15,
                                         weight: FontWeight.w700,
-                                        text: "${Property_Details[2]} EGP",
+                                        text:
+                                            "${snapshot.data!.propertyPrice} EGP",
                                       ),
                                     ],
                                   ),
-                                  snapshot.data!.status == "null"
+                                  snapshot.data!.status == "available"
                                       ? Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -555,7 +558,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                             ),
                                             CustomText(
                                               text:
-                                                  "${Property_Details[15]} EGP",
+                                                  "${snapshot.data!.serviceCharge} EGP",
                                               size: 15,
                                               weight: FontWeight.w700,
                                             ),
@@ -770,7 +773,9 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomText(
-                              text: "Funding timeline".tr,
+                              text: snapshot.data!.status == "sold out"
+                                  ? "Upcoming rental payment"
+                                  : "Funding timeline".tr,
                               size: 20,
                               weight: FontWeight.w600,
                             ),
@@ -780,53 +785,134 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                     text: "There is no funding timelines",
                                     size: 18,
                                   )
-                                : Container(
-                                    width: double.infinity,
-                                    padding: const EdgeInsets.only(left: 15),
-                                    child: Column(
-                                      children: [
-                                        PropertyTimeLineTile(
-                                          isFirst: true,
-                                          isLast: false,
-                                          DateText: DateFormat('d MMMM yyyy')
-                                              .format(DateFormat('yyyy-MM-dd')
-                                                  .parse(snapshot
-                                                      .data!.timelines![0].date
-                                                      .toString())),
-                                          DateDetails:
-                                              "${snapshot.data!.timelines![0].description}",
-                                          DateTitle:
-                                              "${snapshot.data!.timelines![0].title}",
+                                : snapshot.data!.status == "sold out"
+                                    ? Container(
+                                        width: double.infinity,
+                                        padding:
+                                            const EdgeInsets.only(left: 15),
+                                        child: Column(
+                                          children: [
+                                            PropertyTimeLineTile(
+                                              isFirst: true,
+                                              isLast: false,
+                                              isPayRents: true,
+                                              DateText: DateFormat(
+                                                      'd MMMM yyyy')
+                                                  .format(
+                                                      DateFormat('yyyy-MM-dd')
+                                                          .parse(snapshot
+                                                              .data!
+                                                              .timelines![0]
+                                                              .date
+                                                              .toString())),
+                                              DateDetails:
+                                                  "${snapshot.data!.timelines![0].description}",
+                                              DateTitle:
+                                                  "${snapshot.data!.timelines![0].title}",
+                                            ),
+                                            PropertyTimeLineTile(
+                                              isFirst: false,
+                                              isLast: false,
+                                              isPayRents: true,
+                                              DateText: DateFormat(
+                                                      'd MMMM yyyy')
+                                                  .format(
+                                                      DateFormat('yyyy-MM-dd')
+                                                          .parse(snapshot
+                                                              .data!
+                                                              .timelines![1]
+                                                              .date
+                                                              .toString())),
+                                              DateDetails:
+                                                  "${snapshot.data!.timelines![1].description}",
+                                              DateTitle:
+                                                  "${snapshot.data!.timelines![1].title}",
+                                            ),
+                                            PropertyTimeLineTile(
+                                              isFirst: false,
+                                              isLast: true,
+                                              isPayRents: true,
+                                              DateText: DateFormat(
+                                                      'd MMMM yyyy')
+                                                  .format(
+                                                      DateFormat('yyyy-MM-dd')
+                                                          .parse(snapshot
+                                                              .data!
+                                                              .timelines![2]
+                                                              .date
+                                                              .toString())),
+                                              DateDetails:
+                                                  "${snapshot.data!.timelines![2].description}",
+                                              DateTitle:
+                                                  "${snapshot.data!.timelines![2].title}",
+                                            ),
+                                          ],
                                         ),
-                                        PropertyTimeLineTile(
-                                          isFirst: false,
-                                          isLast: false,
-                                          DateText: DateFormat('d MMMM yyyy')
-                                              .format(DateFormat('yyyy-MM-dd')
-                                                  .parse(snapshot
-                                                      .data!.timelines![1].date
-                                                      .toString())),
-                                          DateDetails:
-                                              "${snapshot.data!.timelines![1].description}",
-                                          DateTitle:
-                                              "${snapshot.data!.timelines![1].title}",
+                                      )
+                                    // ===========
+                                    : Container(
+                                        width: double.infinity,
+                                        padding:
+                                            const EdgeInsets.only(left: 15),
+                                        child: Column(
+                                          children: [
+                                            PropertyTimeLineTile(
+                                              isFirst: true,
+                                              isLast: false,
+                                              isPayRents: false,
+                                              DateText: DateFormat(
+                                                      'd MMMM yyyy')
+                                                  .format(
+                                                      DateFormat('yyyy-MM-dd')
+                                                          .parse(snapshot
+                                                              .data!
+                                                              .timelines![0]
+                                                              .date
+                                                              .toString())),
+                                              DateDetails:
+                                                  "${snapshot.data!.timelines![0].description}",
+                                              DateTitle:
+                                                  "${snapshot.data!.timelines![0].title}",
+                                            ),
+                                            PropertyTimeLineTile(
+                                              isFirst: false,
+                                              isLast: false,
+                                              isPayRents: false,
+                                              DateText: DateFormat(
+                                                      'd MMMM yyyy')
+                                                  .format(
+                                                      DateFormat('yyyy-MM-dd')
+                                                          .parse(snapshot
+                                                              .data!
+                                                              .timelines![1]
+                                                              .date
+                                                              .toString())),
+                                              DateDetails:
+                                                  "${snapshot.data!.timelines![1].description}",
+                                              DateTitle:
+                                                  "${snapshot.data!.timelines![1].title}",
+                                            ),
+                                            PropertyTimeLineTile(
+                                              isFirst: false,
+                                              isLast: true,
+                                              isPayRents: false,
+                                              DateText: DateFormat(
+                                                      'd MMMM yyyy')
+                                                  .format(
+                                                      DateFormat('yyyy-MM-dd')
+                                                          .parse(snapshot
+                                                              .data!
+                                                              .timelines![2]
+                                                              .date
+                                                              .toString())),
+                                              DateDetails:
+                                                  "${snapshot.data!.timelines![2].description}",
+                                              DateTitle:
+                                                  "${snapshot.data!.timelines![2].title}",
+                                            ),
+                                          ],
                                         ),
-                                        PropertyTimeLineTile(
-                                          isFirst: false,
-                                          isLast: true,
-                                          DateText: DateFormat('d MMMM yyyy')
-                                              .format(DateFormat('yyyy-MM-dd')
-                                                  .parse(snapshot
-                                                      .data!.timelines![2].date
-                                                      .toString())),
-                                          DateDetails:
-                                              "${snapshot.data!.timelines![2].description}",
-                                          DateTitle:
-                                              "${snapshot.data!.timelines![2].title}",
-                                        ),
-                                      ],
-                                    ),
-                                  )
+                                      )
                           ],
                         ),
                       ),
@@ -835,7 +921,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                         child: GestureDetector(
                           onTap: () {
                             Get.toNamed(Routes.CHECKOUT, arguments: [
-                              Property_Details[3],
+                              snapshot.data!.id,
                               snapshot.data!.propertyPriceTotal,
                               snapshot.data!.propertyPrice,
                               snapshot.data!.funderCount
@@ -853,12 +939,15 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                         const Color.fromRGBO(236, 138, 35, 1),
                                   ),
                                 )
-                              : Button(
-                                  width: 212,
-                                  text: "Book a share".tr,
-                                  buttonColor:
-                                      const Color.fromRGBO(236, 138, 35, 1),
-                                ),
+                              : snapshot.data!.funders!.length >=
+                                      snapshot.data!.funderCount!
+                                  ? const SizedBox()
+                                  : Button(
+                                      width: 212,
+                                      text: "Book a share".tr,
+                                      buttonColor:
+                                          const Color.fromRGBO(236, 138, 35, 1),
+                                    ),
                         ),
                       )
                     ],

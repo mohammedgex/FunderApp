@@ -102,7 +102,7 @@ class SignupController extends GetxController {
             // Successful response
             await SendOtp(Email!);
             box.write("registeredEmail", Email);
-            Get.toNamed(Routes.CREATOTP, arguments: {"Email": Email});
+            Get.offAllNamed(Routes.CREATOTP, arguments: {"Email": Email});
           }
         } else {
           // Unsuccessful response

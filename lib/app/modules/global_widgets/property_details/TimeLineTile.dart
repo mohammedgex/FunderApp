@@ -4,25 +4,28 @@ import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 class PropertyTimeLineTile extends StatelessWidget {
-  const PropertyTimeLineTile(
-      {super.key,
-      required this.isFirst,
-      required this.isLast,
-      required this.DateTitle,
-      required this.DateText,
-      required this.DateDetails});
+  const PropertyTimeLineTile({
+    super.key,
+    required this.isFirst,
+    required this.isLast,
+    required this.DateTitle,
+    required this.DateText,
+    required this.DateDetails,
+    required this.isPayRents,
+  });
 
   final bool isFirst;
   final bool isLast;
   final String DateText;
   final String DateTitle;
+  final bool? isPayRents;
 
   final String DateDetails;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 150,
+      height: isPayRents! ? 70 : 150,
       child: TimelineTile(
         isFirst: isFirst,
         isLast: isLast,
@@ -33,20 +36,24 @@ class PropertyTimeLineTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomText(
-                text: DateText,
-                size: 14,
-              ),
+              isPayRents!
+                  ? const SizedBox()
+                  : CustomText(
+                      text: DateText,
+                      size: 14,
+                    ),
               CustomText(
                 text: DateTitle,
                 size: 16,
                 weight: FontWeight.w600,
               ),
-              CustomText(
-                size: 12,
-                weight: FontWeight.w400,
-                text: DateDetails,
-              ),
+              isPayRents!
+                  ? const SizedBox()
+                  : CustomText(
+                      size: 12,
+                      weight: FontWeight.w400,
+                      text: DateDetails,
+                    ),
             ],
           ),
         ),

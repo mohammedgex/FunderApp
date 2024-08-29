@@ -57,27 +57,7 @@ class PropertiyUnit extends StatelessWidget {
     return GestureDetector(
       onTap: () => Get.toNamed(
         Routes.PROPERTY_DETAILS,
-        arguments: [
-          propert_Title,
-          propert_Location,
-          propert_Price,
-          id,
-          description,
-          fundedDate,
-          purchasePrice,
-          funderCount,
-          rentalIncome,
-          currentRent,
-          percent,
-          locationString,
-          propertyPriceTotal,
-          propertyPrice,
-          transactionCosts,
-          serviceCharge,
-          status,
-          approved,
-          images,
-        ],
+        arguments: {"propertyId": id},
       ),
       child: Container(
         width: 350,

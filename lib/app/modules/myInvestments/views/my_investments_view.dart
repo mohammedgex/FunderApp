@@ -98,14 +98,20 @@ class MyInvestmentsView extends GetView<MyInvestmentsController> {
                                   itemCount: snapshot.data!.length,
                                   itemBuilder: (context, index) {
                                     return my_Property(
-                                      title: snapshot.data![index].name,
-                                      price: snapshot.data![index].propertyPrice
-                                          .toString(),
-                                      imageUrl: snapshot.data![index].images[0],
-                                      rent: snapshot.data![index].rentalIncome
-                                          .toString(),
-                                      id: snapshot.data![index].id,
-                                    );
+                                        title: snapshot.data![index].name,
+                                        price: snapshot
+                                            .data![index].propertyPrice
+                                            .toString(),
+                                        imageUrl:
+                                            snapshot.data![index].images[0],
+                                        rent: snapshot.data![index].rentalIncome
+                                            .toString(),
+                                        id: snapshot.data![index].id,
+                                        pending:
+                                            controller.Is_Selected_type.value ==
+                                                1,
+                                                
+                                        property: snapshot.data![index]);
                                   }),
                             );
                     })))

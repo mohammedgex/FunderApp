@@ -2,7 +2,7 @@ class PropertyDetailsModal {
   final Property property;
   final String propertyPrice;
   final String annualisedReturn;
-  final dynamic currentEvaluation;
+  final String currentEvaluation;
   final int currentRent;
   final int investedAmount;
   final int investmentValue;
@@ -15,7 +15,7 @@ class PropertyDetailsModal {
     required this.property,
     required this.propertyPrice,
     required this.annualisedReturn,
-    this.currentEvaluation,
+    required this.currentEvaluation,
     required this.currentRent,
     required this.investedAmount,
     required this.investmentValue,

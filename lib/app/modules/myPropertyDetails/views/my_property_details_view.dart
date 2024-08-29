@@ -35,7 +35,8 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                       width: 100, height: 100),
                 );
               }
-              if (snapshot.connectionState == ConnectionState.none) {
+              if (snapshot.connectionState == ConnectionState.none ||
+                  !snapshot.hasData) {
                 return CustomText(
                   text: "No details.",
                 );
@@ -43,17 +44,16 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
 
               // Now you can safely access the data with null-aware operators
               final property = snapshot.data!.property;
-              final propertyPrice = snapshot.data!.propertyPrice ?? '';
-              final annualisedReturn = snapshot.data!.annualisedReturn ?? '';
-              final currentEvaluation = snapshot.data!.currentEvaluation ?? '';
-              final currentRent = snapshot.data!.currentRent ?? '';
-              final investedAmount = snapshot.data!.investedAmount ?? '';
-              final investmentValue = snapshot.data!.investmentValue ?? '';
-              final myOwnership = snapshot.data!.myOwnership ?? '';
-              final totalRentReceived = snapshot.data!.totalRentReceived ?? '';
-              final theLastPayment = snapshot.data!.theLastPayment ?? '';
-              final expectedNextPayment =
-                  snapshot.data!.expectedNextPayment ?? '';
+              final propertyPrice = snapshot.data!.propertyPrice;
+              final annualisedReturn = snapshot.data!.annualisedReturn;
+              final currentEvaluation = snapshot.data!.currentEvaluation;
+              final currentRent = snapshot.data!.currentRent;
+              final investedAmount = snapshot.data!.investedAmount;
+              final investmentValue = snapshot.data!.investmentValue;
+              final myOwnership = snapshot.data!.myOwnership;
+              final totalRentReceived = snapshot.data!.totalRentReceived;
+              final theLastPayment = snapshot.data!.theLastPayment;
+              final expectedNextPayment = snapshot.data!.expectedNextPayment;
 
               return SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
@@ -220,27 +220,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                       GestureDetector(
                         onTap: () => Get.toNamed(
                           Routes.PROPERTY_DETAILS,
-                          arguments: [
-                            property.name,
-                            property.locationString,
-                            propertyPrice,
-                            property.id,
-                            property.description,
-                            property.fundedDate,
-                            property.purchasePrice,
-                            property.funderCount,
-                            property.rentalIncome,
-                            currentRent,
-                            property.percent,
-                            property.locationString,
-                            property.propertyPriceTotal,
-                            propertyPrice,
-                            property.serviceCharge,
-                            property.serviceCharge,
-                            property.status,
-                            property.approved,
-                            property.images,
-                          ],
+                          arguments: {"propertyId": property.id},
                         ),
                         child: Button(
                           text: "View property details".tr,

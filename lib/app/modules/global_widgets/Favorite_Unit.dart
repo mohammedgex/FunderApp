@@ -120,7 +120,7 @@ class FavoriteUnit extends StatelessWidget {
                 'The item has been removed successfully',
                 duration: const Duration(seconds: 3),
                 mobileSnackBarPosition: MobileSnackBarPosition.bottom,
-                type: AnimatedSnackBarType.success,
+                type: AnimatedSnackBarType.warning,
               ).show(
                 context,
               );

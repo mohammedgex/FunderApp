@@ -18,8 +18,8 @@ class FavoriteScreenController extends GetxController {
   static const String URL = ApiUrls.Favorites_api;
 
   // Api get favorites
-  Future<List> get_favortes() async {
-    List<FavoriteModel> favortes = [];
+  Future<List<FavoriteModel>> get_favorites() async {
+    List<FavoriteModel> favorites = [];
     try {
       final response = await http.get(
         Uri.parse(URL),
@@ -31,17 +31,13 @@ class FavoriteScreenController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        // print("Conected");
         final List<dynamic> data = jsonDecode(response.body)["message"];
-        print(data);
-        // print(data);
-        favortes = data.map((e) => FavoriteModel.fromJson(e)).toList();
-        // print("propeties $favortes");
+        favorites = data.map((e) => FavoriteModel.fromJson(e)).toList();
       }
     } catch (error) {
-      // print("error : $error");
+      print("Error: $error");
     }
-    return favortes;
+    return favorites;
   }
 
   @override
