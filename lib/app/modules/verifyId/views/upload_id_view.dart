@@ -28,7 +28,7 @@ class UploadIdView extends GetView<VerifyIdController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomText(
-                text: "Upload your Passport".tr,
+                text: "Upload your ${controller.selectedType.value}".tr,
                 size: 24,
                 weight: FontWeight.w700,
               ),

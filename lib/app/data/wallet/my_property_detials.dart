@@ -3,12 +3,12 @@ class PropertyDetailsModal {
   final String propertyPrice;
   final String annualisedReturn;
   final String currentEvaluation;
-  final int currentRent;
-  final int investedAmount;
-  final int investmentValue;
-  final int myOwnership;
-  final int totalRentReceived;
-  final int theLastPayment;
+  final dynamic currentRent;
+  final dynamic investedAmount;
+  final dynamic investmentValue;
+  final dynamic myOwnership;
+  final dynamic totalRentReceived;
+  final dynamic theLastPayment;
   final String expectedNextPayment;
 
   PropertyDetailsModal({

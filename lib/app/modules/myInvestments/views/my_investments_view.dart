@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:funder_app/app/modules/global_widgets/my_property.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
-
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-
 import '../controllers/my_investments_controller.dart';
 
 class MyInvestmentsView extends GetView<MyInvestmentsController> {
@@ -110,7 +108,6 @@ class MyInvestmentsView extends GetView<MyInvestmentsController> {
                                         pending:
                                             controller.Is_Selected_type.value ==
                                                 1,
-                                                
                                         property: snapshot.data![index]);
                                   }),
                             );

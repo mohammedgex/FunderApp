@@ -3,6 +3,8 @@ import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:funder_app/app/modules/global_widgets/receipt_textfield.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:textfield_datepicker/textfield_datepicker.dart';
 import '../controllers/upload_receipt_controller.dart';
 
 class UploadReceiptView extends GetView<UploadReceiptController> {
@@ -10,7 +12,9 @@ class UploadReceiptView extends GetView<UploadReceiptController> {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>(); // Add GlobalKey for Form
+    final _formKey = GlobalKey<FormState>();
+
+    print(controller.despositDate_Controller.text); // Add GlobalKey for Form
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -150,16 +154,42 @@ class UploadReceiptView extends GetView<UploadReceiptController> {
                       size: 16,
                       weight: FontWeight.w400,
                     ),
-                    receiptTextField(
-                      hintText: "1/1/2023",
-                      controller: controller.despositDate_Controller,
-                      validation: (value) {
-                        if (value!.isNotEmpty) {
-                          return null;
-                        }
-                        return "This filed can't be empty.";
-                      },
+                    TextfieldDatePicker(
+                      cupertinoDatePickerBackgroundColor: Colors.white,
+                      cupertinoDatePickerMaximumDate: DateTime(2099),
+                      cupertinoDatePickerMaximumYear: 2099,
+                      cupertinoDatePickerMinimumYear: 1990,
+                      cupertinoDatePickerMinimumDate: DateTime(1990),
+                      cupertinoDateInitialDateTime: DateTime.now(),
+                      materialDatePickerFirstDate: DateTime.now(),
+                      materialDatePickerInitialDate: DateTime.now(),
+                      materialDatePickerLastDate: DateTime(2099),
+                      preferredDateFormat:
+                          DateFormat('yyyy/MM/dd'), // Custom date format
+                      onFieldSubmitted: (val) => print(val),
+                      onSaved: (val) =>
+                          print(controller.despositDate_Controller.text),
+                      textfieldDatePickerController:
+                          controller.despositDate_Controller,
+                      textCapitalization: TextCapitalization.sentences,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "1/1/2023",
+                        hintStyle: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.normal),
+                        fillColor: Colors.white,
+                      ),
                     ),
+                    // receiptTextField(
+                    //   hintText: "1/1/2023",
+                    //   controller: controller.despositDate_Controller,
+                    //   validation: (value) {
+                    //     if (value!.isNotEmpty) {
+                    //       return null;
+                    //     }
+                    //     return "This filed can't be empty.";
+                    //   },
+                    // ),
                     const SizedBox(
                       height: 10,
                     ),

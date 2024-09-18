@@ -45,7 +45,7 @@ class CheckoutView extends GetView<CheckoutController> {
                                   child: GestureDetector(
                                     onTap: () => controller.decrement(args[3]),
                                     child: const Icon(
-                                      Icons.minimize,
+                                      Icons.remove,
                                       size: 30,
                                     ),
                                   ),

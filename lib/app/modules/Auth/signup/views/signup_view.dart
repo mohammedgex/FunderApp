@@ -128,7 +128,7 @@ class SignupView extends GetView<SignupController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomText(
-                text: "+20",
+                text: "+2",
                 size: 16,
                 weight: FontWeight.w600,
               ),
@@ -170,12 +170,12 @@ class SignupView extends GetView<SignupController> {
                 onTap: () => controller.troglePassword(),
                 child: Icon(
                   controller.showPassword.value
-                      ? IconlyLight.show
-                      : IconlyLight.hide,
+                      ? IconlyLight.hide
+                      : IconlyLight.show,
                   color: const Color.fromRGBO(105, 106, 108, 0.8),
                 ),
               ),
-              showen: controller.showPassword.value,
+              showen: controller.showPassword.value ? false : true,
             )),
         const SizedBox(height: 15),
         Obx(() => CustomTextField(
@@ -195,12 +195,12 @@ class SignupView extends GetView<SignupController> {
                 onTap: () => controller.trogleConfPassword(),
                 child: Icon(
                   controller.conf_showPassword.value
-                      ? IconlyLight.show
-                      : IconlyLight.hide,
+                      ? IconlyLight.hide
+                      : IconlyLight.show,
                   color: const Color.fromRGBO(105, 106, 108, 0.8),
                 ),
               ),
-              showen: controller.conf_showPassword.value,
+              showen: controller.conf_showPassword.value ? false : true,
             )),
       ],
     );

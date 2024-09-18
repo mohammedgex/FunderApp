@@ -29,7 +29,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
   @override
   Widget build(BuildContext context) {
     // slider years
-    int years = 1;
+    int years = 3;
     return Scaffold(
         body: FutureBuilder(
             future: controller.DetailsApi(Property_Details["propertyId"]),
@@ -52,9 +52,6 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                         .toDouble(); // Calculate progress, e.g., 5 / 12
               }
 
-              print(
-                  "IS YEAR : ${controller.isYear(snapshot.data!.fundedDate!)}");
-
               return SafeArea(
                 child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
@@ -73,16 +70,14 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                   ? snapshot.data!.images!.length
                                   : 6,
                               itemBuilder: (context, index) {
-                                return Container(
-                                  width: double.infinity,
-                                  height: 275,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: NetworkImage(
-                                              "${ApiUrls.URl}/uploads/${snapshot.data!.images![index]}")),
-                                      borderRadius: BorderRadius.circular(12)),
-                                );
+                                return ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Image.network(
+                                        errorBuilder: (context, error,
+                                                stackTrace) =>
+                                            Image.asset("assets/passport.svg"),
+                                        fit: BoxFit.cover,
+                                        "${ApiUrls.URl}/uploads/${snapshot.data!.images![index]}"));
                               }),
                         ),
                         Padding(
@@ -604,7 +599,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                             ),
                             Obx(
                               () => Slider(
-                                divisions: 100,
+                                divisions: 90,
                                 label: controller.investment_value.value
                                     .toInt()
                                     .toString(),
@@ -621,8 +616,8 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                   // controller.calculateTotalValueGrowth(
                                   //     snapshot.data.estimatedAnnualAppreciation, years);
                                 },
-                                min: 0,
-                                max: 100000,
+                                min: 100000,
+                                max: 1000000,
                               ),
                             ),
                           ],
@@ -666,8 +661,8 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                       value.toInt());
                                   controller.yield_value.value = value;
                                 },
-                                min: 0,
-                                max: 20,
+                                min: 1,
+                                max: 5,
                               ),
                             ),
                           ],
@@ -682,13 +677,20 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                         weight: FontWeight.w400,
                         color: const Color.fromRGBO(148, 148, 148, 1),
                       ),
-                      Obx(() => CustomText(
-                            text:
-                                "EGP ${controller.investment_value.value.toInt()} in ${controller.yield_value.value.toInt()} years",
-                            size: 20,
-                            weight: FontWeight.w600,
-                            color: const Color.fromRGBO(4, 54, 61, 1),
-                          )),
+                      Obx(() {
+                        var investmentValue =
+                            controller.investment_value.value.toInt() *
+                                (int.parse(snapshot
+                                        .data!.estimatedAnnualAppreciation!) /
+                                    100);
+                        return CustomText(
+                          text:
+                              "EGP ${investmentValue.toInt() * years} in ${controller.yield_value.value.toInt()} years",
+                          size: 20,
+                          weight: FontWeight.w600,
+                          color: const Color.fromRGBO(4, 54, 61, 1),
+                        );
+                      }),
                       const SizedBox(
                         height: 15,
                       ),
@@ -746,7 +748,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                                 Color.fromRGBO(189, 32, 44, 1),
                                           ),
                                           CustomText(
-                                            text: "Value growth".tr,
+                                            text: "Yearly appreciation".tr,
                                             size: 12,
                                             color: const Color.fromRGBO(
                                                 148, 148, 148, 1),
@@ -755,7 +757,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                       ),
                                       CustomText(
                                         text:
-                                            "${controller.valueGrowth.value.toInt()}",
+                                            "${(controller.investment_value.value.toInt() * (int.parse(snapshot.data!.estimatedAnnualAppreciation!) / 100)).toInt()}",
                                         size: 14,
                                         weight: FontWeight.w600,
                                       )

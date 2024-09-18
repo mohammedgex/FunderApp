@@ -73,9 +73,9 @@ class UploadReceiptController extends GetxController {
         request.fields['receipt_number'] =
             receiptNum_Controller.text.toString();
         request.fields['deposit_date'] = despositDate_Controller.text
-            .split('/')
-            .reversed
-            .join('/')
+            // .split('/')
+            // .reversed
+            // .join('/')
             .toString();
         request.fields['deposited_amount'] =
             despositedAmount_Controller.text.toString();

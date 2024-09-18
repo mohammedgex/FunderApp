@@ -91,7 +91,7 @@ class Translation extends Translations {
           "property value growth years": "نمو العقار السنوي",
           "Projected investment return of": "العائد الاستثماري المتوقع",
           "Investment": "الإستثمار",
-          "Value growth": "قيمة النمو",
+          "Yearly appreciation": "النمو السنوي المتوقع",
           "Funding timeline": "جدول البيع الزمني",
           // button
           "Book a share": "حجز سهم",
@@ -290,7 +290,7 @@ class Translation extends Translations {
           "property value growth years": "Property value growth years",
           "Projected investment return of": "Projected investment return of",
           "Investment": "Investment",
-          "Value growth": "Value growth",
+          "Yearly appreciation": "Yearly appreciation",
           "Funding timeline": "Funding timeline",
           "Book a share": "Book a share",
           "sell your share": "sell your share",

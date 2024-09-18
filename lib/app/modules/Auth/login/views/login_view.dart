@@ -69,8 +69,8 @@ class LoginView extends GetView<LoginController> {
                         suficon: GestureDetector(
                           onTap: () => controller.troglePassword(),
                           child: controller.showPassword.value
-                              ? const Icon(IconlyLight.show)
-                              : const Icon(IconlyLight.hide),
+                              ? const Icon(IconlyLight.hide)
+                              : const Icon(IconlyLight.show),
                         ),
                         validation: (value) {
                           if (value!.length >= 8) {
@@ -78,7 +78,7 @@ class LoginView extends GetView<LoginController> {
                           }
                           return "Enter Valid Password";
                         },
-                        showen: controller.showPassword.value ? true : false,
+                        showen: controller.showPassword.value ? false : true,
                       ),
                     ),
                     const SizedBox(

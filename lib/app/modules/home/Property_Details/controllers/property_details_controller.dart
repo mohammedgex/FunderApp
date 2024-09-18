@@ -18,7 +18,7 @@ class PropertyDetailsController extends GetxController {
   // var numOfYearsStart = 1.0.obs;
   // var numOfYearsEnd = 20.0.obs;
 
-  var investment_value = 1000.0.obs;
+  var investment_value = 100000.0.obs;
   var yield_value = 1.0.obs;
   var valueGrowth = 0.0.obs;
 
@@ -74,11 +74,8 @@ class PropertyDetailsController extends GetxController {
 
   bool isYear(String date) {
     DateTime now = DateTime.now();
-    print(now);
     DateTime convertedDate = DateTime.parse(date);
-    print(convertedDate);
     Duration difference = now.difference(convertedDate);
-    print(difference.inDays);
     if (difference.inDays >= 365) {
       return true;
     } else {

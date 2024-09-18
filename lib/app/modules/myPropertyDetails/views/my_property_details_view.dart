@@ -14,6 +14,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
   @override
   Widget build(BuildContext context) {
     final args = Get.arguments;
+    print(args["my_propery_id"]);
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -35,12 +36,12 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                       width: 100, height: 100),
                 );
               }
-              if (snapshot.connectionState == ConnectionState.none ||
-                  !snapshot.hasData) {
-                return CustomText(
-                  text: "No details.",
-                );
-              }
+              // if (snapshot.connectionState == ConnectionState.none ||
+              //     !snapshot.hasData) {
+              //   return CustomText(
+              //     text: "No details.",
+              //   );
+              // }
 
               // Now you can safely access the data with null-aware operators
               final property = snapshot.data!.property;

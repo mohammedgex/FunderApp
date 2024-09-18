@@ -63,11 +63,11 @@ class InstaPayView extends GetView {
               children: [
                 copy_Box(
                   title: "The name of the bank".tr,
-                  content: "${args[5]}",
+                  content: args[5] != null ? "${args[5]}" : "EMPTY",
                 ),
                 copy_Box(
                   title: "The account number".tr,
-                  content: "${args[6]}",
+                  content: args[6] != null ? "${args[6]}" : "EMPTY",
                 ),
                 copy_Box(
                   title: "The username".tr,
