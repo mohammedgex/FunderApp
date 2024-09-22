@@ -1,5 +1,5 @@
 class ApiUrls {
-  static const URl = "https://app.atfunder.com";
+  static const URl = "http://192.168.1.80:8000";
   static const Login_api = "$URl/api/user/login";
   static const Register_api = "$URl/api/user/register";
   static const OTP_api = "$URl/api/user/send-code";
@@ -18,6 +18,8 @@ class ApiUrls {
   static const categories_api = "$URl/api/category";
   static const sold_out_properties = "$URl/api/properties/sold-out";
   static const Rese_password_api = "$URl/api/user/reset-password";
+  static const userDate = "$URl/api/userData";
+  static const userIdentification = "$URl/api/userIdentification";
 
   // static const addTofav_api = "$URl/api/user/favorites/";
 }

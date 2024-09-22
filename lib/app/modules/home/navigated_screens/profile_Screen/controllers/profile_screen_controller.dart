@@ -1,10 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_svg/svg.dart';
+import 'package:funder_app/app/data/Auth/identificationModel.dart';
+import 'package:funder_app/app/modules/Auth/userModel.dart';
 import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:flutter/material.dart';
 import 'package:funder_app/app/data/apis_url.dart';
 import 'package:get/get.dart';
@@ -23,6 +25,10 @@ class ProfileScreenController extends GetxController {
   late TextEditingController PhoneNumber_Controller;
   // api url
   final String URL = ApiUrls.Profile_api;
+  final String USER_DATA_URL = ApiUrls.userDate;
+  final String USER_Identification_URL = ApiUrls.userIdentification;
+
+  bool? isIdentiy = false;
 
   // when page started
   @override
@@ -148,6 +154,48 @@ class ProfileScreenController extends GetxController {
       // Error occurred
       isLoading.value = false;
       print("error : $error");
+    }
+  }
+
+  Future<UserModel> getUserDate() async {
+    final response = await http.get(
+      Uri.parse(USER_DATA_URL),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${box.read("userToken")}',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      print("Conected");
+      final Map<String, dynamic> data = jsonDecode(response.body)['user'];
+      print("data $data");
+      return UserModel.fromJson(data);
+    } else {
+      throw Exception('Failed to load wallet data');
+    }
+  }
+
+  Future<IdentificationModel> getUserIdentificaion() async {
+    final response = await http.get(
+      Uri.parse(USER_Identification_URL),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${box.read("userToken")}',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      print("Conected");
+      final Map<String, dynamic> data =
+          jsonDecode(response.body)['identification'];
+      print("data $data");
+      return IdentificationModel.fromJson(data);
+    } else {
+      isIdentiy = true;
+      throw Exception('Failed to load wallet data');
     }
   }
 }

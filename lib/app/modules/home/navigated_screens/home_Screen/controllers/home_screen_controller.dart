@@ -74,15 +74,15 @@ class HomeScreenController extends GetxController {
   }
 
   // property detials calculator
-  void calculateTotalValueGrowth(
-    int initial_investment,
-    int annual_appreciation,
-    int years,
-  ) {
-    int eq1 = 1 + annual_appreciation;
-    int eq2 = initial_investment * eq1 * years;
-    int eq3 = eq2 - initial_investment;
-  }
+  // void calculateTotalValueGrowth(
+  //   int initial_investment,
+  //   int annual_appreciation,
+  //   int years,
+  // ) {
+  //   int eq1 = 1 + annual_appreciation;
+  //   int eq2 = initial_investment * eq1 * years;
+  //   int eq3 = eq2 - initial_investment;
+  // }
 
   // add property to favorite
   Future<void> addtofavorite(int id, BuildContext context) async {

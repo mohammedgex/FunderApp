@@ -73,7 +73,7 @@ class VerifyIdController extends GetxController {
         var response = await request.send();
 
         // Handle response
-        if (response.statusCode == 200) {
+        if (response.statusCode == 200 || response.statusCode == 201) {
           isLoading.value = false;
           // Successful response
           Get.defaultDialog(
@@ -110,7 +110,7 @@ class VerifyIdController extends GetxController {
                     height: 35,
                   ),
                   GestureDetector(
-                    onTap: () => Get.offAllNamed(Routes.LOGIN),
+                    onTap: () => Get.offAllNamed(Routes.MAIN_PAGE),
                     child: const Button(
                       width: 252,
                       text: "Continue",
@@ -139,7 +139,7 @@ class VerifyIdController extends GetxController {
         mobileSnackBarPosition: MobileSnackBarPosition.bottom,
         type: AnimatedSnackBarType.error,
       ).show(
-        context!,
+        context,
       );
     }
   }
