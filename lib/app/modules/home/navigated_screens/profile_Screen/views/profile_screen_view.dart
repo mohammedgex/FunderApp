@@ -158,11 +158,13 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
       return const SizedBox();
     }
 
-    return CustomText(
-        text: snapshotDate.data!.notes,
-        color: Colors.red,
-        size: 12,
-        weight: FontWeight.w500);
+    return snapshotDate.data!.notes != null
+        ? CustomText(
+            text: snapshotDate.data!.notes,
+            color: Colors.red,
+            size: 12,
+            weight: FontWeight.w500)
+        : const SizedBox();
   }
 
   Widget _buildProfileOptions(BuildContext context,
