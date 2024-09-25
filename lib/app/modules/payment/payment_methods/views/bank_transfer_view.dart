@@ -7,10 +7,10 @@ class BankTransferView extends GetView {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('BankTransferView'),
+        title: const Text('BankTransferView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'BankTransferView is working',
           style: TextStyle(fontSize: 20),

@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class SearchResultsView extends GetView<SearchFilterController> {
-  const SearchResultsView({Key? key}) : super(key: key);
+  const SearchResultsView({super.key});
   @override
   Widget build(BuildContext context) {
     dynamic SearchData = Get.arguments;

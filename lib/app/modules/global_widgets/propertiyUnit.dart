@@ -83,7 +83,7 @@ class PropertiyUnit extends StatelessWidget {
                   image: DecorationImage(
                       fit: BoxFit.cover,
                       image:
-                          NetworkImage("${ApiUrls.URl}/uploads/$image_url"))),
+                          NetworkImage("${ApiUrls.URl}/storage/$image_url"))),
               height: 173,
             ),
             Padding(

@@ -169,7 +169,7 @@ class SearchFilterView extends GetView<SearchFilterController> {
                       onTap: () => Get.toNamed(Routes.SEARCH_RESULTS,
                           arguments: [
                             "$searchText",
-                            "${controller.locationController.text}",
+                            (controller.locationController.text),
                             1
                           ]),
                       child: const Button(

@@ -24,13 +24,13 @@ class wallet_model {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['receipts'] = this.receipts;
-    data['my_investments'] = this.myInvestments;
-    data['deposit'] = this.deposit;
-    data['number_of_properties'] = this.numberOfProperties;
-    data['monthly_income'] = this.monthlyIncome;
-    data['annual_gross_yield'] = this.annualGrossYield;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['receipts'] = receipts;
+    data['my_investments'] = myInvestments;
+    data['deposit'] = deposit;
+    data['number_of_properties'] = numberOfProperties;
+    data['monthly_income'] = monthlyIncome;
+    data['annual_gross_yield'] = annualGrossYield;
     return data;
   }
 }

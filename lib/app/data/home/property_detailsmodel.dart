@@ -21,6 +21,8 @@ class property_detailsmodel {
   int? categoryId;
   String? createdAt;
   String? updatedAt;
+  String? location_longitude;
+  String? location_latitude;
   List<Funders>? funders;
   List<Timelines>? timelines;
   Location? location;
@@ -68,6 +70,8 @@ class property_detailsmodel {
     funderCount = json['funder_count'];
     rentalIncome = json['rental_income'];
     currentRent = json['current_rent'];
+    location_latitude = json["location_latitude"];
+    location_longitude = json["location_longitude"];
     percent = json['percent'];
     locationString = json['location_string'];
     propertyPriceTotal = json['property_price_total'];
@@ -84,59 +88,58 @@ class property_detailsmodel {
     if (json['funders'] != null) {
       funders = <Funders>[];
       json['funders'].forEach((v) {
-        funders!.add(new Funders.fromJson(v));
+        funders!.add(Funders.fromJson(v));
       });
     }
     if (json['timelines'] != null) {
       timelines = <Timelines>[];
       json['timelines'].forEach((v) {
-        timelines!.add(new Timelines.fromJson(v));
+        timelines!.add(Timelines.fromJson(v));
       });
     }
-    location = json['location'] != null
-        ? new Location.fromJson(json['location'])
-        : null;
+    location =
+        json['location'] != null ? Location.fromJson(json['location']) : null;
     ifUserShared = json['if_user_shared'];
     status = json['status'];
     approved = json['approved'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['images'] = this.images;
-    data['funded_date'] = this.fundedDate;
-    data['purchase_price'] = this.purchasePrice;
-    data['funder_count'] = this.funderCount;
-    data['rental_income'] = this.rentalIncome;
-    data['current_rent'] = this.currentRent;
-    data['percent'] = this.percent;
-    data['location_string'] = this.locationString;
-    data['property_price_total'] = this.propertyPriceTotal;
-    data['property_price'] = this.propertyPrice;
-    data['discount'] = this.discount;
-    data['estimated_annualised_return'] = this.estimatedAnnualisedReturn;
-    data['estimated_annual_appreciation'] = this.estimatedAnnualAppreciation;
-    data['estimated_projected_gross_yield'] = this.estimatedProjectedGrossYield;
-    data['transaction_costs'] = this.transactionCosts;
-    data['service_charge'] = this.serviceCharge;
-    data['category_id'] = this.categoryId;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    if (this.funders != null) {
-      data['funders'] = this.funders!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['description'] = description;
+    data['images'] = images;
+    data['funded_date'] = fundedDate;
+    data['purchase_price'] = purchasePrice;
+    data['funder_count'] = funderCount;
+    data['rental_income'] = rentalIncome;
+    data['current_rent'] = currentRent;
+    data['percent'] = percent;
+    data['location_string'] = locationString;
+    data['property_price_total'] = propertyPriceTotal;
+    data['property_price'] = propertyPrice;
+    data['discount'] = discount;
+    data['estimated_annualised_return'] = estimatedAnnualisedReturn;
+    data['estimated_annual_appreciation'] = estimatedAnnualAppreciation;
+    data['estimated_projected_gross_yield'] = estimatedProjectedGrossYield;
+    data['transaction_costs'] = transactionCosts;
+    data['service_charge'] = serviceCharge;
+    data['category_id'] = categoryId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    if (funders != null) {
+      data['funders'] = funders!.map((v) => v.toJson()).toList();
     }
-    if (this.timelines != null) {
-      data['timelines'] = this.timelines!.map((v) => v.toJson()).toList();
+    if (timelines != null) {
+      data['timelines'] = timelines!.map((v) => v.toJson()).toList();
     }
-    if (this.location != null) {
-      data['location'] = this.location!.toJson();
+    if (location != null) {
+      data['location'] = location!.toJson();
     }
-    data['if_user_shared'] = this.ifUserShared;
-    data['status'] = this.status;
-    data['approved'] = this.approved;
+    data['if_user_shared'] = ifUserShared;
+    data['status'] = status;
+    data['approved'] = approved;
     return data;
   }
 }
@@ -167,13 +170,13 @@ class Funders {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['property_id'] = this.propertyId;
-    data['user_id'] = this.userId;
-    data['status'] = this.status;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['property_id'] = propertyId;
+    data['user_id'] = userId;
+    data['status'] = status;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -207,14 +210,14 @@ class Timelines {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['date'] = this.date;
-    data['title'] = this.title;
-    data['description'] = this.description;
-    data['property_id'] = this.propertyId;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['date'] = date;
+    data['title'] = title;
+    data['description'] = description;
+    data['property_id'] = propertyId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -245,13 +248,13 @@ class Location {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['latitude'] = this.latitude;
-    data['longitude'] = this.longitude;
-    data['property_id'] = this.propertyId;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['latitude'] = latitude;
+    data['longitude'] = longitude;
+    data['property_id'] = propertyId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

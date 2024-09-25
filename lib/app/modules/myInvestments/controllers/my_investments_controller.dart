@@ -36,7 +36,7 @@ class MyInvestmentsController extends GetxController {
 
       if (response.statusCode == 200) {
         final List<dynamic> data = jsonDecode(response.body)["properties"];
-        print("data ${data}");
+        print("data $data");
 
         myproperties = data.map((e) => Property_Model.fromJson(e)).toList();
       }

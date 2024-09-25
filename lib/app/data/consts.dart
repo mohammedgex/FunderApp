@@ -10,7 +10,7 @@ class Kconstans {
       {String? title, String? content, bool? show, String? routeName}) {
     Get.defaultDialog(
         barrierDismissible: false,
-        onWillPop: () async => await Get.offAllNamed(Routes.MAIN_PAGE),
+        onWillPop: () async => await Get.offAndToNamed(Routes.MAIN_PAGE),
         title: "",
         content: Column(
           mainAxisAlignment: MainAxisAlignment.center,

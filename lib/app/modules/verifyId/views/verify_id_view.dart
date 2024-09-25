@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/routes/app_pages.dart';
-
 import 'package:get/get.dart';
-
 import '../controllers/verify_id_controller.dart';
 
 class VerifyIdView extends GetView<VerifyIdController> {
@@ -63,7 +60,7 @@ class VerifyIdView extends GetView<VerifyIdController> {
             ),
             GestureDetector(
               onTap: () {
-                Get.toNamed(Routes.SELECT_TYPE);
+                Get.toNamed(Routes.SELECT_TYPE, arguments: {"isUpdate": false});
               },
               child: Button(
                 width: 278,

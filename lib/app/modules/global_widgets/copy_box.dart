@@ -33,7 +33,7 @@ class copy_Box extends StatelessWidget {
                 weight: FontWeight.w500,
                 color: const Color.fromRGBO(177, 174, 174, 1),
               ),
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width - 160,
                 child: Text(
                   "$content",

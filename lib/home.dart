@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:funder_app/app/modules/onboarding/controllers/onboarding_controller.dart';
 import 'package:funder_app/app/routes/app_pages.dart';

@@ -74,7 +74,7 @@ class MyPropertyDetailsView extends GetView<MyPropertyDetailsController> {
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: NetworkImage(
-                                        "${ApiUrls.URl}/uploads/${snapshot.data!.property.images[0]}"))),
+                                        "${ApiUrls.URl}/storage/${snapshot.data!.property.images[0]}"))),
                           ),
                           snapshot.data!.currentRent == 0
                               ? Positioned(

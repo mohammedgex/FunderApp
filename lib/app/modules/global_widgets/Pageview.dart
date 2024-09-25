@@ -5,7 +5,7 @@ import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:get/get.dart';
 
 class pageViewInde extends GetView<OnboardingController> {
-  pageViewInde({this.content, this.header, this.imageurl, this.controll});
+  const pageViewInde({this.content, this.header, this.imageurl, this.controll});
   final String? imageurl;
   final String? header;
   final String? content;

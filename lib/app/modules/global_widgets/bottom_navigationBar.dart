@@ -18,7 +18,7 @@ class bottom_NavigationBar extends StatelessWidget {
       },
       indicatorColor: Colors.white,
       selectedIndex: controller.currentPage.value,
-      overlayColor: const MaterialStatePropertyAll(Colors.white),
+      overlayColor: const WidgetStatePropertyAll(Colors.white),
       backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       elevation: 0,
       destinations: [

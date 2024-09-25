@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 class SelectType extends GetView<VerifyIdController> {
   @override
   Widget build(BuildContext context) {
+    final args = Get.arguments;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -68,6 +69,10 @@ class SelectType extends GetView<VerifyIdController> {
                   if (controller.selectedType.value.isNotEmpty) {
                     Get.toNamed(Routes.UPLOAD_ID, arguments: {
                       'type': controller.selectedType.value,
+                      "id": args["id"],
+                      "isUpdate": args["isUpdate"],
+                      "frontSide": args["frontSide"],
+                      "backSide": args["backSide"],
                     });
                   }
                 },

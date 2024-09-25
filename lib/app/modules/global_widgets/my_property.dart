@@ -73,7 +73,7 @@ class my_Property extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage("${ApiUrls.URl}/uploads/$imageUrl")),
+                      image: NetworkImage("${ApiUrls.URl}/storage/$imageUrl")),
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),

@@ -9,11 +9,14 @@ class UploadIdView extends GetView<VerifyIdController> {
   @override
   Widget build(BuildContext context) {
     final args = Get.arguments; // Assign arguments first
+    print(args['type']);
+    print(args['id']);
+    print(args['isUpdate']);
 
 // If args or args["isUpdate"] is null, set `isUpdate` to false
     bool isUpdate =
         (args != null && args["isUpdate"] != null) ? args["isUpdate"] : false;
-    print(isUpdate);
+    isUpdate ? controller.selectedType.value = args["type"] ?? '' : null;
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -101,7 +104,7 @@ class UploadIdView extends GetView<VerifyIdController> {
                                             .backSide!.value.path.isEmpty
                                         ? isUpdate
                                             ? NetworkImage(
-                                                    "$ApiUrls/storage/${args["backSide"]}")
+                                                    "${ApiUrls.URl}/storage/${args["backSide"]}")
                                                 as ImageProvider
                                             : const AssetImage(
                                                 "assets/upload.jpg")
@@ -114,7 +117,11 @@ class UploadIdView extends GetView<VerifyIdController> {
               ),
               GestureDetector(
                   onTap: () async {
-                    await controller.UPLOADID(context);
+                    if (isUpdate) {
+                      await controller.UPDATEID(context, args['id']);
+                    } else {
+                      await controller.UPLOADID(context);
+                    }
                   },
                   child: Obx(
                     () => controller.isLoading.value

@@ -37,17 +37,17 @@ class reciptsmodel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['count_sheres'] = this.countSheres;
-    data['method'] = this.method;
-    data['image'] = this.image;
-    data['receipt_number'] = this.receiptNumber;
-    data['deposit_date'] = this.depositDate;
-    data['deposited_amount'] = this.depositedAmount;
-    data['status'] = this.status;
-    data['user_id'] = this.userId;
-    data['property_id'] = this.propertyId;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['count_sheres'] = countSheres;
+    data['method'] = method;
+    data['image'] = image;
+    data['receipt_number'] = receiptNumber;
+    data['deposit_date'] = depositDate;
+    data['deposited_amount'] = depositedAmount;
+    data['status'] = status;
+    data['user_id'] = userId;
+    data['property_id'] = propertyId;
 
     return data;
   }

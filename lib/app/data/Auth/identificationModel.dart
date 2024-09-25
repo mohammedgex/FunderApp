@@ -4,6 +4,8 @@ class IdentificationModel {
   String? backSide;
   String? type;
   String? status;
+  String? notes;
+
   int? userId;
   String? createdAt;
   String? updatedAt;
@@ -15,6 +17,7 @@ class IdentificationModel {
     this.type,
     this.status,
     this.userId,
+    this.notes,
     this.createdAt,
     this.updatedAt,
   });
@@ -27,23 +30,10 @@ class IdentificationModel {
       backSide: json['back_side'],
       type: json['type'],
       status: json['status'],
+      notes: json['notes'],
       userId: json['user_id'],
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
     );
-  }
-
-  // Method to convert Identification object to JSON
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'front_side': frontSide,
-      'back_side': backSide,
-      'type': type,
-      'status': status,
-      'user_id': userId,
-      'created_at': createdAt,
-      'updated_at': updatedAt,
-    };
   }
 }

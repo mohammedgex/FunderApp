@@ -82,7 +82,7 @@ class SearchFilterController extends GetxController {
     print("Location ${locationController.text}");
     List<Property_Model> results = [];
     try {
-      final response = await http.post(Uri.parse("$SEARCH_URl"),
+      final response = await http.post(Uri.parse(SEARCH_URl),
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',

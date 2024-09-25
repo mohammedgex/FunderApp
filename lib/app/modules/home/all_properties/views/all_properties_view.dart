@@ -66,9 +66,7 @@ class AllPropertiesView extends GetView<AllPropertiesController> {
                         transactionCosts:
                             snapshot.data![index].transactionCosts,
                         serviceCharge: snapshot.data![index].serviceCharge,
-                        status: snapshot.data![index].status != null
-                            ? snapshot.data![index].status
-                            : "null",
+                        status: snapshot.data![index].status ?? "null",
                         approved: snapshot.data![index].approved,
                         propert_Price:
                             snapshot.data![index].purchasePrice.toString(),

@@ -38,7 +38,7 @@ class PersonalDetails extends GetView<ProfileScreenController> {
                             fit: BoxFit.cover,
                             image: controller.profileImage!.value.path.isEmpty
                                 ? NetworkImage(
-                                    "${ApiUrls.URl}/uploads/${box.read("userImage")}")
+                                    "${ApiUrls.URl}/storage/${box.read("userImage")}")
                                 : FileImage(controller.profileImage!.value)
                                     as ImageProvider<Object>),
                         borderRadius: BorderRadius.circular(100)),

@@ -61,25 +61,25 @@ class Property_Model {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['images'] = this.images;
-    data['funded_date'] = this.fundedDate;
-    data['purchase_price'] = this.purchasePrice;
-    data['funder_count'] = this.funderCount;
-    data['rental_income'] = this.rentalIncome;
-    data['current_rent'] = this.currentRent;
-    data['percent'] = this.percent;
-    data['location_string'] = this.locationString;
-    data['property_price_total'] = this.propertyPriceTotal;
-    data['property_price'] = this.propertyPrice;
-    data['transaction_costs'] = this.transactionCosts;
-    data['service_charge'] = this.serviceCharge;
-    data['status'] = this.status;
-    data['approved'] = this.approved;
-    data['category_id'] = this.categoryId;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['description'] = description;
+    data['images'] = images;
+    data['funded_date'] = fundedDate;
+    data['purchase_price'] = purchasePrice;
+    data['funder_count'] = funderCount;
+    data['rental_income'] = rentalIncome;
+    data['current_rent'] = currentRent;
+    data['percent'] = percent;
+    data['location_string'] = locationString;
+    data['property_price_total'] = propertyPriceTotal;
+    data['property_price'] = propertyPrice;
+    data['transaction_costs'] = transactionCosts;
+    data['service_charge'] = serviceCharge;
+    data['status'] = status;
+    data['approved'] = approved;
+    data['category_id'] = categoryId;
     return data;
   }
 }

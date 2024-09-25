@@ -28,7 +28,7 @@ class ProfileScreenController extends GetxController {
   final String USER_DATA_URL = ApiUrls.userDate;
   final String USER_Identification_URL = ApiUrls.userIdentification;
 
-  bool? isIdentiy = false;
+  bool? isNotIdentiy = false;
 
   // when page started
   @override
@@ -194,7 +194,7 @@ class ProfileScreenController extends GetxController {
       print("data $data");
       return IdentificationModel.fromJson(data);
     } else {
-      isIdentiy = true;
+      isNotIdentiy = true;
       throw Exception('Failed to load wallet data');
     }
   }

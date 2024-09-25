@@ -17,12 +17,12 @@ class paymentMethod_model {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['description'] = this.description;
-    data['bank'] = this.bank;
-    data['account_number'] = this.accountNumber;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['description'] = description;
+    data['bank'] = bank;
+    data['account_number'] = accountNumber;
     return data;
   }
 }

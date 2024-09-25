@@ -31,7 +31,7 @@ class key_box extends StatelessWidget {
                   size: 14,
                   weight: FontWeight.w500,
                   text: "Monthly income",
-                  color: Color.fromRGBO(4, 54, 61, 1),
+                  color: const Color.fromRGBO(4, 54, 61, 1),
                 ),
               )
             ],
@@ -40,11 +40,11 @@ class key_box extends StatelessWidget {
             text: "AED 1.99",
             size: 14,
             weight: FontWeight.w700,
-            color: Color.fromRGBO(4, 54, 61, 1),
+            color: const Color.fromRGBO(4, 54, 61, 1),
           ),
           CustomText(
             text: "NOV2023",
-            color: Color.fromRGBO(4, 54, 61, 1),
+            color: const Color.fromRGBO(4, 54, 61, 1),
             size: 10,
             weight: FontWeight.w400,
           ),

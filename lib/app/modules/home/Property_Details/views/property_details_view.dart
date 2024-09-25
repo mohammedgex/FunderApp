@@ -77,7 +77,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                                 stackTrace) =>
                                             Image.asset("assets/passport.svg"),
                                         fit: BoxFit.cover,
-                                        "${ApiUrls.URl}/uploads/${snapshot.data!.images![index]}"));
+                                        "${ApiUrls.URl}/storage/${snapshot.data!.images![index]}"));
                               }),
                         ),
                         Padding(
@@ -228,7 +228,9 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                           text: snapshot.data!.status! ==
                                                   "sold out"
                                               ? "${snapshot.data!.estimatedAnnualisedReturn}%"
-                                              : "${snapshot.data!.fundedDate}",
+                                              : DateFormat('yyyy-MM-dd').format(
+                                                  DateTime.parse(snapshot
+                                                      .data!.fundedDate!)),
                                         )
                                       ],
                                     ),
@@ -463,8 +465,10 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                               child: FlutterMap(
                                 options: MapOptions(
                                     initialCenter: LatLng(
-                                        snapshot.data!.location!.latitude!,
-                                        snapshot.data!.location!.longitude!),
+                                        double.parse(
+                                            snapshot.data!.location_longitude!),
+                                        double.parse(snapshot
+                                            .data!.location_longitude!)),
                                     initialZoom: 15),
                                 children: [
                                   TileLayer(
@@ -476,9 +480,10 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                     circles: [
                                       CircleMarker(
                                         point: LatLng(
-                                            snapshot.data!.location!.latitude!,
-                                            snapshot.data!.location!
-                                                .longitude!), // center of 't Gooi
+                                            double.parse(snapshot
+                                                .data!.location_longitude!),
+                                            double.parse(snapshot.data!
+                                                .location_latitude!)), // center of 't Gooi
                                         radius: 50,
                                         useRadiusInMeter: true,
                                         color: Colors.red.withOpacity(0.3),

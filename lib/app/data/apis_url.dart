@@ -20,6 +20,7 @@ class ApiUrls {
   static const Rese_password_api = "$URl/api/user/reset-password";
   static const userDate = "$URl/api/userData";
   static const userIdentification = "$URl/api/userIdentification";
+  static const notification_api = "$URl/api/notifications";
 
   // static const addTofav_api = "$URl/api/user/favorites/";
 }

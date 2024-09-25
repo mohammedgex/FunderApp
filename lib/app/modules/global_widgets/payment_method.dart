@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 
 class payMethod_widget extends StatelessWidget {
-  payMethod_widget(
+  const payMethod_widget(
       {super.key, this.fees, this.payment_name, this.transfer_way});
   final String? payment_name;
   final String? fees;

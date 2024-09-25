@@ -50,7 +50,7 @@ class FavoriteUnit extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage("${ApiUrls.URl}/uploads/$image_url"))),
+                    image: NetworkImage("${ApiUrls.URl}/storage/$image_url"))),
             height: double.infinity,
           ),
           Padding(

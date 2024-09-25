@@ -24,7 +24,7 @@ class receiptUnit extends StatelessWidget {
             decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage("${ApiUrls.URl}/uploads/$imageUrl")),
+                    image: NetworkImage("${ApiUrls.URl}/storage/$imageUrl")),
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
                     width: 0.5, color: const Color.fromRGBO(115, 115, 115, 1))),

@@ -7,7 +7,7 @@ import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class InstaPayView extends GetView {
-  InstaPayView({
+  const InstaPayView({
     this.payment_title,
     this.payment_body,
     this.payment_body1,

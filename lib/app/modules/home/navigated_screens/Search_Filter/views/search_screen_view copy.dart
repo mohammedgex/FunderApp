@@ -56,7 +56,7 @@ class _SearchScreenViewState extends State<SearchScreenView> {
                           offset: Offset(0, 4),
                           spreadRadius: 0),
                     ], borderRadius: BorderRadius.all(Radius.circular(12))),
-                    child: Container(
+                    child: SizedBox(
                       width: 268,
                       height: 48,
                       child: GestureDetector(
@@ -129,7 +129,7 @@ class _SearchScreenViewState extends State<SearchScreenView> {
                 height: 20,
               ),
               searchHistoryList.isNotEmpty
-                  ? Obx(() => Container(
+                  ? Obx(() => SizedBox(
                         width: double.infinity,
                         height: MediaQuery.of(context).size.height,
                         child: ListView.separated(
@@ -146,13 +146,13 @@ class _SearchScreenViewState extends State<SearchScreenView> {
                                       const SizedBox(
                                         width: 15,
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width *
                                                 0.5,
                                         child: CustomText(
                                           text:
-                                              "${searchHistoryList[index].toString()}",
+                                              searchHistoryList[index].toString(),
                                         ),
                                       )
                                     ],
