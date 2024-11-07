@@ -1,4 +1,4 @@
-class property_detailsmodel {
+class PropertyDetailsModel {
   int? id;
   String? name;
   String? description;
@@ -21,16 +21,16 @@ class property_detailsmodel {
   int? categoryId;
   String? createdAt;
   String? updatedAt;
-  String? location_longitude;
-  String? location_latitude;
+  String? locationLongitude;
+  String? locationLatitude;
   List<Funders>? funders;
   List<Timelines>? timelines;
   Location? location;
   bool? ifUserShared;
   String? status;
-  bool? approved;
+  String? approved;
 
-  property_detailsmodel(
+  PropertyDetailsModel(
       {this.id,
       this.name,
       this.description,
@@ -53,6 +53,8 @@ class property_detailsmodel {
       this.categoryId,
       this.createdAt,
       this.updatedAt,
+      this.locationLongitude,
+      this.locationLatitude,
       this.funders,
       this.timelines,
       this.location,
@@ -60,7 +62,7 @@ class property_detailsmodel {
       this.status,
       this.approved});
 
-  property_detailsmodel.fromJson(Map<String, dynamic> json) {
+  PropertyDetailsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
@@ -70,8 +72,6 @@ class property_detailsmodel {
     funderCount = json['funder_count'];
     rentalIncome = json['rental_income'];
     currentRent = json['current_rent'];
-    location_latitude = json["location_latitude"];
-    location_longitude = json["location_longitude"];
     percent = json['percent'];
     locationString = json['location_string'];
     propertyPriceTotal = json['property_price_total'];
@@ -85,6 +85,8 @@ class property_detailsmodel {
     categoryId = json['category_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    locationLongitude = json['location_longitude'];
+    locationLatitude = json['location_latitude'];
     if (json['funders'] != null) {
       funders = <Funders>[];
       json['funders'].forEach((v) {
@@ -128,6 +130,8 @@ class property_detailsmodel {
     data['category_id'] = categoryId;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    data['location_longitude'] = locationLongitude;
+    data['location_latitude'] = locationLatitude;
     if (funders != null) {
       data['funders'] = funders!.map((v) => v.toJson()).toList();
     }

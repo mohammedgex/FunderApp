@@ -72,12 +72,12 @@ class creatPasswordView extends GetView<ForgetPasswordController> {
                             onTap: () => controller.troglePassword(),
                             child: Icon(
                               controller.showPassword.value
-                                  ? IconlyLight.show
-                                  : IconlyLight.hide,
+                                  ? IconlyLight.hide
+                                  : IconlyLight.show,
                               color: const Color.fromRGBO(105, 106, 108, 0.8),
                             ),
                           ),
-                          showen: controller.showPassword.value,
+                          showen: controller.showPassword.value ? true : false,
                         )),
                     const SizedBox(
                       height: 18,
@@ -99,12 +99,13 @@ class creatPasswordView extends GetView<ForgetPasswordController> {
                             onTap: () => controller.trogleConfPassword(),
                             child: Icon(
                               controller.conf_showPassword.value
-                                  ? IconlyLight.show
-                                  : IconlyLight.hide,
+                                  ? IconlyLight.hide
+                                  : IconlyLight.show,
                               color: const Color.fromRGBO(105, 106, 108, 0.8),
                             ),
                           ),
-                          showen: controller.conf_showPassword.value,
+                          showen:
+                              controller.conf_showPassword.value ? true : false,
                         )),
                     const SizedBox(
                       height: 18,

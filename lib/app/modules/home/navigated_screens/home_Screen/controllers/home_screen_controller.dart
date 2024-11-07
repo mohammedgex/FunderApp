@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:funder_app/app/data/apis_url.dart';
 import 'package:funder_app/app/data/home/propertmodel.dart';
@@ -97,19 +96,39 @@ class HomeScreenController extends GetxController {
       );
       print(response.body);
       if (response.statusCode == 200) {
-        AnimatedSnackBar.material(
-          'The item has been added successfully',
-          duration: const Duration(seconds: 3),
-          mobileSnackBarPosition: MobileSnackBarPosition.bottom,
-          type: AnimatedSnackBarType.success,
-        ).show(
-          context,
-        );
       } else if (response.statusCode == 403) {
         Get.defaultDialog(title: "add before", content: const SizedBox());
       }
     } catch (e) {
       print("Error $e");
     }
+  }
+
+  Future<void> removetofavorite(
+    int id,
+  ) async {
+    try {
+      final response = await http.delete(
+        Uri.parse("$FAVO_URl/$id"),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${box.read("userToken")}',
+        },
+      );
+      print(response.body);
+      if (response.statusCode == 200) {
+      } else if (response.statusCode == 403) {
+        Get.defaultDialog(title: "add before", content: const SizedBox());
+      }
+    } catch (e) {
+      // print("Error $e");
+    }
+  }
+
+  @override
+  void onInit() {
+    print("iniiit");
+    super.onInit();
   }
 }

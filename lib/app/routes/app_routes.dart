@@ -37,6 +37,8 @@ abstract class Routes {
   static const RESET_PASSWORD = _Paths.RESET_PASSWORD;
   static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
   static const RESETPASSWORD = _Paths.RESETPASSWORD;
+  static const CHAT_SUPPORT = _Paths.CHAT_SUPPORT;
+  static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
 }
 
 abstract class _Paths {
@@ -74,4 +76,7 @@ abstract class _Paths {
   static const RESET_PASSWORD = '/resetpassword';
   static const NOTIFICATIONS = '/notifications';
   static const RESETPASSWORD = '/resetpassword';
+
+  static const CHAT_SUPPORT = '/chat-support';
+  static const SPLASH_SCREEN = '/splash-screen';
 }

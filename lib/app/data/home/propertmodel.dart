@@ -17,27 +17,28 @@ class Property_Model {
   dynamic status;
   dynamic approved;
   int? categoryId;
+  String? isFavorite;
 
-  Property_Model({
-    this.id,
-    this.name,
-    this.description,
-    this.images,
-    this.fundedDate,
-    this.purchasePrice,
-    this.funderCount,
-    this.rentalIncome,
-    this.currentRent,
-    this.percent,
-    this.locationString,
-    this.propertyPriceTotal,
-    this.propertyPrice,
-    this.transactionCosts,
-    this.serviceCharge,
-    this.status,
-    this.approved,
-    this.categoryId,
-  });
+  Property_Model(
+      {this.id,
+      this.name,
+      this.description,
+      this.images,
+      this.fundedDate,
+      this.purchasePrice,
+      this.funderCount,
+      this.rentalIncome,
+      this.currentRent,
+      this.percent,
+      this.locationString,
+      this.propertyPriceTotal,
+      this.propertyPrice,
+      this.transactionCosts,
+      this.serviceCharge,
+      this.status,
+      this.approved,
+      this.categoryId,
+      this.isFavorite});
 
   Property_Model.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -58,6 +59,7 @@ class Property_Model {
     status = json['status'];
     approved = json['approved'];
     categoryId = json['category_id'];
+    isFavorite = json['if_favorite'];
   }
 
   Map<String, dynamic> toJson() {
@@ -80,6 +82,7 @@ class Property_Model {
     data['status'] = status;
     data['approved'] = approved;
     data['category_id'] = categoryId;
+    data['if_favorite'] = isFavorite;
     return data;
   }
 }

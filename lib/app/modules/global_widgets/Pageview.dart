@@ -5,14 +5,18 @@ import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:get/get.dart';
 
 class pageViewInde extends GetView<OnboardingController> {
-  const pageViewInde({this.content, this.header, this.imageurl, this.controll});
+  const pageViewInde(
+      {this.content, this.header, this.imageurl, this.controll, this.isTerms});
   final String? imageurl;
   final String? header;
   final String? content;
   final PageController? controll;
+  final bool? isTerms;
 
   @override
   Widget build(BuildContext context) {
+    String fontFamily =
+        Get.locale?.languageCode == 'ar' ? 'Tajawal-Regular' : 'Lato';
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -45,21 +49,22 @@ class pageViewInde extends GetView<OnboardingController> {
                           children: [
                             Text(
                               header!,
-                              style: const TextStyle(
-                                  color: Color.fromRGBO(4, 54, 61, 1),
+                              style: TextStyle(
+                                  color: const Color.fromRGBO(4, 54, 61, 1),
                                   fontSize: 32,
                                   fontWeight: FontWeight.w700,
-                                  fontFamily: "Roboto"),
+                                  fontFamily: fontFamily),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Text(
                                 content!,
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontSize: 16,
-                                    color: Color.fromRGBO(136, 136, 136, 1),
+                                    color:
+                                        const Color.fromRGBO(136, 136, 136, 1),
                                     fontWeight: FontWeight.w400,
-                                    fontFamily: "Roboto"),
+                                    fontFamily: fontFamily),
                               ),
                             )
                           ],
@@ -80,38 +85,49 @@ class pageViewInde extends GetView<OnboardingController> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Get.offNamed(Routes.LOGIN);
+                      if (isTerms!) {
+                        Get.toNamed(Routes.MAIN_PAGE);
+                      } else {
+                        Get.offNamed(Routes.LOGIN);
+                      }
                     },
                     child: GestureDetector(
                       onTap: () {
-                        controller.DoneButton();
+                        if (isTerms!) {
+                          Get.offNamed(Routes.MAIN_PAGE);
+                        } else {
+                          controller.DoneButton();
+                        }
                       },
-                      child: const Text(
-                        "Skip",
+                      child: Text(
+                        "Skip".tr,
                         style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 20,
-                            color: Color.fromRGBO(4, 54, 61, 0.66)),
+                            fontFamily: fontFamily,
+                            color: const Color.fromRGBO(4, 54, 61, 0.66)),
                       ),
                     ),
                   ),
                   Obx(() => GestureDetector(
                         onTap: () {
                           controller.lastPage.value
-                              ? controller.DoneButton()
+                              ? isTerms!
+                                  ? Get.offAllNamed(Routes.MAIN_PAGE)
+                                  : controller.DoneButton()
                               : controll!.nextPage(
                                   duration: const Duration(milliseconds: 500),
                                   curve: Curves.fastOutSlowIn);
                         },
                         child: controller.lastPage.value
-                            ? const Button(
+                            ? Button(
                                 width: 147,
-                                text: "Get started",
-                                buttonColor: Color.fromRGBO(4, 54, 61, 1),
+                                text: "Get started".tr,
+                                buttonColor: const Color.fromRGBO(4, 54, 61, 1),
                               )
-                            : const Button(
-                                text: "Next",
-                                buttonColor: Color.fromRGBO(4, 54, 61, 1),
+                            : Button(
+                                text: "Next".tr,
+                                buttonColor: const Color.fromRGBO(4, 54, 61, 1),
                               ),
                       )),
                 ],

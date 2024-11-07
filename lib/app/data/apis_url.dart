@@ -1,5 +1,5 @@
 class ApiUrls {
-  static const URl = "http://192.168.1.80:8000";
+  static const URl = "https://app.atfunder.com";
   static const Login_api = "$URl/api/user/login";
   static const Register_api = "$URl/api/user/register";
   static const OTP_api = "$URl/api/user/send-code";

@@ -17,7 +17,7 @@ class NotificationsView extends GetView<NotificationsController> {
         scrolledUnderElevation: 0,
         backgroundColor: Colors.white,
         title: CustomText(
-          text: "Notifications",
+          text: "Notifications".tr,
           size: 20,
           weight: FontWeight.w600,
         ),
@@ -66,7 +66,7 @@ class NotificationsView extends GetView<NotificationsController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomText(
-                          text: "Today",
+                          text: "Today".tr,
                           size: 20,
                           weight: FontWeight.w600,
                         ),
@@ -97,7 +97,7 @@ class NotificationsView extends GetView<NotificationsController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomText(
-                          text: "Yesterday",
+                          text: "Yesterday".tr,
                           size: 20,
                           weight: FontWeight.w600,
                         ),
@@ -128,7 +128,7 @@ class NotificationsView extends GetView<NotificationsController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomText(
-                          text: "Old Notifications",
+                          text: "Old Notifications".tr,
                           size: 20,
                           weight: FontWeight.w600,
                         ),

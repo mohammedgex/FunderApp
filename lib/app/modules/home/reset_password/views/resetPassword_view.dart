@@ -99,7 +99,7 @@ class resetPasswordView extends GetView<resetPasswordController> {
                 ],
               ),
               InkWell(
-                onTap: () => controller.resetPassword(),
+                onTap: () => controller.resetPassword(context),
                 child: Button(
                   width: double.infinity,
                   text: "Save".tr,

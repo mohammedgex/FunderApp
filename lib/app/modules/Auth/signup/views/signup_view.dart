@@ -175,7 +175,7 @@ class SignupView extends GetView<SignupController> {
                   color: const Color.fromRGBO(105, 106, 108, 0.8),
                 ),
               ),
-              showen: controller.showPassword.value ? false : true,
+              showen: controller.showPassword.value ? true : false,
             )),
         const SizedBox(height: 15),
         Obx(() => CustomTextField(
@@ -200,7 +200,7 @@ class SignupView extends GetView<SignupController> {
                   color: const Color.fromRGBO(105, 106, 108, 0.8),
                 ),
               ),
-              showen: controller.conf_showPassword.value ? false : true,
+              showen: controller.conf_showPassword.value ? true : false,
             )),
       ],
     );

@@ -3,6 +3,7 @@ import 'package:funder_app/app/modules/global_widgets/button.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../controllers/checkout_controller.dart';
 
 class CheckoutView extends GetView<CheckoutController> {
@@ -149,7 +150,8 @@ class CheckoutView extends GetView<CheckoutController> {
                                     weight: FontWeight.w400,
                                   ),
                                   CustomText(
-                                    text: "${args[1]} EGP",
+                                    text:
+                                        "${NumberFormat('#,###').format(args[1])} EGP",
                                     size: 13,
                                     weight: FontWeight.w400,
                                   )
@@ -165,7 +167,8 @@ class CheckoutView extends GetView<CheckoutController> {
                                     weight: FontWeight.w400,
                                   ),
                                   CustomText(
-                                    text: "${int.parse(args[2])} EGP",
+                                    text:
+                                        "${NumberFormat('#,###').format(args[2])}  EGP",
                                     size: 13,
                                     weight: FontWeight.w400,
                                   )
@@ -182,7 +185,7 @@ class CheckoutView extends GetView<CheckoutController> {
                                   ),
                                   Obx(() => CustomText(
                                         text:
-                                            "${int.parse(args[2]) * controller.count.value} EGP",
+                                            "${NumberFormat('#,###').format(args[2] * controller.count.value)}  EGP",
                                         size: 13,
                                         weight: FontWeight.w400,
                                       ))
@@ -210,7 +213,7 @@ class CheckoutView extends GetView<CheckoutController> {
                           ),
                           Obx(() => CustomText(
                                 text:
-                                    "${(int.parse(args[2]) * controller.count.value) / 10} EGP",
+                                    "${NumberFormat('#,###').format((5000 * controller.count.value))} EGP",
                                 size: 13,
                                 weight: FontWeight.w700,
                               ))

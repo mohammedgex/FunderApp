@@ -5,6 +5,8 @@ import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/modules/home/navigated_screens/home_Screen/controllers/home_screen_controller.dart';
 import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:iconly/iconly.dart';
+import 'package:intl/intl.dart';
 
 class PropertiyUnit extends StatelessWidget {
   const PropertiyUnit(
@@ -29,6 +31,7 @@ class PropertiyUnit extends StatelessWidget {
       this.status,
       this.transactionCosts,
       this.controller,
+      this.isFavorite,
       this.propert_Title});
   final String? propert_Title;
   final String? propert_Location;
@@ -51,14 +54,21 @@ class PropertiyUnit extends StatelessWidget {
   final dynamic status;
   final dynamic approved;
   final List<dynamic>? images;
+  final String? isFavorite;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(
-        Routes.PROPERTY_DETAILS,
-        arguments: {"propertyId": id},
-      ),
+      onTap: () {
+        Get.toNamed(
+          Routes.PROPERTY_DETAILS,
+          arguments: {
+            "propertyId": id,
+            "isFavorite": isFavorite,
+            "backMain": true
+          },
+        );
+      },
       child: Container(
         width: 350,
         height: 264,
@@ -112,16 +122,31 @@ class PropertiyUnit extends StatelessWidget {
                       ),
                   InkWell(
                       onTap: () async {
-                        await controller!.addtofavorite(id!, context);
+                        if (isFavorite == "true") {
+                          await controller!.removetofavorite(id!);
+                          Get.offAllNamed(Routes.MAIN_PAGE);
+                        } else if (isFavorite == "false") {
+                          await controller!.addtofavorite(id!, context);
+                          Get.offAllNamed(Routes.MAIN_PAGE);
+                        }
                       },
-                      child: SvgPicture.asset("assets/icons/favorite2.svg"))
+                      child: isFavorite == "true"
+                          ? const Icon(
+                              IconlyBold.heart,
+                              color: Color.fromRGBO(236, 138, 35, 1),
+                            )
+                          : const Icon(
+                              IconlyLight.heart,
+                              color: Color.fromARGB(255, 46, 44, 44),
+                            ))
                 ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5.0),
               child: CustomText(
-                text: "$propert_Price EGP",
+                text:
+                    "${NumberFormat('#,###').format(int.parse(propert_Price!))} EGP",
                 weight: FontWeight.w600,
                 size: 14,
               ),

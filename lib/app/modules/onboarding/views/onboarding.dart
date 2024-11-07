@@ -12,6 +12,7 @@ class OnboardingView extends GetView<OnboardingController> {
 
   @override
   Widget build(BuildContext context) {
+    final data = Get.arguments;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -25,25 +26,34 @@ class OnboardingView extends GetView<OnboardingController> {
             },
             children: [
               pageViewInde(
-                header: "Welcome to funder! ",
+                header: "Welcome to funder!".tr,
                 content:
-                    "Get ready to simplify your renting experience with our user-friendly platform",
+                    "Get ready to simplify your renting experience with our user-friendly platform"
+                        .tr,
                 imageurl: "assets/image1.jfif",
                 controll: control,
+                isTerms:
+                    (data != null && data["isTerms"] != null) ? true : false,
               ),
               pageViewInde(
-                header: "We’re excited to have you on board!",
+                header: "We’re excited to have you on board!".tr,
                 content:
-                    "Your on board use our intuitive search feature to discover available properties that match your preferences ",
+                    "Your on board use our intuitive search feature to discover available properties that match your preferences"
+                        .tr,
                 imageurl: "assets/image2.jfif",
                 controll: control,
+                isTerms:
+                    (data != null && data["isTerms"] != null) ? true : false,
               ),
               pageViewInde(
-                header: "Congratulation!",
+                header: "Congratulation!".tr,
                 content:
-                    "Let's get started sign up or log in to assess all the features and benefits  of our application",
+                    "Let's get started sign up or log in to assess all the features and benefits  of our application"
+                        .tr,
                 imageurl: "assets/image1.jfif",
                 controll: control,
+                isTerms:
+                    (data != null && data["isTerms"] != null) ? true : false,
               )
             ],
           ),

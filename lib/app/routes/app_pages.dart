@@ -1,5 +1,3 @@
-import 'package:funder_app/app/modules/myPropertyDetails/bindings/my_property_details_binding.dart';
-import 'package:funder_app/app/modules/myPropertyDetails/views/my_property_details_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/Auth/forget_password/bindings/forget_password_binding.dart';
@@ -10,6 +8,8 @@ import '../modules/Auth/login/views/login_view.dart';
 import '../modules/Auth/login/views/otp_widget_view.dart';
 import '../modules/Auth/signup/bindings/signup_binding.dart';
 import '../modules/Auth/signup/views/signup_view.dart';
+import '../modules/home/ChatSupport/bindings/chat_support_binding.dart';
+import '../modules/home/ChatSupport/views/chat_support_view.dart';
 import '../modules/home/Property_Details/bindings/property_details_binding.dart';
 import '../modules/home/Property_Details/views/property_details_view.dart';
 import '../modules/home/all_properties/bindings/all_properties_binding.dart';
@@ -28,6 +28,8 @@ import '../modules/home/reset_password/bindings/resetPassword_binding.dart';
 import '../modules/home/reset_password/views/resetPassword_view.dart';
 import '../modules/myInvestments/bindings/my_investments_binding.dart';
 import '../modules/myInvestments/views/my_investments_view.dart';
+import '../modules/myPropertyDetails/bindings/my_property_details_binding.dart';
+import '../modules/myPropertyDetails/views/my_property_details_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding.dart';
 import '../modules/payment/checkout/bindings/checkout_binding.dart';
@@ -39,7 +41,6 @@ import '../modules/receipt/receipts/bindings/receipts_binding.dart';
 import '../modules/receipt/receipts/views/receipts_view.dart';
 import '../modules/receipt/upload_receipt/bindings/upload_receipt_binding.dart';
 import '../modules/receipt/upload_receipt/views/upload_receipt_view.dart';
-
 import '../modules/terms/bindings/terms_binding.dart';
 import '../modules/terms/views/terms_view.dart';
 import '../modules/verifyId/bindings/verify_id_binding.dart';
@@ -114,7 +115,7 @@ class AppPages {
         name: _Paths.MAIN_PAGE,
         page: () => MainPageView(),
         binding: MainPageBinding(),
-        transition: Transition.cupertinoDialog),
+        transition: Transition.noTransition),
     GetPage(
       name: _Paths.PROFILE_PAGE,
       page: () => ProfileScreenView(),
@@ -139,27 +140,27 @@ class AppPages {
         name: _Paths.CHECKOUT,
         page: () => CheckoutView(),
         binding: CheckoutBinding(),
-        transition: Transition.cupertinoDialog),
+        transition: Transition.noTransition),
     GetPage(
-      name: _Paths.PAYMENT_METHODS,
-      page: () => PaymentMethodsView(),
-      binding: PaymentMethodsBinding(),
-    ),
+        name: _Paths.PAYMENT_METHODS,
+        page: () => PaymentMethodsView(),
+        binding: PaymentMethodsBinding(),
+        transition: Transition.noTransition),
     GetPage(
-      name: _Paths.UPLOAD_RECEIPT,
-      page: () => UploadReceiptView(),
-      binding: UploadReceiptBinding(),
-    ),
+        name: _Paths.UPLOAD_RECEIPT,
+        page: () => UploadReceiptView(),
+        binding: UploadReceiptBinding(),
+        transition: Transition.noTransition),
     GetPage(
-      name: _Paths.INSTAPAY,
-      page: () => InstaPayView(),
-      binding: PaymentMethodsBinding(),
-    ),
+        name: _Paths.INSTAPAY,
+        page: () => const InstaPayView(),
+        binding: PaymentMethodsBinding(),
+        transition: Transition.noTransition),
     GetPage(
-      name: _Paths.MY_INVESTMENTS,
-      page: () => MyInvestmentsView(),
-      binding: MyInvestmentsBinding(),
-    ),
+        name: _Paths.MY_INVESTMENTS,
+        page: () => MyInvestmentsView(),
+        binding: MyInvestmentsBinding(),
+        transition: Transition.noTransition),
     GetPage(
       name: _Paths.MY_PROPERTY_DETAILS,
       page: () => const MyPropertyDetailsView(),
@@ -189,6 +190,11 @@ class AppPages {
         name: _Paths.NOTIFICATIONS,
         page: () => const NotificationsView(),
         binding: NotificationsBinding(),
-        transition: Transition.downToUp),
+        transition: Transition.noTransition),
+    GetPage(
+        name: _Paths.CHAT_SUPPORT,
+        page: () => const ChatSupportView(),
+        binding: ChatSupportBinding(),
+        transition: Transition.noTransition),
   ];
 }

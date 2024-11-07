@@ -1,10 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:funder_app/app/data/apis_url.dart';
 import 'package:funder_app/app/data/home/favoritemodel.dart';
-import 'package:funder_app/app/modules/global_widgets/button.dart';
-import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -57,59 +54,14 @@ class FavoriteScreenController extends GetxController {
           'Authorization': 'Bearer ${box.read("userToken")}',
         },
       );
-      if (response.statusCode == 200) {
-        Get.defaultDialog(
-            barrierDismissible: false,
-            onWillPop: () async => await Get.offAllNamed(Routes.MAIN_PAGE),
-            title: "",
-            content: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SvgPicture.asset("assets/icons/succ_verify.svg"),
-                const SizedBox(
-                  height: 35,
-                ),
-                Center(
-                  child: CustomText(
-                    text: "Successfully !",
-                    color: const Color.fromRGBO(236, 138, 35, 1),
-                    size: 20,
-                    weight: FontWeight.w700,
-                  ),
-                ),
-                const SizedBox(
-                  height: 35,
-                ),
-                CustomText(
-                  text: "All favorite propeties has been deleted successfully.",
-                  size: 16,
-                  cenetr: true,
-                  weight: FontWeight.w400,
-                ),
-                const SizedBox(
-                  height: 35,
-                ),
-                GestureDetector(
-                  onTap: () => Get.offAllNamed(Routes.MAIN_PAGE),
-                  child: const Button(
-                    width: 252,
-                    text: "Continue",
-                    buttonColor: Color.fromRGBO(236, 138, 35, 1),
-                  ),
-                )
-              ],
-            ));
-      }
+      if (response.statusCode == 200) {}
     } catch (e) {
       // print(e);
     }
   }
 
-  // remove from favorites
-  Future<void> removetofavorite(
-    int id,
-  ) async {
+  // // remove from favorites
+  Future<void> removetofavorite(int id, BuildContext context) async {
     try {
       final response = await http.delete(
         Uri.parse("$URL/$id"),
@@ -119,8 +71,10 @@ class FavoriteScreenController extends GetxController {
           'Authorization': 'Bearer ${box.read("userToken")}',
         },
       );
+
       print(response.body);
       if (response.statusCode == 200) {
+        Get.offAllNamed(Routes.MAIN_PAGE);
       } else if (response.statusCode == 403) {
         Get.defaultDialog(title: "add before", content: const SizedBox());
       }

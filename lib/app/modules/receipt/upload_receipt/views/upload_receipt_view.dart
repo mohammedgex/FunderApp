@@ -137,7 +137,7 @@ class UploadReceiptView extends GetView<UploadReceiptController> {
                       weight: FontWeight.w400,
                     ),
                     receiptTextField(
-                      hintText: "1234",
+                      hintText: "123456789",
                       controller: controller.receiptNum_Controller,
                       validation: (value) {
                         if (value!.isNotEmpty) {
@@ -174,7 +174,7 @@ class UploadReceiptView extends GetView<UploadReceiptController> {
                       textCapitalization: TextCapitalization.sentences,
                       decoration: const InputDecoration(
                         border: InputBorder.none,
-                        hintText: "1/1/2023",
+                        hintText: "YYYY/MM/DD",
                         hintStyle: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.normal),
                         fillColor: Colors.white,
@@ -199,7 +199,7 @@ class UploadReceiptView extends GetView<UploadReceiptController> {
                       weight: FontWeight.w400,
                     ),
                     receiptTextField(
-                      hintText: "Deposit".tr,
+                      hintText: "5000 EGP".tr,
                       controller: controller.despositedAmount_Controller,
                       validation: (value) {
                         if (value!.isNotEmpty) {

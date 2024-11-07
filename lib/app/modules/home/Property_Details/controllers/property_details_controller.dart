@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:funder_app/app/data/Auth/identificationModel.dart';
 import 'package:funder_app/app/data/apis_url.dart';
 import 'package:funder_app/app/data/home/property_detailsmodel.dart';
 import 'package:funder_app/app/modules/global_widgets/button.dart';
@@ -18,9 +19,11 @@ class PropertyDetailsController extends GetxController {
   // var numOfYearsStart = 1.0.obs;
   // var numOfYearsEnd = 20.0.obs;
 
-  var investment_value = 100000.0.obs;
-  var yield_value = 1.0.obs;
+  var investment_value = 400000.0.obs;
+  var yield_value = 3.0.obs;
   var valueGrowth = 0.0.obs;
+  final String USER_Identification_URL = ApiUrls.userIdentification;
+  String? status = "";
 
   // init local storage
   final box = GetStorage();
@@ -29,7 +32,7 @@ class PropertyDetailsController extends GetxController {
   static const String URL = ApiUrls.Properties_api;
 
   // api connect
-  Future<property_detailsmodel> DetailsApi(int id) async {
+  Future<PropertyDetailsModel> DetailsApi(int id) async {
     final response = await http.get(
       Uri.parse("$URL/$id"),
       headers: {
@@ -43,7 +46,7 @@ class PropertyDetailsController extends GetxController {
       print("Conected");
       final Map<String, dynamic> data = jsonDecode(response.body)["properties"];
       print("data $data");
-      return property_detailsmodel.fromJson(data);
+      return PropertyDetailsModel.fromJson(data);
     } else {
       throw Exception('Failed to load wallet data');
     }
@@ -160,6 +163,30 @@ class PropertyDetailsController extends GetxController {
           backgroundColor: Colors.red,
           colorText: Colors.white,
           snackPosition: SnackPosition.BOTTOM);
+    }
+  }
+
+  Future<IdentificationModel> getUserIdentificaion() async {
+    isLoading.value = true;
+    final response = await http.get(
+      Uri.parse(USER_Identification_URL),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${box.read("userToken")}',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      print("Conected");
+      final Map<String, dynamic> data =
+          jsonDecode(response.body)['identification'];
+      status = data["status"];
+      return IdentificationModel.fromJson(data);
+    } else {
+      status = "Empty";
+
+      throw Exception('Failed to load wallet data');
     }
   }
 }

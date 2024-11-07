@@ -22,10 +22,10 @@ class HomeScreenView extends GetView<HomeScreenController> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SvgPicture.asset(
-                "assets/logo.svg",
-                width: 96,
-                height: 24,
+              Image.asset(
+                "assets/splashLogo.png",
+                width: 100,
+                height: 100,
               ),
               InkWell(
                 onTap: () => Get.toNamed(Routes.NOTIFICATIONS),
@@ -150,6 +150,7 @@ class HomeScreenView extends GetView<HomeScreenController> {
                               snapshot.data![index].purchasePrice.toString(),
                           propert_Title: snapshot.data![index].name,
                           image_url: snapshot.data![index].images[0],
+                          isFavorite: snapshot.data![index].isFavorite,
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) {

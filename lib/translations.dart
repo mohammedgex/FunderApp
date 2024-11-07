@@ -5,12 +5,41 @@ class Translation extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ar_EG': {
+          // Notifications
+          "Notifications": "الاشعارات",
+          "Today": "اليوم",
+          "Yesterday": "البارحة",
+          "Old Notifications": "الاشعارات القديمة",
+
+          //chat buttons
+
+          "Live Chat": "لايف شات",
+
+          "Contact via whatsapp": "التواصل عبر واتساب",
+
+          // onboarding
+
+          "Welcome to funder!": "مرحبًا بك في فاندير!",
+          "Get ready to simplify your renting experience with our user-friendly platform":
+              "استعد لتبسيط تجربة الإيجار الخاصة بك مع منصتنا السهلة الاستخدام.",
+          "We’re excited to have you on board!": "نحن متحمسون لانضمامك إلينا!",
+          "Your on board use our intuitive search feature to discover available properties that match your preferences":
+              "استخدم ميزتنا البحثية البديهية لاكتشاف العقارات المتاحة التي تتناسب مع تفضيلاتك.",
+          "Congratulation!": "تهانينا!",
+          "Let's get started sign up or log in to assess all the features and benefits  of our application":
+              "لنبدأ! قم بالتسجيل أو تسجيل الدخول للوصول إلى جميع ميزات وفوائد تطبيقنا.",
+          "Skip": "تخطي",
+          "Next": "التالي",
+          "Get started": "بداء الاستخدام",
+
           //home page
           'Available': 'المتاح',
           'Funded': 'المباع',
           'Our Properties': 'العقارات',
           "Our properties": "عقاراتنا",
           "Funded Properties": "العقارات المباعة",
+
+          "How to use app": "كيفية استخدام التطبيق",
 
           // wallet page
           "MY Wallet": "محفظتي",
@@ -31,14 +60,13 @@ class Translation extends Translations {
           "log out": "تسجيل خروج",
           "change language": "تغيير اللغة",
           "login out": "تسجيل خروج",
-          "Are you sure want to login out?": "هل انت متأكد من تسجيل الخروج؟",
+          "Are you sure want to log out?": "هل انت متأكد من تسجيل الخروج؟",
 
           // favorite page
           "Favorites": "المفضلة",
           "clear all": "مسح الكل",
 
           // Buttons
-          "Next": "التالي",
           "Cancel": "الغاء",
           "Continue": "التالي",
 
@@ -86,6 +114,7 @@ class Translation extends Translations {
           // section 2
           "Financials": "الماليات",
           "Transaction Costs": "رسوم التحويل",
+          "Share Price": "سعر السهم",
           "Investment calculator": "حاسبة الإستثمار",
           "Initial Investment": "الإستثمار المبدئي",
           "property value growth years": "نمو العقار السنوي",
@@ -208,18 +237,25 @@ class Translation extends Translations {
           "NO DATA": "لا توجد اي بيانات حتي الان"
         },
         'en_US': {
+// chat button
+          "Live Chat": "Live Chat",
+          "Contact via whatsapp": "Contact via whatsapp",
+
           // home page
           'Available': 'Available',
+
           'Funded': 'Funded',
           'Our Properties': 'Our Properties',
           "Funded Properties": "Funded Properties",
+
+          "How to use app": "How to use app",
 
           // profile page
           "Personal details": "Personal details",
           "login out": "Log out",
           "log out": "Log out",
           "change language": "Change language",
-          "Are you sure want to login out?": "Are you sure want to log out?",
+          "Are you sure want to log out?": "Are you sure want to log out?",
 
           // favorite page
           "Favorites": "Favorites",
@@ -284,6 +320,7 @@ class Translation extends Translations {
           "See on Map": "See on Map",
           "Location": "Location",
           "Financials": "Financials",
+          "Share Price": "Share Price",
           "Transaction Costs": "Transaction Costs",
           "Investment calculator": "Investment calculator",
           "Initial Investment": "Initial Investment",

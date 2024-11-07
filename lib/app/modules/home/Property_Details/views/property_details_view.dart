@@ -12,7 +12,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lottie/lottie.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../controllers/property_details_controller.dart';
 
 class PropertyDetailsView extends GetView<PropertyDetailsController> {
@@ -28,6 +30,13 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
 
   @override
   Widget build(BuildContext context) {
+    void getIdentificaion() async {
+      await controller.getUserIdentificaion();
+    }
+
+    getIdentificaion();
+    print(controller.status);
+
     // slider years
     int years = 3;
     return Scaffold(
@@ -51,6 +60,20 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                     snapshot.data!.funderCount!
                         .toDouble(); // Calculate progress, e.g., 5 / 12
               }
+
+              // Calculate the step size based on the min, max, and divisions
+              double step = (1000000 - 100000) / 90;
+
+              // Round the value to the nearest step
+              double roundedValue = ((int.parse(snapshot.data!.propertyPrice!) /
+                              snapshot.data!.funderCount!) /
+                          step)
+                      .round() *
+                  step;
+              print(roundedValue);
+
+              // Set the rounded value
+              controller.investment_value.value = roundedValue;
 
               return SafeArea(
                 child: SingleChildScrollView(
@@ -86,23 +109,45 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                           child: Row(
                             children: [
                               GestureDetector(
-                                onTap: () => Get.back(),
+                                onTap: () {
+                                  if (Property_Details["backMain"] == true) {
+                                    // Navigate to the main page
+                                    Get.offAllNamed(Routes.MAIN_PAGE);
+                                  } else {
+                                    // Go back to the previous screen
+                                    Get.back();
+                                  }
+                                },
                                 child: const Icon(
                                   Icons.arrow_back,
                                   color: Colors.black,
                                 ),
                               ),
                               const Expanded(child: SizedBox()),
-                              SvgPicture.asset("assets/icons/share.svg"),
+                              GestureDetector(
+                                  onTap: () async {
+                                    await Share.share("https://atfunder.com/",
+                                        subject: "text");
+                                  },
+                                  child: SvgPicture.asset(
+                                      "assets/icons/share.svg")),
                               const SizedBox(
                                 width: 3,
                               ),
                               GestureDetector(
-                                  onTap: () => HomeScreenController()
-                                      .addtofavorite(
-                                          snapshot.data!.id!, context),
-                                  child: SvgPicture.asset(
-                                      "assets/icons/favoGround.svg")),
+                                  onTap: () {
+                                    HomeScreenController().addtofavorite(
+                                        snapshot.data!.id!, context);
+                                  },
+                                  child:
+                                      Property_Details["isFavorite"] == "true"
+                                          ? SvgPicture.asset(
+                                              "assets/icons/favoGround.svg",
+                                            )
+                                          : SvgPicture.asset(
+                                              "assets/icons/favoGround.svg",
+                                              color: Colors.white,
+                                            )),
                             ],
                           ),
                         ),
@@ -144,7 +189,8 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                   ),
                                 ),
                                 CustomText(
-                                  text: "${snapshot.data!.propertyPrice} EGP",
+                                  text:
+                                      "${NumberFormat('#,###').format(int.parse(snapshot.data!.propertyPrice!))} EGP",
                                   size: 16,
                                   weight: FontWeight.w700,
                                 ),
@@ -249,7 +295,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                           text: snapshot.data!.status! ==
                                                   "sold out"
                                               ? "${snapshot.data!.estimatedAnnualAppreciation}%"
-                                              : "${snapshot.data!.purchasePrice} EGP",
+                                              : "${NumberFormat('#,###').format(snapshot.data!.purchasePrice)} EGP",
                                         )
                                       ],
                                     ),
@@ -425,23 +471,42 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                               4, 54, 61, 1),
                                           weight: FontWeight.w600,
                                         ),
-                                        CustomText(
-                                          text: "See on Map".tr,
-                                          size: 14,
-                                          color: const Color.fromRGBO(
-                                              4, 54, 61, 1),
-                                          weight: FontWeight.w400,
-                                          Underline: true,
+                                        GestureDetector(
+                                          onTap: () async {
+                                            final url =
+                                                'https://www.google.com/maps/search/?api=1&query=${snapshot.data!.locationLatitude!},${snapshot.data!.locationLatitude!}';
+                                            await launchUrl(Uri.parse(url),
+                                                mode: LaunchMode
+                                                    .externalApplication);
+                                          },
+                                          child: CustomText(
+                                            text: "See on Map".tr,
+                                            size: 14,
+                                            color: const Color.fromRGBO(
+                                                4, 54, 61, 1),
+                                            weight: FontWeight.w400,
+                                            Underline: true,
+                                          ),
                                         ),
                                       ]
                                     : [
-                                        CustomText(
-                                          text: "See on Map".tr,
-                                          size: 14,
-                                          color: const Color.fromRGBO(
-                                              4, 54, 61, 1),
-                                          weight: FontWeight.w400,
-                                          Underline: true,
+                                        GestureDetector(
+                                          child: CustomText(
+                                            text: "See on Map".tr,
+                                            size: 14,
+                                            color: const Color.fromRGBO(
+                                                4, 54, 61, 1),
+                                            weight: FontWeight.w400,
+                                            Underline: true,
+                                          ),
+                                          onTap: () async {
+                                            final url =
+                                                'https://www.google.com/maps/search/?api=1&query=${snapshot.data!.locationLatitude!},${snapshot.data!.locationLatitude!}';
+
+                                            await launchUrl(Uri.parse(url),
+                                                mode: LaunchMode
+                                                    .externalApplication);
+                                          },
                                         ),
                                         CustomText(
                                           text: "Location".tr,
@@ -466,9 +531,9 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                 options: MapOptions(
                                     initialCenter: LatLng(
                                         double.parse(
-                                            snapshot.data!.location_longitude!),
-                                        double.parse(snapshot
-                                            .data!.location_longitude!)),
+                                            snapshot.data!.locationLongitude!),
+                                        double.parse(
+                                            snapshot.data!.locationLatitude!)),
                                     initialZoom: 15),
                                 children: [
                                   TileLayer(
@@ -481,9 +546,9 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                       CircleMarker(
                                         point: LatLng(
                                             double.parse(snapshot
-                                                .data!.location_longitude!),
+                                                .data!.locationLongitude!),
                                             double.parse(snapshot.data!
-                                                .location_latitude!)), // center of 't Gooi
+                                                .locationLatitude!)), // center of 't Gooi
                                         radius: 50,
                                         useRadiusInMeter: true,
                                         color: Colors.red.withOpacity(0.3),
@@ -542,7 +607,24 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                         size: 15,
                                         weight: FontWeight.w700,
                                         text:
-                                            "${snapshot.data!.propertyPrice} EGP",
+                                            "${NumberFormat('#,###').format(int.parse(snapshot.data!.propertyPrice!))} EGP",
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      CustomText(
+                                        size: 14,
+                                        weight: FontWeight.w400,
+                                        text: "Share Price".tr,
+                                      ),
+                                      CustomText(
+                                        text:
+                                            "${NumberFormat('#,###').format(int.parse(snapshot.data!.propertyPrice!) / snapshot.data!.funderCount!)} EGP",
+                                        size: 15,
+                                        weight: FontWeight.w700,
                                       ),
                                     ],
                                   ),
@@ -604,25 +686,53 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                             ),
                             Obx(
                               () => Slider(
-                                divisions: 90,
-                                label: controller.investment_value.value
-                                    .toInt()
-                                    .toString(),
+                                divisions: (((snapshot.data!
+                                                        .propertyPriceTotal! /
+                                                    step)
+                                                .round() *
+                                            step) -
+                                        ((int.parse(snapshot.data!
+                                                            .propertyPrice!) /
+                                                        snapshot.data!
+                                                            .funderCount!) /
+                                                    step)
+                                                .round() *
+                                            step) ~/
+                                    10000, // Number of increments of 10,000 between min and max
+                                label: NumberFormat('#,###').format(
+                                    controller.investment_value.value.toInt()),
                                 activeColor:
                                     const Color.fromRGBO(85, 198, 90, 1),
                                 value: controller.investment_value.value,
                                 onChanged: (value) {
+                                  // Round the value to the nearest increment of 10,000
+                                  double roundedValue =
+                                      (value / 10000).roundToDouble() * 10000;
+
                                   controller.calculateTotalValueGrowth(
                                       int.parse(snapshot.data!
                                               .estimatedAnnualAppreciation!)
                                           .toDouble(),
                                       years);
-                                  controller.investment_value.value = value;
-                                  // controller.calculateTotalValueGrowth(
-                                  //     snapshot.data.estimatedAnnualAppreciation, years);
+                                  controller.investment_value.value =
+                                      roundedValue; // Assign rounded value
                                 },
-                                min: 100000,
-                                max: 1000000,
+                                min:
+                                    ((int.parse(snapshot.data!.propertyPrice!) /
+                                                    snapshot
+                                                        .data!.funderCount!) /
+                                                step)
+                                            .round() *
+                                        step, // Set minimum value
+                                max: (((snapshot.data!.propertyPriceTotal! /
+                                                        step)
+                                                    .round() *
+                                                step) *
+                                            40 /
+                                            100)
+                                        .round() *
+                                    10000 /
+                                    10000, // Adjusted max value rounded to increments of 10,000
                               ),
                             ),
                           ],
@@ -690,7 +800,7 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                     100);
                         return CustomText(
                           text:
-                              "EGP ${investmentValue.toInt() * years} in ${controller.yield_value.value.toInt()} years",
+                              "EGP ${NumberFormat('#,###').format(investmentValue.toInt() * years)} in ${controller.yield_value.value.toInt()} years",
                           size: 20,
                           weight: FontWeight.w600,
                           color: const Color.fromRGBO(4, 54, 61, 1),
@@ -730,8 +840,9 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                         ],
                                       ),
                                       CustomText(
-                                        text:
-                                            "${controller.investment_value.value.toInt()}",
+                                        text: NumberFormat('#,###').format(
+                                            controller.investment_value.value
+                                                .toInt()),
                                         size: 14,
                                         weight: FontWeight.w600,
                                       )
@@ -761,8 +872,13 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                                         ],
                                       ),
                                       CustomText(
-                                        text:
-                                            "${(controller.investment_value.value.toInt() * (int.parse(snapshot.data!.estimatedAnnualAppreciation!) / 100)).toInt()}",
+                                        text: NumberFormat('#,###').format(
+                                            (controller.investment_value.value
+                                                        .toInt() *
+                                                    (int.parse(snapshot.data!
+                                                            .estimatedAnnualAppreciation!) /
+                                                        100))
+                                                .toInt()),
                                         size: 14,
                                         weight: FontWeight.w600,
                                       )
@@ -927,12 +1043,21 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                         padding: const EdgeInsets.only(bottom: 40),
                         child: GestureDetector(
                           onTap: () {
-                            Get.toNamed(Routes.CHECKOUT, arguments: [
-                              snapshot.data!.id,
-                              snapshot.data!.propertyPriceTotal,
-                              snapshot.data!.propertyPrice,
-                              snapshot.data!.funderCount
-                            ]);
+                            if (controller.status != "valid") {
+                              Get.snackbar(
+                                  "Error", "Make sure you are a verified user.",
+                                  backgroundColor: Colors.red,
+                                  colorText: Colors.white,
+                                  snackPosition: SnackPosition.BOTTOM);
+                            } else {
+                              Get.toNamed(Routes.CHECKOUT, arguments: [
+                                snapshot.data!.id,
+                                snapshot.data!.propertyPriceTotal,
+                                int.parse(snapshot.data!.propertyPrice!) /
+                                    snapshot.data!.funderCount!,
+                                snapshot.data!.funderCount
+                              ]);
+                            }
                           },
                           child: controller.isYear(snapshot.data!.fundedDate!)
                               ? GestureDetector(
@@ -949,12 +1074,19 @@ class PropertyDetailsView extends GetView<PropertyDetailsController> {
                               : snapshot.data!.funders!.length >=
                                       snapshot.data!.funderCount!
                                   ? const SizedBox()
-                                  : Button(
-                                      width: 212,
-                                      text: "Book a share".tr,
-                                      buttonColor:
-                                          const Color.fromRGBO(236, 138, 35, 1),
-                                    ),
+                                  : controller.status != "valid"
+                                      ? Button(
+                                          width: 212,
+                                          text: "Book a share".tr,
+                                          buttonColor: const Color.fromARGB(
+                                              255, 44, 43, 41),
+                                        )
+                                      : Button(
+                                          width: 212,
+                                          text: "Book a share".tr,
+                                          buttonColor: const Color.fromRGBO(
+                                              236, 138, 35, 1),
+                                        ),
                         ),
                       )
                     ],

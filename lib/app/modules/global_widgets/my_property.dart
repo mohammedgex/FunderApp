@@ -4,6 +4,7 @@ import 'package:funder_app/app/data/home/propertmodel.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class my_Property extends StatelessWidget {
   my_Property({
@@ -50,9 +51,10 @@ class my_Property extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => pending!
-          ? Get.toNamed(Routes.PROPERTY_DETAILS, arguments: {"propertyId": id})
+          ? Get.toNamed(Routes.PROPERTY_DETAILS,
+              arguments: {"propertyId": id, "backMain": false})
           : Get.toNamed(Routes.MY_PROPERTY_DETAILS,
-              arguments: {"my_propery_id": id}),
+              arguments: {"my_propery_id": id, "backMain": false}),
       child: Container(
         width: double.infinity,
         height: 97,
@@ -93,12 +95,14 @@ class my_Property extends StatelessWidget {
                             fontWeight: FontWeight.w500),
                       )),
                   CustomText(
-                    text: "$price EGP",
+                    text:
+                        "${NumberFormat('#,###').format(int.parse(price!))} EGP",
                     size: 10,
                     weight: FontWeight.w600,
                   ),
                   CustomText(
-                    text: "Rent earned : $rent EGP",
+                    text:
+                        "Rent earned : ${NumberFormat('#,###').format(int.parse(rent!))} EGP",
                     size: 12,
                     weight: FontWeight.w400,
                   ),

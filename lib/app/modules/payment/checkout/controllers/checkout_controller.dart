@@ -8,6 +8,9 @@ class CheckoutController extends GetxController {
     print(isOvered.value);
     if (count.value < fundersNumber * 0.4) {
       count += 1;
+      if (count.value == fundersNumber * 0.4) {
+        isOvered.value = false;
+      }
     } else {
       isOvered.value = false;
     }

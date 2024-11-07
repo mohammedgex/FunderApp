@@ -1,11 +1,11 @@
-import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funder_app/app/data/apis_url.dart';
 import 'package:funder_app/app/modules/global_widgets/text.dart';
 import 'package:funder_app/app/modules/home/navigated_screens/favorite_Screen/controllers/favorite_screen_controller.dart';
-import 'package:funder_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:iconly/iconly.dart';
+import 'package:intl/intl.dart';
 
 class FavoriteUnit extends StatelessWidget {
   const FavoriteUnit(
@@ -15,7 +15,8 @@ class FavoriteUnit extends StatelessWidget {
       this.propert_Location,
       this.propert_Price,
       this.status,
-      this.propert_Title});
+      this.propert_Title,
+      this.property_id});
 
   final String? propert_Title;
   final String? propert_Location;
@@ -23,6 +24,7 @@ class FavoriteUnit extends StatelessWidget {
   final String? image_url;
   final String? status;
   final int? id;
+  final int? property_id;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +74,8 @@ class FavoriteUnit extends StatelessWidget {
                   ),
                 ),
                 CustomText(
-                  text: "$propert_Price EGP",
+                  text:
+                      "${NumberFormat('#,###').format(int.parse(propert_Price!))} EGP",
                   weight: FontWeight.w600,
                   size: 14,
                 ),
@@ -113,22 +116,14 @@ class FavoriteUnit extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              controller.removetofavorite(
-                id!,
-              );
-              AnimatedSnackBar.material(
-                'The item has been removed successfully',
-                duration: const Duration(seconds: 3),
-                mobileSnackBarPosition: MobileSnackBarPosition.bottom,
-                type: AnimatedSnackBarType.warning,
-              ).show(
-                context,
-              );
-              Get.offAllNamed(Routes.MAIN_PAGE);
+              controller.removetofavorite(property_id!, context);
             },
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: SvgPicture.asset("assets/icons/favor.svg"),
+            child: const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Icon(
+                IconlyBold.heart,
+                color: Color.fromRGBO(236, 138, 35, 1),
+              ),
             ),
           )
         ],

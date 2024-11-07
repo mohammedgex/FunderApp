@@ -96,15 +96,15 @@ class UploadReceiptController extends GetxController {
         if (response.statusCode == 200) {
           // Successful response
           isLoading.value = false;
-          Kconstans.showDialog(
+          Kconstans.showDialog(context!,
               title: "Successfully",
-              content: "customer support will contact you shortly",
+              content: "Customer support will contact you shortly",
               show: false,
-              routeName: Routes.RECEIPTS);
+              routeName: Routes.MAIN_PAGE);
         } else {
           // Unsuccessful response
           isLoading.value = false;
-          Kconstans.showDialog(
+          Kconstans.showDialog(context!,
               title: "Faild",
               content: jsonDecode(responseBody)["error"],
               show: false,

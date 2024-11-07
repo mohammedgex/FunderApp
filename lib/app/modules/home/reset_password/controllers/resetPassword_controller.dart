@@ -32,7 +32,7 @@ class resetPasswordController extends GetxController {
     showReNewPassword.value = !showReNewPassword.value;
   }
 
-  Future<void> resetPassword() async {
+  Future<void> resetPassword(BuildContext context) async {
     final password = Password_Controller.text.trim();
     final newPassword = NewPassword_Controller.text.trim();
     final renewPassword = ReNewPassword_Controller.text.trim();
@@ -58,14 +58,14 @@ class resetPasswordController extends GetxController {
     );
 
     if (response.statusCode == 200) {
-      Kconstans.showDialog(
+      Kconstans.show_Dialog(context!,
           title: "Success",
           content: "Password reset successful",
           show: false,
           routeName: Routes.MAIN_PAGE);
       // Navigate to the next screen if needed
     } else {
-      Kconstans.showDialog(
+      Kconstans.show_Dialog(context,
           title: "Error",
           content: "Failed to reset password",
           show: false,

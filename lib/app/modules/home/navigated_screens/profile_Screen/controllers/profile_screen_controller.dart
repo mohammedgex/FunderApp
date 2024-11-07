@@ -178,6 +178,7 @@ class ProfileScreenController extends GetxController {
   }
 
   Future<IdentificationModel> getUserIdentificaion() async {
+    isLoading.value = true;
     final response = await http.get(
       Uri.parse(USER_Identification_URL),
       headers: {
@@ -189,12 +190,15 @@ class ProfileScreenController extends GetxController {
 
     if (response.statusCode == 200) {
       print("Conected");
+      isLoading.value = false;
       final Map<String, dynamic> data =
           jsonDecode(response.body)['identification'];
       print("data $data");
       return IdentificationModel.fromJson(data);
     } else {
       isNotIdentiy = true;
+      isLoading.value = false;
+
       throw Exception('Failed to load wallet data');
     }
   }

@@ -78,7 +78,7 @@ class LoginView extends GetView<LoginController> {
                           }
                           return "Enter Valid Password";
                         },
-                        showen: controller.showPassword.value ? false : true,
+                        showen: controller.showPassword.value ? true : false,
                       ),
                     ),
                     const SizedBox(
